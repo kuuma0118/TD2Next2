@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{dbccaf69-d940-4515-9d1f-615acdef35f5}</ProjectGuid>
+    <RootNamespace>ClassVer</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <AdditionalIncludeDirectories>$(ProjectDir)shader;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalOptions>/ignore:4049 /ignore:4098 %(AdditionalOptions)</AdditionalOptions>
+      <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
+      <AdditionalDependencies>xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxcompiler.dll" "$(TargetDir)dxcompiler.dll"
+copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dxil.dll"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <AdditionalIncludeDirectories>$(ProjectDir)shader;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalOptions>/ignore:4049 /ignore:4098 %(AdditionalOptions)</AdditionalOptions>
+      <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
+      <AdditionalDependencies>xinput.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxcompiler.dll" "$(TargetDir)dxcompiler.dll"
+copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dxil.dll"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Blossom Engine\Common\Common.cpp" />
+    <ClCompile Include="Blossom Engine\components\Audio\Audio.cpp" />
+    <ClCompile Include="Blossom Engine\components\camera\Camera.cpp" />
+    <ClCompile Include="Blossom Engine\components\camera\DebugCamera.cpp" />
+    <ClCompile Include="Blossom Engine\components\Input\Input.cpp" />
+    <ClCompile Include="Blossom Engine\components\light\Light.cpp" />
+    <ClCompile Include="Blossom Engine\GameScenes\GameScene.cpp" />
+    <ClCompile Include="Blossom Engine\GameScenes\IScene.cpp" />
+    <ClCompile Include="Blossom Engine\GameScenes\TitleScene.cpp" />
+    <ClCompile Include="Blossom Engine\Math\MatrixCalculate.cpp" />
+    <ClCompile Include="Blossom Engine\Model\Model.cpp" />
+    <ClCompile Include="Blossom Engine\Sphere\Sphere.cpp" />
+    <ClCompile Include="Blossom Engine\Sprite\Sprite.cpp" />
+    <ClCompile Include="Blossom Engine\String\String.cpp" />
+    <ClCompile Include="Blossom Engine\Sys\Sys.cpp" />
+    <ClCompile Include="Blossom Engine\utility\GlobalVariables.cpp" />
+    <ClCompile Include="Blossom Engine\utility\MaterialData.cpp" />
+    <ClCompile Include="Blossom Engine\WinApp\WinApp.cpp" />
+    <ClCompile Include="externals\imgui\imgui.cpp" />
+    <ClCompile Include="externals\imgui\imgui_demo.cpp" />
+    <ClCompile Include="externals\imgui\imgui_draw.cpp" />
+    <ClCompile Include="externals\imgui\imgui_impl_dx12.cpp" />
+    <ClCompile Include="externals\imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="externals\imgui\imgui_tables.cpp" />
+    <ClCompile Include="externals\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="ImGui\ImGuiManager.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Manager\GameManager.cpp" />
+    <ClCompile Include="Manager\ObjManager.cpp" />
+    <ClCompile Include="Manager\Pipelinemanager.cpp" />
+    <ClCompile Include="Manager\TextureManager.cpp" />
+    <ClCompile Include="Necessary\Effect\EffectManager.cpp" />
+    <ClCompile Include="Necessary\Map\Map.cpp" />
+    <ClCompile Include="Necessary\Map\MapManager.cpp" />
+    <ClCompile Include="Necessary\Models\Block.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Blossom Engine\Common\Common.h" />
+    <ClInclude Include="Blossom Engine\components\Audio\Audio.h" />
+    <ClInclude Include="Blossom Engine\components\camera\Camera.h" />
+    <ClInclude Include="Blossom Engine\components\camera\DebugCamera.h" />
+    <ClInclude Include="Blossom Engine\components\Input\Input.h" />
+    <ClInclude Include="Blossom Engine\components\light\Light.h" />
+    <ClInclude Include="Blossom Engine\GameScenes\GameScene.h" />
+    <ClInclude Include="Blossom Engine\GameScenes\IScene.h" />
+    <ClInclude Include="Blossom Engine\GameScenes\TitleScene.h" />
+    <ClInclude Include="Blossom Engine\Math\Matrix3x3.h" />
+    <ClInclude Include="Blossom Engine\Math\Matrix4x4.h" />
+    <ClInclude Include="Blossom Engine\Math\MatrixCalculate.h" />
+    <ClInclude Include="Blossom Engine\Math\Vector2.h" />
+    <ClInclude Include="Blossom Engine\Math\Vector3.h" />
+    <ClInclude Include="Blossom Engine\Math\Vector4.h" />
+    <ClInclude Include="Blossom Engine\Model\Model.h" />
+    <ClInclude Include="Blossom Engine\Sphere\Sphere.h" />
+    <ClInclude Include="Blossom Engine\Sprite\Sprite.h" />
+    <ClInclude Include="Blossom Engine\String\String.h" />
+    <ClInclude Include="Blossom Engine\Sys\Sys.h" />
+    <ClInclude Include="Blossom Engine\utility\GlobalVariables.h" />
+    <ClInclude Include="Blossom Engine\utility\MaterialData.h" />
+    <ClInclude Include="Blossom Engine\utility\resource.h" />
+    <ClInclude Include="Blossom Engine\WinApp\WinApp.h" />
+    <ClInclude Include="externals\imgui\imconfig.h" />
+    <ClInclude Include="externals\imgui\imgui.h" />
+    <ClInclude Include="externals\imgui\imgui_impl_dx12.h" />
+    <ClInclude Include="externals\imgui\imgui_impl_win32.h" />
+    <ClInclude Include="externals\imgui\imgui_internal.h" />
+    <ClInclude Include="externals\imgui\imstb_rectpack.h" />
+    <ClInclude Include="externals\imgui\imstb_textedit.h" />
+    <ClInclude Include="externals\imgui\imstb_truetype.h" />
+    <ClInclude Include="ImGui\ImGuiManager.h" />
+    <ClInclude Include="Manager\GameManager.h" />
+    <ClInclude Include="Manager\ObjManager.h" />
+    <ClInclude Include="Manager\PipelineManager.h" />
+    <ClInclude Include="Manager\TextureManager.h" />
+    <ClInclude Include="Necessary\Effect\Easing.h" />
+    <ClInclude Include="Necessary\Effect\EffectManager.h" />
+    <ClInclude Include="Necessary\Effect\IEffect.h" />
+    <ClInclude Include="Necessary\Map\Map.h" />
+    <ClInclude Include="Necessary\Map\MapManager.h" />
+    <ClInclude Include="Necessary\Models\Block.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
+    <None Include="shader\Object3d.hlsli">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="externals\imgui\LICENSE.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="shader\Object3d.PS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="shader\Object3d.VS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="externals\DirectXTex\DirectXTex_Desktop_2022_Win10.vcxproj">
+      <Project>{371b9fa9-4c90-4ac6-a123-aced756d6c77}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
