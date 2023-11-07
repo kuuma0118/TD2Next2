@@ -15,9 +15,6 @@
     <Filter Include="Blossom Engine\Common">
       <UniqueIdentifier>{8129da6b-5b06-435e-96b9-82916b8109be}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Blossom Engine\GameScene">
-      <UniqueIdentifier>{4c305805-045a-4333-8f55-8f417b603d3f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Blossom Engine\Model">
       <UniqueIdentifier>{25908754-90e8-4aaa-83ae-3a2612ca0bd9}</UniqueIdentifier>
     </Filter>
@@ -78,6 +75,9 @@
     <Filter Include="Particle">
       <UniqueIdentifier>{68ea612b-a075-4579-8e34-aaaca2094675}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameScene">
+      <UniqueIdentifier>{4c305805-045a-4333-8f55-8f417b603d3f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui_impl_dx12.cpp">
@@ -106,7 +106,7 @@
       <Filter>Blossom Engine\Common</Filter>
     </ClCompile>
     <ClCompile Include="Blossom Engine\GameScenes\GameScene.cpp">
-      <Filter>Blossom Engine\GameScene</Filter>
+      <Filter>GameScene</Filter>
     </ClCompile>
     <ClCompile Include="Blossom Engine\Model\Model.cpp">
       <Filter>Blossom Engine\Model</Filter>
@@ -130,7 +130,7 @@
       <Filter>Blossom Engine\Manager</Filter>
     </ClCompile>
     <ClCompile Include="Blossom Engine\GameScenes\TitleScene.cpp">
-      <Filter>Blossom Engine\GameScene</Filter>
+      <Filter>GameScene</Filter>
     </ClCompile>
     <ClCompile Include="Manager\GameManager.cpp">
       <Filter>Blossom Engine\Manager</Filter>
@@ -166,7 +166,7 @@
       <Filter>Blossom Engine\utility</Filter>
     </ClCompile>
     <ClCompile Include="Blossom Engine\GameScenes\IScene.cpp">
-      <Filter>Blossom Engine\GameScene</Filter>
+      <Filter>GameScene</Filter>
     </ClCompile>
     <ClCompile Include="Necessary\Effect\EffectManager.cpp">
       <Filter>Necessary\Effect</Filter>
@@ -182,6 +182,9 @@
     </ClCompile>
     <ClCompile Include="Blossom Engine\components\Input\Input.cpp">
       <Filter>Blossom Engine\components\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewProjection.cpp">
+      <Filter>Blossom Engine\Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -246,13 +249,13 @@
       <Filter>Blossom Engine\Common</Filter>
     </ClInclude>
     <ClInclude Include="Blossom Engine\GameScenes\GameScene.h">
-      <Filter>Blossom Engine\GameScene</Filter>
+      <Filter>GameScene</Filter>
     </ClInclude>
     <ClInclude Include="Blossom Engine\GameScenes\IScene.h">
-      <Filter>Blossom Engine\GameScene</Filter>
+      <Filter>GameScene</Filter>
     </ClInclude>
     <ClInclude Include="Blossom Engine\GameScenes\TitleScene.h">
-      <Filter>Blossom Engine\GameScene</Filter>
+      <Filter>GameScene</Filter>
     </ClInclude>
     <ClInclude Include="Manager\GameManager.h">
       <Filter>Blossom Engine\Manager</Filter>
@@ -313,6 +316,12 @@
     </ClInclude>
     <ClInclude Include="Blossom Engine\components\Input\Input.h">
       <Filter>Blossom Engine\components\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewProjection.h">
+      <Filter>Blossom Engine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleBase.h">
+      <Filter>Particle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

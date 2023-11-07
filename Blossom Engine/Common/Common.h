@@ -65,6 +65,12 @@ public:
 	// 解放処理とリソースチェック
 	void Release();
 
+	/// リソースの作成
+/// </summary>
+/// <param name="sizeInBytes"></param>
+/// <returns></returns>
+	Microsoft::WRL::ComPtr<ID3D12Resource> CreateBufferResource(size_t sizeInBytes);
+
 private:
 	UINT backBufferIndex_;
 	Microsoft::WRL::ComPtr<IDXGIFactory7> dxgiFactory_;
