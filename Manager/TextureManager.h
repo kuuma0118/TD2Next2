@@ -10,6 +10,7 @@
 #include "../Blossom Engine/utility/MaterialData.h"
 #include <wrl.h>
 #include "../Blossom Engine/Common/Common.h"
+#include <array>
 
 enum TextureName {
 	UVCHEKER,
@@ -29,6 +30,26 @@ public:
 	Microsoft::WRL::ComPtr<ID3D12Resource> GetDepthStencilResource() { return depthStencilResource_.Get(); }
 	D3D12_DEPTH_STENCIL_DESC GetDepthStencilDesc() { return depthStencilDesc_; }
 	D3D12_GPU_DESCRIPTOR_HANDLE* GetTextureSrvHandleGPU() { return textureSrvHandleGPU_; }
+
+	//ディスクリプタの最大数
+	static const size_t kNumDescriptors = 256;
+	//インクリメントサイズ
+	static uint32_t descriptorSizeSRV;
+	/// テクスチャ
+	struct Texture {
+		//テクスチャリソース
+		Microsoft::WRL::ComPtr<ID3D12Resource> resource = nullptr;
+		//中間リソース
+		Microsoft::WRL::ComPtr<ID3D12Resource> intermediateResource = nullptr;
+		//CPUのディスクリプタハンドル
+		D3D12_CPU_DESCRIPTOR_HANDLE srvHandleCPU{};
+		//GPUのディスクリプタハンドル
+		D3D12_GPU_DESCRIPTOR_HANDLE srvHandleGPU{};
+		//テクスチャの名前
+		std::string name{};
+		//テクスチャハンドル
+		uint32_t textureHandle = 0;
+	};
 
 	// COMの初期化
 	void ComInit();
@@ -70,6 +91,9 @@ public:
 
 	// COMの終了処理
 	void ComUninit();
+
+	uint32_t CreateInstancingShaderResourceView(const Microsoft::WRL::ComPtr<ID3D12Resource>& instancingResource, uint32_t kNumInstance, size_t size);
+
 public:
 	// [0]はSpriteに使用しているuvChecker.png(textureSrvHandleGPUは三角形にも使用)[1]はSphereに使用しているmonsterBall.png
 	static const uint32_t kMaxImages = 3;
@@ -86,4 +110,18 @@ public:
 	// objデータ
 	static const int32_t kMaxObjModelData = 2;
 	ModelData* modelData_;
+
+private:
+	//インスタンス
+	static TextureManager* instance;
+	//デバイス
+	ID3D12Device* device_ = nullptr;
+	//コマンドリスト
+	ID3D12GraphicsCommandList* commandList_ = nullptr;
+	//ディスクリプタヒープ
+	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> srvDescriptorHeap_ = nullptr;
+	//テクスチャの配列
+	std::array<Texture, kNumDescriptors> textures_{};
+	//テクスチャ番号
+	uint32_t textureHandle_ = -1;
 };

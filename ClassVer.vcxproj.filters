@@ -189,6 +189,21 @@
     <ClCompile Include="Blossom Engine\Math\Random.cpp">
       <Filter>Blossom Engine\Math</Filter>
     </ClCompile>
+    <ClCompile Include="Necessary\Effect\Particle\ParticleBase.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Necessary\Effect\Particle\ParticleEmitter.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Necessary\Effect\Particle\BuildEmitter.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Necessary\Effect\Particle\ParticleSystem.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Necessary\Models\ParticleModel.cpp">
+      <Filter>Necessary\Models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imgui_impl_dx12.h">
@@ -320,17 +335,26 @@
     <ClInclude Include="Blossom Engine\components\Input\Input.h">
       <Filter>Blossom Engine\components\Input</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleBase.h">
-      <Filter>Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleEmitter.h">
-      <Filter>Particle</Filter>
-    </ClInclude>
     <ClInclude Include="Blossom Engine\Math\ViewProjection.h">
       <Filter>Blossom Engine\Math</Filter>
     </ClInclude>
     <ClInclude Include="Blossom Engine\Math\Random.h">
       <Filter>Blossom Engine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Necessary\Effect\Particle\ParticleEmitter.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Necessary\Effect\Particle\ParticleBase.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Necessary\Effect\Particle\BuildEmitter.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Necessary\Effect\Particle\ParticleSystem.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Necessary\Models\ParticleModel.h">
+      <Filter>Necessary\Models</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
