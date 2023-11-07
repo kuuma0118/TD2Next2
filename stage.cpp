@@ -1,5 +1,5 @@
 #include "stage.h"
-Microsoft::WRL::ComPtr<ID3D12Resource> Block::CreateBufferResource(const Microsoft::WRL::ComPtr<ID3D12Device>& device, size_t sizeInBytes) {
+Microsoft::WRL::ComPtr<ID3D12Resource> Stage::CreateBufferResource(const Microsoft::WRL::ComPtr<ID3D12Device>& device, size_t sizeInBytes) {
 	HRESULT hr;
 	D3D12_HEAP_PROPERTIES uploadHeapProperties{};
 	uploadHeapProperties.Type = D3D12_HEAP_TYPE_UPLOAD;

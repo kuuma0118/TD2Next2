@@ -12,9 +12,9 @@ void GameScene::Initialize() {
 	sphere_->Initialize();
 	textureNum_ = UVCHEKER;
 	input_ = Input::GetInstance();
-	block_ = new Block();
-	block_->Initialize();
-	block_->textureNum = STAGETEXTURE;
+	stage_ = new Stage();
+	stage_->Initialize();
+	stage_->textureNum = STAGETEXTURE;
 	pos_ = { 0,0,30 };
 }
 

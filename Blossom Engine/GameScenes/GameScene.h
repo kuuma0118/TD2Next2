@@ -6,7 +6,7 @@
 #include "../Blossom Engine/Sprite/Sprite.h"
 #include "../Blossom Engine/Sphere/Sphere.h"
 #include "../Blossom Engine/components/Input/Input.h"
-#include "../Necessary/Models/Block.h"
+#include "../Necessary/Models/stage.h"
 class GameManager;
 
 class GameScene : public IScene
@@ -24,12 +24,6 @@ private:
 	////// マップデータ
 	//Map* map_ = nullptr;
 
-	//// デバッグ用の変数
-	//int loadStageNum_ = 0;	// 読み込むステージの番号
-	Sprite* sprite_;
-	Sphere* sphere_;
-	int textureNum_;
-	Input* input_;
-	Vector3 pos_;
-	Block* block_;
+	// デバッグ用の変数
+	int loadStageNum_ = 0;	// 読み込むステージの番号
 };
