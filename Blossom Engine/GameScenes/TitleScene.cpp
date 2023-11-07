@@ -14,7 +14,9 @@ void TitleScene::Initialize() {
 }
 
 void TitleScene::Update() {
-
+	if(input_->TriggerKey(DIK_SPACE)){
+		sceneNum = GAME_SCENE;
+	}
 }
 
 void TitleScene::Draw() {

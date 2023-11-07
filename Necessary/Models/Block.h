@@ -28,7 +28,7 @@ public: // メンバ関数
 
 	void Initialize();	// 初期化
 	//void Update();	// 更新
-	
+
 	/// <summary>
 	/// 描画
 	/// </summary>
