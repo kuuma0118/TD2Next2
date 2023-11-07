@@ -26,4 +26,10 @@ private:
 
 	// デバッグ用の変数
 	int loadStageNum_ = 0;	// 読み込むステージの番号
+	Sprite* sprite_;
+	Sphere* sphere_;
+	int textureNum_;
+	Input* input_;
+	Vector3 pos_;
+	Stage* stage_;
 };

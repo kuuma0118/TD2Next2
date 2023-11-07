@@ -183,6 +183,9 @@
     <ClCompile Include="Blossom Engine\components\Input\Input.cpp">
       <Filter>Blossom Engine\components\Input</Filter>
     </ClCompile>
+    <ClCompile Include="Necessary\Models\stage.cpp">
+      <Filter>Necessary\Models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imgui_impl_dx12.h">
@@ -313,6 +316,9 @@
     </ClInclude>
     <ClInclude Include="Blossom Engine\components\Input\Input.h">
       <Filter>Blossom Engine\components\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Necessary\Models\stage.h">
+      <Filter>Necessary\Models</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

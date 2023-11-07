@@ -129,6 +129,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Necessary\Map\Map.cpp" />
     <ClCompile Include="Necessary\Map\MapManager.cpp" />
     <ClCompile Include="Necessary\Models\Block.cpp" />
+    <ClCompile Include="Necessary\Models\stage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Blossom Engine\Common\Common.h" />
@@ -174,6 +175,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Necessary\Map\Map.h" />
     <ClInclude Include="Necessary\Map\MapManager.h" />
     <ClInclude Include="Necessary\Models\Block.h" />
+    <ClInclude Include="Necessary\Models\stage.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />

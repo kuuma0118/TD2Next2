@@ -31,12 +31,12 @@ void GameScene::Update() {
 void GameScene::Draw() {
 	ObjManager::GetInstance()->GetObjModelData()[stage];
 	//map_->Draw();
-	block_->Draw();
-	sprite_->Draw(pos_, UVCHEKER);
+	stage_->Draw();
+	//sprite_->Draw(pos_, UVCHEKER);
 }
 
 void GameScene::Finalize() {
 	delete sprite_;
 	delete sphere_;
-	delete block_;
+	delete stage_;
 }
