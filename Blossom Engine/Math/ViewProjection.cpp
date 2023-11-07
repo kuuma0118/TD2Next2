@@ -1,5 +1,5 @@
 #include "ViewProjection.h"
-#include "Blossom Engine/Common/Common.h"
+#include "../Blossom Engine/Common/Common.h"
 
 void ViewProjection::Initialize() {
 	//CBVの作成

@@ -104,6 +104,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Blossom Engine\GameScenes\IScene.cpp" />
     <ClCompile Include="Blossom Engine\GameScenes\TitleScene.cpp" />
     <ClCompile Include="Blossom Engine\Math\MatrixCalculate.cpp" />
+    <ClCompile Include="Blossom Engine\Math\Random.cpp" />
+    <ClCompile Include="Blossom Engine\Math\ViewProjection.cpp" />
     <ClCompile Include="Blossom Engine\Model\Model.cpp" />
     <ClCompile Include="Blossom Engine\Sphere\Sphere.cpp" />
     <ClCompile Include="Blossom Engine\Sprite\Sprite.cpp" />
@@ -129,7 +131,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Necessary\Map\Map.cpp" />
     <ClCompile Include="Necessary\Map\MapManager.cpp" />
     <ClCompile Include="Necessary\Models\Block.cpp" />
-    <ClCompile Include="ViewProjection.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Blossom Engine\Common\Common.h" />
@@ -144,9 +145,11 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Blossom Engine\Math\Matrix3x3.h" />
     <ClInclude Include="Blossom Engine\Math\Matrix4x4.h" />
     <ClInclude Include="Blossom Engine\Math\MatrixCalculate.h" />
+    <ClInclude Include="Blossom Engine\Math\Random.h" />
     <ClInclude Include="Blossom Engine\Math\Vector2.h" />
     <ClInclude Include="Blossom Engine\Math\Vector3.h" />
     <ClInclude Include="Blossom Engine\Math\Vector4.h" />
+    <ClInclude Include="Blossom Engine\Math\ViewProjection.h" />
     <ClInclude Include="Blossom Engine\Model\Model.h" />
     <ClInclude Include="Blossom Engine\Sphere\Sphere.h" />
     <ClInclude Include="Blossom Engine\Sprite\Sprite.h" />
@@ -176,7 +179,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Necessary\Map\MapManager.h" />
     <ClInclude Include="Necessary\Models\Block.h" />
     <ClInclude Include="ParticleBase.h" />
-    <ClInclude Include="ViewProjection.h" />
+    <ClInclude Include="ParticleEmitter.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />

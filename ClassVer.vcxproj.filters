@@ -183,7 +183,10 @@
     <ClCompile Include="Blossom Engine\components\Input\Input.cpp">
       <Filter>Blossom Engine\components\Input</Filter>
     </ClCompile>
-    <ClCompile Include="ViewProjection.cpp">
+    <ClCompile Include="Blossom Engine\Math\ViewProjection.cpp">
+      <Filter>Blossom Engine\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Blossom Engine\Math\Random.cpp">
       <Filter>Blossom Engine\Math</Filter>
     </ClCompile>
   </ItemGroup>
@@ -317,11 +320,17 @@
     <ClInclude Include="Blossom Engine\components\Input\Input.h">
       <Filter>Blossom Engine\components\Input</Filter>
     </ClInclude>
-    <ClInclude Include="ViewProjection.h">
-      <Filter>Blossom Engine\Math</Filter>
-    </ClInclude>
     <ClInclude Include="ParticleBase.h">
       <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleEmitter.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Blossom Engine\Math\ViewProjection.h">
+      <Filter>Blossom Engine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Blossom Engine\Math\Random.h">
+      <Filter>Blossom Engine\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
