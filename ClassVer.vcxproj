@@ -106,6 +106,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Blossom Engine\Math\MatrixCalculate.cpp" />
     <ClCompile Include="Blossom Engine\Math\Random.cpp" />
     <ClCompile Include="Blossom Engine\Math\ViewProjection.cpp" />
+    <ClCompile Include="Blossom Engine\Math\WorldTransform.cpp" />
+    <ClCompile Include="Blossom Engine\Model\Material.cpp" />
+    <ClCompile Include="Blossom Engine\Model\Mesh.cpp" />
     <ClCompile Include="Blossom Engine\Model\Model.cpp" />
     <ClCompile Include="Blossom Engine\Sphere\Sphere.cpp" />
     <ClCompile Include="Blossom Engine\Sprite\Sprite.cpp" />
@@ -135,7 +138,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Necessary\Map\Map.cpp" />
     <ClCompile Include="Necessary\Map\MapManager.cpp" />
     <ClCompile Include="Necessary\Models\Block.cpp" />
-    <ClCompile Include="Necessary\Models\ParticleModel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Blossom Engine\Common\Common.h" />
@@ -155,6 +157,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Blossom Engine\Math\Vector3.h" />
     <ClInclude Include="Blossom Engine\Math\Vector4.h" />
     <ClInclude Include="Blossom Engine\Math\ViewProjection.h" />
+    <ClInclude Include="Blossom Engine\Math\WorldTransform.h" />
+    <ClInclude Include="Blossom Engine\Model\Material.h" />
+    <ClInclude Include="Blossom Engine\Model\Mesh.h" />
     <ClInclude Include="Blossom Engine\Model\Model.h" />
     <ClInclude Include="Blossom Engine\Sphere\Sphere.h" />
     <ClInclude Include="Blossom Engine\Sprite\Sprite.h" />
@@ -187,7 +192,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Necessary\Map\Map.h" />
     <ClInclude Include="Necessary\Map\MapManager.h" />
     <ClInclude Include="Necessary\Models\Block.h" />
-    <ClInclude Include="Necessary\Models\ParticleModel.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />

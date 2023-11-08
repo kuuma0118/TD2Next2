@@ -4,6 +4,7 @@
 #include "../Blossom Engine/Sphere/Sphere.h"
 #include "../Blossom Engine/components/Input/Input.h"
 #include "../Necessary/Models/Block.h"
+#include "../Blossom Engine/Math/ViewProjection.h"
 
 class GameManager;
 
@@ -15,6 +16,13 @@ public:
 	void Draw() override;
 	void Finalize()override;
 private:
+	//カメラ
+	ViewProjection viewProjection_{};
+	//テクスチャ
+	uint32_t textureHandle_ = 0;
+	//TextureManager
+	TextureManager* textureManager_ = nullptr;
+
 	Sprite* sprite_;
 	Sphere* sphere_;
 	int textureNum_;

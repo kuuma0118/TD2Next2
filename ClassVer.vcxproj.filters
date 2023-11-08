@@ -201,8 +201,14 @@
     <ClCompile Include="Necessary\Effect\Particle\ParticleSystem.cpp">
       <Filter>Particle</Filter>
     </ClCompile>
-    <ClCompile Include="Necessary\Models\ParticleModel.cpp">
-      <Filter>Necessary\Models</Filter>
+    <ClCompile Include="Blossom Engine\Model\Mesh.cpp">
+      <Filter>Blossom Engine\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Blossom Engine\Model\Material.cpp">
+      <Filter>Blossom Engine\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Blossom Engine\Math\WorldTransform.cpp">
+      <Filter>Blossom Engine\Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -353,8 +359,14 @@
     <ClInclude Include="Necessary\Effect\Particle\ParticleSystem.h">
       <Filter>Particle</Filter>
     </ClInclude>
-    <ClInclude Include="Necessary\Models\ParticleModel.h">
-      <Filter>Necessary\Models</Filter>
+    <ClInclude Include="Blossom Engine\Model\Material.h">
+      <Filter>Blossom Engine\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Blossom Engine\Model\Mesh.h">
+      <Filter>Blossom Engine\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Blossom Engine\Math\WorldTransform.h">
+      <Filter>Blossom Engine\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
