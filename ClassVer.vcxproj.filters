@@ -78,6 +78,9 @@
     <Filter Include="Particle">
       <UniqueIdentifier>{68ea612b-a075-4579-8e34-aaaca2094675}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Blossom Engine\utility\Collision">
+      <UniqueIdentifier>{a043f162-39d5-48e4-be4c-0eddb1a68157}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui_impl_dx12.cpp">
@@ -191,6 +194,9 @@
     </ClCompile>
     <ClCompile Include="Necessary\Models\UpsideTank.cpp">
       <Filter>Necessary\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Blossom Engine\utility\Collision\CollisionManager.cpp">
+      <Filter>Blossom Engine\utility\Collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -331,6 +337,15 @@
     </ClInclude>
     <ClInclude Include="DownsideTank.h">
       <Filter>Necessary\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Blossom Engine\utility\Collision\CollisionConfig.h">
+      <Filter>Blossom Engine\utility\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Blossom Engine\utility\Collision\CollisionManager.h">
+      <Filter>Blossom Engine\utility\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Blossom Engine\utility\Collision\Collider.h">
+      <Filter>Blossom Engine\utility\Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
