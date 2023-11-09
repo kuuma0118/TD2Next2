@@ -107,9 +107,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Blossom Engine\Math\Random.cpp" />
     <ClCompile Include="Blossom Engine\Math\ViewProjection.cpp" />
     <ClCompile Include="Blossom Engine\Math\WorldTransform.cpp" />
-    <ClCompile Include="Blossom Engine\Model\Material.cpp" />
     <ClCompile Include="Blossom Engine\Model\Mesh.cpp" />
     <ClCompile Include="Blossom Engine\Model\Model.cpp" />
+    <ClCompile Include="Blossom Engine\Model\ParicleModel.cpp" />
     <ClCompile Include="Blossom Engine\Sphere\Sphere.cpp" />
     <ClCompile Include="Blossom Engine\Sprite\Sprite.cpp" />
     <ClCompile Include="Blossom Engine\String\String.cpp" />
@@ -158,9 +158,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Blossom Engine\Math\Vector4.h" />
     <ClInclude Include="Blossom Engine\Math\ViewProjection.h" />
     <ClInclude Include="Blossom Engine\Math\WorldTransform.h" />
-    <ClInclude Include="Blossom Engine\Model\Material.h" />
     <ClInclude Include="Blossom Engine\Model\Mesh.h" />
     <ClInclude Include="Blossom Engine\Model\Model.h" />
+    <ClInclude Include="Blossom Engine\Model\ParticleModel.h" />
     <ClInclude Include="Blossom Engine\Sphere\Sphere.h" />
     <ClInclude Include="Blossom Engine\Sprite\Sprite.h" />
     <ClInclude Include="Blossom Engine\String\String.h" />

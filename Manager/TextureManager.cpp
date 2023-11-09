@@ -18,6 +18,71 @@ TextureManager::~TextureManager() {
 
 }
 
+uint32_t TextureManager::Load(const std::string& filePath) {
+
+	//テクスチャを読み込む
+	uint32_t textureHandle = TextureManager::GetInstance()->LoadInternal(filePath);
+
+	return textureHandle;
+}
+
+uint32_t TextureManager::LoadInternal(const std::string& filePath) {
+
+	//同じテクスチャがないか探す
+	for (int i = 0; i < kNumDescriptors; i++) {
+		//同じテクスチャがあった場合そのテクスチャハンドルを返す
+		if (textures_[i].name == filePath) {
+			return textures_[i].textureHandle;
+		}
+	}
+
+
+	//テクスチャハンドルをインクリメント
+	textureHandle_++;
+	//テクスチャがディスクリプタの最大数を超えていたら止める
+	if (textureHandle_ >= kNumDescriptors) {
+		assert(0);
+	}
+
+
+	//テクスチャを読み込む
+	DirectX::ScratchImage mipImages = TextureManager::LoadTexture(filePath);
+
+
+	//メタデータを取得
+	const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
+	//テクスチャ情報を基にリソースを作成
+	textures_[textureHandle_].resource = TextureManager::CreateTextureResource(metadata);
+
+
+	//テクスチャのリソースにデータを転送する
+	textures_[textureHandle_].intermediateResource = TextureManager::UploadTextureData(textures_[textureHandle_].resource.Get(), mipImages);
+
+
+	//metaDataを基にSRVの設定
+	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
+	srvDesc.Format = metadata.format;
+	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;//2Dテクスチャ
+	srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
+
+	//SRVを作成するDescriptorHeapの場所を決める
+	textures_[textureHandle_].srvHandleCPU = TextureManager::GetCPUDescriptorHandle(srvDescriptorHeap_.Get(), descriptorSizeSRV, textureHandle_);
+	textures_[textureHandle_].srvHandleGPU = TextureManager::GetGPUDescriptorHandle(srvDescriptorHeap_.Get(), descriptorSizeSRV, textureHandle_);
+
+	//SRVの作成
+	device_->CreateShaderResourceView(textures_[textureHandle_].resource.Get(), &srvDesc, textures_[textureHandle_].srvHandleCPU);
+
+
+	//テクスチャの名前を保存する
+	textures_[textureHandle_].name = filePath;
+	//テクスチャハンドルを保存する
+	textures_[textureHandle_].textureHandle = textureHandle_;
+
+
+	return textureHandle_;
+}
+
 uint32_t TextureManager::descriptorSizeSRV = 0;
 
 void TextureManager::TransferTexture(const Microsoft::WRL::ComPtr<ID3D12DescriptorHeap>& srvDescriptorHeap) {
@@ -242,6 +307,17 @@ void TextureManager::CreateDepthStencilView() {
 
 	const uint32_t descriptorSizeDSV = DirectXCommon::GetInstance()->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_DSV);
 	DirectXCommon::GetInstance()->GetDevice()->CreateDepthStencilView(depthStencilResource_.Get(), &dsvDesc, GetCPUDescriptorHandle(dsvDescriptorHeap_.Get(), descriptorSizeDSV, 0));
+}
+
+void TextureManager::SetGraphicsDescriptorHeap() {
+	//DescriptorHeapを設定
+	ID3D12DescriptorHeap* descriptorHeaps[] = { srvDescriptorHeap_.Get() };
+	commandList_->SetDescriptorHeaps(1, descriptorHeaps);
+}
+
+void TextureManager::SetGraphicsRootDescriptorTable(UINT rootParameterIndex, uint32_t textureHandle) {
+	//SRVのDescriptorTableの先頭を設定
+	commandList_->SetGraphicsRootDescriptorTable(rootParameterIndex, textures_[textureHandle].srvHandleGPU);
 }
 
 void TextureManager::SettingDepthStencilState() {

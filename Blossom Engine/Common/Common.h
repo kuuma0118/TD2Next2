@@ -20,8 +20,10 @@ public:
 	D3D12_GPU_DESCRIPTOR_HANDLE GetGPUDescriptorHandle(const Microsoft::WRL::ComPtr<ID3D12DescriptorHeap>& descriptorHeap, uint32_t descriptorSize, uint32_t index);
 
 	// Getter
-	Microsoft::WRL::ComPtr<ID3D12Device> GetDevice() { return this->device_.Get(); }
-	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> GetCommandList() { return this->commandList_.Get(); }
+	ID3D12Device* GetDevice() const { return device_.Get(); };
+	ID3D12GraphicsCommandList* GetCommandList() const { return commandList_.Get(); };
+	//Microsoft::WRL::ComPtr<ID3D12Device> GetDevice() { return this->device_.Get(); }
+	//Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> GetCommandList() { return this->commandList_.Get(); }
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> GetSrvDescriptorHeap() { return this->srvDescriptorHeap_.Get(); }
 	D3D12_RENDER_TARGET_VIEW_DESC GetRtvDesc() { return rtvDesc_; }
 	DXGI_SWAP_CHAIN_DESC1 GetSwapChainDesc() { return swapChainDesc_; }

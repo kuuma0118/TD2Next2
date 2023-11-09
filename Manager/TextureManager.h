@@ -2,7 +2,7 @@
 #include "../externals/DirectXTex/d3dx12.h"
 #include "../externals/DirectXTex/DirectXTex.h"
 #include <string>
-
+#include "../Blossom Engine/String/String.h"
 #include "../Blossom Engine/Math/MatrixCalculate.h"
 #include "../Blossom Engine/Math/Matrix4x4.h"
 #include <d3d12.h>
@@ -22,6 +22,9 @@ class TextureManager
 {
 public:
 	static TextureManager* GetInstance();
+
+	/// テクスチャを読み込む
+	static uint32_t Load(const std::string& filePath);
 
 	D3D12_CPU_DESCRIPTOR_HANDLE GetCPUDescriptorHandle(const Microsoft::WRL::ComPtr<ID3D12DescriptorHeap>& descriptorHeap, uint32_t descriptorSize, uint32_t index);
 	D3D12_GPU_DESCRIPTOR_HANDLE GetGPUDescriptorHandle(const Microsoft::WRL::ComPtr<ID3D12DescriptorHeap>& descriptorHeap, uint32_t descriptorSize, uint32_t index);
@@ -94,6 +97,11 @@ public:
 
 	uint32_t CreateInstancingShaderResourceView(const Microsoft::WRL::ComPtr<ID3D12Resource>& instancingResource, uint32_t kNumInstance, size_t size);
 
+	/// ディスクリプタヒープを設定
+	void SetGraphicsDescriptorHeap();
+	/// ディスクリプタテーブルを設定
+	void SetGraphicsRootDescriptorTable(UINT rootParameterIndex, uint32_t textureHandle);
+
 public:
 	// [0]はSpriteに使用しているuvChecker.png(textureSrvHandleGPUは三角形にも使用)[1]はSphereに使用しているmonsterBall.png
 	static const uint32_t kMaxImages = 3;
@@ -124,4 +132,6 @@ private:
 	std::array<Texture, kNumDescriptors> textures_{};
 	//テクスチャ番号
 	uint32_t textureHandle_ = -1;
+	/// テクスチャを読み込む
+	uint32_t LoadInternal(const std::string& filePath);
 };
