@@ -109,6 +109,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Blossom Engine\Sprite\Sprite.cpp" />
     <ClCompile Include="Blossom Engine\String\String.cpp" />
     <ClCompile Include="Blossom Engine\Sys\Sys.cpp" />
+    <ClCompile Include="Blossom Engine\utility\Collision\CollisionManager.cpp" />
     <ClCompile Include="Blossom Engine\utility\GlobalVariables.cpp" />
     <ClCompile Include="Blossom Engine\utility\MaterialData.cpp" />
     <ClCompile Include="Blossom Engine\WinApp\WinApp.cpp" />
@@ -151,6 +152,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Blossom Engine\Sprite\Sprite.h" />
     <ClInclude Include="Blossom Engine\String\String.h" />
     <ClInclude Include="Blossom Engine\Sys\Sys.h" />
+    <ClInclude Include="Blossom Engine\utility\Collision\Collider.h" />
+    <ClInclude Include="Blossom Engine\utility\Collision\CollisionConfig.h" />
+    <ClInclude Include="Blossom Engine\utility\Collision\CollisionManager.h" />
     <ClInclude Include="Blossom Engine\utility\GlobalVariables.h" />
     <ClInclude Include="Blossom Engine\utility\MaterialData.h" />
     <ClInclude Include="Blossom Engine\utility\resource.h" />
