@@ -5,6 +5,9 @@
 enum ModelName {
 	block,
 	player,
+	stage,
+	UpsideTankM,
+	DownsideTankM,
 };
 
 class ObjManager
@@ -21,7 +24,7 @@ public:
 	ModelData LoadObjFile(const std::string& directoryPath, const std::string& filename);
 
 private:
-	static const int32_t kMaxModelData = 2;
+	static const int32_t kMaxModelData = 5;
 	ModelData modelData_[kMaxModelData];
 };
 

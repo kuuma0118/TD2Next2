@@ -12,7 +12,8 @@
 #include "../Manager/TextureManager.h"
 #include "../Blossom Engine/Common/Common.h"
 
-class Block {
+class Stage {
+
 public: // メンバ関数
 	ModelData GetModelData() { return modelData_; }
 
