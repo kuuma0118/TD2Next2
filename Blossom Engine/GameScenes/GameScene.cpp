@@ -36,19 +36,53 @@ void GameScene::Update() {
 	map_->Update();*/
 	if (input_->PressKey(DIK_W)) {
 		downsidetank_->transform.translate.y += 0.02f;
+		downsidetank_->transform.rotate.z = 0.00f;
 		upsidetank_->transform.translate.y += 0.02f;
+		if (input_->PressKey(DIK_A)) {
+			downsidetank_->transform.rotate.z = 0.77f;
+		}
+		if (input_->PressKey(DIK_D)) {
+			downsidetank_->transform.rotate.z = -0.77f;
+		}
 	}
 	if (input_->PressKey(DIK_S)) {
 		downsidetank_->transform.translate.y -= 0.02f;
+		downsidetank_->transform.rotate.z = 3.15f;
 		upsidetank_->transform.translate.y -= 0.02f;
+		if (input_->PressKey(DIK_A)) {
+			downsidetank_->transform.rotate.z = 2.37f;
+
+		}
+		if (input_->PressKey(DIK_D)) {
+			downsidetank_->transform.rotate.z = -2.37f;
+
+		}
 	}
 	if (input_->PressKey(DIK_A)) {
 		downsidetank_->transform.translate.x -= 0.02f;
+		downsidetank_->transform.rotate.z = 1.55f;
 		upsidetank_->transform.translate.x -= 0.02f;
+		if (input_->PressKey(DIK_W)) {
+			downsidetank_->transform.rotate.z = 0.77f;
+
+		}
+		if (input_->PressKey(DIK_S)) {
+			downsidetank_->transform.rotate.z = 2.37f;
+
+		}
 	}
 	if (input_->PressKey(DIK_D)) {
 		downsidetank_->transform.translate.x += 0.02f;
+		downsidetank_->transform.rotate.z = -1.55f;
 		upsidetank_->transform.translate.x += 0.02f;
+		if (input_->PressKey(DIK_W)) {
+			downsidetank_->transform.rotate.z = -0.77f;
+
+		}
+		if (input_->PressKey(DIK_S)) {
+			downsidetank_->transform.rotate.z = -2.37f;
+
+		}
 	}
 	if (input_->PressKey(DIK_Q)) {
 		upsidetank_->transform.rotate.z += 0.02f;
