@@ -22,6 +22,7 @@ struct Node {
 	}
 };
 
+class DownsideTank;
 
 class Enemy
 {
@@ -30,7 +31,7 @@ public:	// ** メンバ関数 ** //
 	Enemy();
 	~Enemy();
 
-	void Initialize();
+	void Initialize(DownsideTank* player);
 	void Update();
 	void Draw();
 
@@ -46,6 +47,9 @@ public:	// ** メンバ関数 ** //
 
 
 private:// ** メンバ変数 ** //
+
+	// プレイヤーのポインタを取得
+	DownsideTank* player_;
 
 	// 座標 //
 

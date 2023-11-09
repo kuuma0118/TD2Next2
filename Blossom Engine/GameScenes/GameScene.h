@@ -9,6 +9,8 @@
 #include "../Necessary/Models/stage.h"
 #include "../Necessary/Models/UpsideTank.h"
 #include "../Necessary/Models/DownsideTank.h"
+#include "../Enemy.h"
+
 class GameManager;
 
 class GameScene : public IScene
@@ -36,5 +38,5 @@ private:
 	Stage* stage_;
 	UpsideTank* upsidetank_;
 	DownsideTank* downsidetank_;
-	
+	Enemy* enemy_ = nullptr;
 };

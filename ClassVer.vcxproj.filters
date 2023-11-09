@@ -356,9 +356,6 @@
     <ClInclude Include="UpsideTank.h">
       <Filter>Necessary\Models</Filter>
     </ClInclude>
-    <ClInclude Include="DownsideTank.h">
-      <Filter>Necessary\Models</Filter>
-    </ClInclude>
     <ClInclude Include="Blossom Engine\utility\Collision\CollisionConfig.h">
       <Filter>Blossom Engine\utility\Collision</Filter>
     </ClInclude>
@@ -367,6 +364,9 @@
     </ClInclude>
     <ClInclude Include="Blossom Engine\utility\Collision\Collider.h">
       <Filter>Blossom Engine\utility\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Necessary\Models\DownsideTank.h">
+      <Filter>Necessary\Models</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

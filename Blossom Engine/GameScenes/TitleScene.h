@@ -4,7 +4,6 @@
 #include "../Blossom Engine/Sphere/Sphere.h"
 #include "../Blossom Engine/components/Input/Input.h"
 #include "../Necessary/Models/Block.h"
-#include "../Enemy.h"
 
 class GameManager;
 
@@ -22,5 +21,4 @@ private:
 	Input* input_;
 	Vector3 pos_;
 	Block* block_;
-	Enemy* enemy_;
 };

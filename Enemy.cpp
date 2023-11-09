@@ -4,6 +4,7 @@
 #include <set>
 #include <cmath>
 #include "MoveEasing.h"
+#include "Necessary/Models/DownsideTank.h"
 
 Enemy::Enemy() {
 
@@ -13,7 +14,10 @@ Enemy::~Enemy() {
 
 }
 
-void Enemy::Initialize() {
+void Enemy::Initialize(DownsideTank* player) {
+
+	// プレイヤーのポインタを取得
+	player_ = player;
 
 	// 敵本体 トランスフォーム
 	transform_ = { {1.0f,1.0f,1.0f}, {0.0f,0.0f,0.0f}, { 0.0f, 0.0f, 0.0f } };
@@ -122,11 +126,19 @@ void Enemy::Update() {
 	//}
 	//ImGui::End();
 
+	
+
 	///////////////////////////////////////
 	/// 追従を行う
 	///////////////////////////////////////
 
 	// イージング用の数値を加算
+	if (moveT == 1.0f) {
+		moveT = 0.0f;
+		start = now;
+		end.x = player_->transform.translate.x;
+		end.y = player_->transform.translate.y;
+	}
 	if (moveT < 1.0f) {
 		moveT += 0.01f;
 		if (moveT > 1.0f) {	moveT = 1.0f;}

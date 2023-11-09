@@ -25,6 +25,10 @@ void GameScene::Initialize() {
 	downsidetank_->textureNum = DOWNSIDETANK;
 	pos_ = { 0,0,30 };
 	bool isWKeyPressed = false;
+
+	// enemy　一体仮置き
+	enemy_ = new Enemy;
+	enemy_->Initialize(downsidetank_);
 }
 
 void GameScene::Update() {
@@ -90,6 +94,8 @@ void GameScene::Update() {
 	if (input_->PressKey(DIK_E)) {
 		upsidetank_->transform.rotate.z -= 0.02f;
 	}
+
+	enemy_->Update();
 }
 
 void GameScene::Draw() {
@@ -97,6 +103,7 @@ void GameScene::Draw() {
 	stage_->Draw();
 	upsidetank_->Draw();
 	downsidetank_->Draw();
+	enemy_->Draw();
 	//sprite_->Draw(pos_, UVCHEKER);
 }
 
