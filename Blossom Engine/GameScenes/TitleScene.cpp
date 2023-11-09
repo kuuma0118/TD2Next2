@@ -17,7 +17,11 @@ void TitleScene::Initialize() {
 }
 
 void TitleScene::Update() {
-	enemy_->Update();
+
+	if (input_->TriggerKey(DIK_1)) {
+		enemy_->Update();
+	}
+	
 }
 
 void TitleScene::Draw() {

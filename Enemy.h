@@ -1,7 +1,7 @@
 #pragma once
 #include "./Blossom Engine/Math/MatrixCalculate.h"
 #include "./Blossom Engine/Model/Model.h"
-
+#include "Necessary/Models/Block.h"
 
 enum class AI_TYPE {
 	NOMAL,
@@ -23,7 +23,6 @@ struct Node {
 };
 
 
-
 class Enemy
 {
 public:	// ** メンバ関数 ** //
@@ -36,7 +35,6 @@ public:	// ** メンバ関数 ** //
 	void Draw();
 
 	std::vector<Node>AStar(const Node& start, const Node& end);
-
 
 	bool IsValid(int32_t x, int32_t y);
 	int ManhattanDistance(const Node& a, const Node& b);
@@ -60,7 +58,8 @@ private:// ** メンバ変数 ** //
 	Transform cannonTransform_;
 
 	// モデル //
-	Model* model_;
+	Model* model_ = nullptr;
+	Model* mapChip[5][5];
 
 	// テクスチャ
 	
@@ -76,6 +75,15 @@ private:// ** メンバ変数 ** //
 	// クールタイム(最速で一秒ごとに一発)
 	int32_t shotCoolTime_;
 	const int32_t kMaxShotCoolTime_ = 60;
+
+	// 仮マップ
+	std::vector < std::vector<int32_t>>map = {
+	{0,0,0,0,0},
+	{0,1,1,0,0},
+	{0,0,0,1,0},
+	{0,1,0,0,0},
+	{0,0,0,0,0}
+	};
 
 };
 
