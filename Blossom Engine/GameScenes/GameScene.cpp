@@ -28,34 +28,54 @@ void GameScene::Initialize() {
 }
 
 void GameScene::Update() {
+	XINPUT_STATE joystate;
 
 	/*ImGui::Begin("GameScene Debug");
 	ImGui::SliderInt("loadStageLevel", &loadStageNum_, 0, 7);
 	ImGui::End();
 
 	map_->Update();*/
+	
 	if (input_->PressKey(DIK_W)) {
 		downsidetank_->transform.translate.y += 0.02f;
 		upsidetank_->transform.translate.y += 0.02f;
 	}
-	if (input_->PressKey(DIK_S)) {
+	else if (input_->PressKey(DIK_S)) {
 		downsidetank_->transform.translate.y -= 0.02f;
 		upsidetank_->transform.translate.y -= 0.02f;
 	}
+	else if (Input::GetInstance()->GetJoystickState(0,joystate)) {
+		downsidetank_->transform.translate.y += (float)joystate.Gamepad.sThumbLY / SHRT_MAX * 0.02f;
+		upsidetank_->transform.translate.y += (float)joystate.Gamepad.sThumbLY / SHRT_MAX * 0.02f;
+	}
+
 	if (input_->PressKey(DIK_A)) {
 		downsidetank_->transform.translate.x -= 0.02f;
 		upsidetank_->transform.translate.x -= 0.02f;
 	}
-	if (input_->PressKey(DIK_D)) {
+	else if (input_->PressKey(DIK_D)) {
 		downsidetank_->transform.translate.x += 0.02f;
 		upsidetank_->transform.translate.x += 0.02f;
 	}
+	else if (Input::GetInstance()->GetJoystickState(0, joystate)) {
+		downsidetank_->transform.translate.x += (float)joystate.Gamepad.sThumbLX / SHRT_MAX * 0.02f;
+		upsidetank_->transform.translate.x += (float)joystate.Gamepad.sThumbLX / SHRT_MAX * 0.02f;
+	}
+
 	if (input_->PressKey(DIK_Q)) {
 		upsidetank_->transform.rotate.z += 0.02f;
 	}
-	if (input_->PressKey(DIK_E)) {
+	else if (input_->PressKey(DIK_E)) {
 		upsidetank_->transform.rotate.z -= 0.02f;
 	}
+	else if (joystate.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER) {
+		upsidetank_->transform.rotate.z -= 0.02f;
+	}
+	else if (joystate.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER) {
+		upsidetank_->transform.rotate.z += 0.02f;
+	}
+	
+
 }
 
 void GameScene::Draw() {
