@@ -24,6 +24,7 @@ void GameScene::Initialize() {
 	downsidetank_->Initialize();
 	downsidetank_->textureNum = UVCHEKER;
 	pos_ = { 0,0,30 };
+	bool isWKeyPressed = false;
 }
 
 void GameScene::Update() {
@@ -33,11 +34,31 @@ void GameScene::Update() {
 	ImGui::End();
 
 	map_->Update();*/
-
+	if (input_->PressKey(DIK_W)) {
+		downsidetank_->transform.translate.y += 0.02f;
+		upsidetank_->transform.translate.y += 0.02f;
+	}
+	if (input_->PressKey(DIK_S)) {
+		downsidetank_->transform.translate.y -= 0.02f;
+		upsidetank_->transform.translate.y -= 0.02f;
+	}
+	if (input_->PressKey(DIK_A)) {
+		downsidetank_->transform.translate.x -= 0.02f;
+		upsidetank_->transform.translate.x -= 0.02f;
+	}
+	if (input_->PressKey(DIK_D)) {
+		downsidetank_->transform.translate.x += 0.02f;
+		upsidetank_->transform.translate.x += 0.02f;
+	}
+	if (input_->PressKey(DIK_Q)) {
+		upsidetank_->transform.rotate.z += 0.02f;
+	}
+	if (input_->PressKey(DIK_E)) {
+		upsidetank_->transform.rotate.z -= 0.02f;
+	}
 }
 
 void GameScene::Draw() {
-	ObjManager::GetInstance()->GetObjModelData()[stage];
 	//map_->Draw();
 	stage_->Draw();
 	upsidetank_->Draw();
