@@ -78,6 +78,12 @@
     <Filter Include="Particle">
       <UniqueIdentifier>{68ea612b-a075-4579-8e34-aaaca2094675}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Enemy">
+      <UniqueIdentifier>{1c52a88d-0a51-4662-953f-39041391c271}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemy\AI">
+      <UniqueIdentifier>{8acb7659-8908-4a59-ba5d-73a162cb6d44}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui_impl_dx12.cpp">
@@ -182,6 +188,9 @@
     </ClCompile>
     <ClCompile Include="Blossom Engine\components\Input\Input.cpp">
       <Filter>Blossom Engine\components\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -313,6 +322,9 @@
     </ClInclude>
     <ClInclude Include="Blossom Engine\components\Input\Input.h">
       <Filter>Blossom Engine\components\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

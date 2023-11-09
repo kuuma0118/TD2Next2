@@ -11,18 +11,23 @@ void TitleScene::Initialize() {
 	block_->Initialize();
 	block_->textureNum = BLOCK;
 	pos_ = { 0,0,30 };
+
+	enemy_ = new Enemy;
+	enemy_->Initialize();
 }
 
 void TitleScene::Update() {
-
+	enemy_->Update();
 }
 
 void TitleScene::Draw() {
-	block_->Draw();
+	//block_->Draw();
+	enemy_->Draw();
 }
 
 void TitleScene::Finalize() {
 	delete sprite_;
 	delete sphere_;
 	delete block_;
+	delete enemy_;
 }
