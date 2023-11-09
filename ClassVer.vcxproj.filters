@@ -186,6 +186,12 @@
     <ClCompile Include="Necessary\Models\stage.cpp">
       <Filter>Necessary\Models</Filter>
     </ClCompile>
+    <ClCompile Include="UpsideTank.cpp">
+      <Filter>Necessary\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="DownsideTank.cpp">
+      <Filter>Necessary\Models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imgui_impl_dx12.h">
@@ -318,6 +324,12 @@
       <Filter>Blossom Engine\components\Input</Filter>
     </ClInclude>
     <ClInclude Include="Necessary\Models\stage.h">
+      <Filter>Necessary\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="UpsideTank.h">
+      <Filter>Necessary\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="DownsideTank.h">
       <Filter>Necessary\Models</Filter>
     </ClInclude>
   </ItemGroup>
