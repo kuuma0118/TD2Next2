@@ -23,7 +23,7 @@ void TextureManager::TransferTexture(const Microsoft::WRL::ComPtr<ID3D12Descript
 	mipImages_[UVCHEKER] = LoadTexture("Resources/uvChecker.png");
 	mipImages_[MONSTERBALL] = LoadTexture("Resources/monsterBall.png");
 	mipImages_[BLOCK] = LoadTexture("Resources/block/block.png");
-	mipImages_[STAGETEXTURE] = LoadTexture("Resources/uvChecker.png");
+	mipImages_[STAGETEXTURE] = LoadTexture("Resources/stage.png");
 	mipImages_[UPSIDETANK] = LoadTexture("Resources/uvChecker.png");
 	mipImages_[DOWNSIDETANK] = LoadTexture("Resources/uvChecker.png");
 
