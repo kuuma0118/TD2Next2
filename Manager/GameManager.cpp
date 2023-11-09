@@ -56,9 +56,8 @@ void GameManager::Initialize() {
 	camera_ = Camera::GetInstance();
 	camera_->Initialize();
 
-	// ImGuiの初期化
-	imGuiManager_ = new ImGuiManager();
-	imGuiManager_->Initialize(winApp_->GetHwnd());
+	//DirectXCommonのインスタンスを取得
+	directXCommon_ = DirectXCommon::GetInstance();
 
 	// ブローバル変数の読み込み
 	GlobalVariables::GetInstance()->LoadFiles();
@@ -144,7 +143,7 @@ void GameManager::BeginFrame() {
 	myEngine_->BeginFrame();
 
 	// ImGui
-	imGuiManager_->PreDraw();
+	imGuiManager_->Draw();
 
 	// デバッグカメラ
 	debugCamera_->Update();
@@ -157,7 +156,7 @@ void GameManager::BeginFrame() {
 
 void GameManager::EndFrame() {
 	// ImGui
-	imGuiManager_->PostDraw();
+	imGuiManager_->Draw();
 
 	myEngine_->EndFrame();
 }

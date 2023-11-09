@@ -9,6 +9,7 @@
 // Manager
 #include "ObjManager.h"
 #include "../Manager/PipelineManager.h"
+#include "../ImGui/ImGuiManager.h"
 
 // Base
 #include "../Blossom Engine/WinApp/WinApp.h"

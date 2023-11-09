@@ -30,9 +30,6 @@
     <Filter Include="Blossom Engine\Sys">
       <UniqueIdentifier>{b95d94c6-9894-4127-9016-4c68919e560e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Blossom Engine\WinApp">
-      <UniqueIdentifier>{b1d5c354-6878-4b5d-af27-f86c9a83bf07}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Blossom Engine\Manager">
       <UniqueIdentifier>{6f87089a-149a-4154-93a4-7814a68a98dd}</UniqueIdentifier>
     </Filter>
@@ -78,6 +75,9 @@
     <Filter Include="GameScene">
       <UniqueIdentifier>{4c305805-045a-4333-8f55-8f417b603d3f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Necessary\WinApp">
+      <UniqueIdentifier>{b1d5c354-6878-4b5d-af27-f86c9a83bf07}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui_impl_dx12.cpp">
@@ -121,7 +121,7 @@
       <Filter>Blossom Engine\String</Filter>
     </ClCompile>
     <ClCompile Include="Blossom Engine\WinApp\WinApp.cpp">
-      <Filter>Blossom Engine\WinApp</Filter>
+      <Filter>Necessary\WinApp</Filter>
     </ClCompile>
     <ClCompile Include="Blossom Engine\Sys\Sys.cpp">
       <Filter>Blossom Engine\Sys</Filter>
@@ -315,7 +315,7 @@
       <Filter>Blossom Engine\Sys</Filter>
     </ClInclude>
     <ClInclude Include="Blossom Engine\WinApp\WinApp.h">
-      <Filter>Blossom Engine\WinApp</Filter>
+      <Filter>Necessary\WinApp</Filter>
     </ClInclude>
     <ClInclude Include="Blossom Engine\utility\GlobalVariables.h">
       <Filter>Blossom Engine\utility</Filter>
