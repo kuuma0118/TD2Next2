@@ -19,10 +19,10 @@ void GameScene::Initialize() {
 	//tank
 	upsidetank_ = new UpsideTank();
 	upsidetank_->Initialize();
-	upsidetank_->textureNum = UVCHEKER;
+	upsidetank_->textureNum = UPSIDETANK;
 	downsidetank_ = new DownsideTank();
 	downsidetank_->Initialize();
-	downsidetank_->textureNum = UVCHEKER;
+	downsidetank_->textureNum = DOWNSIDETANK;
 	pos_ = { 0,0,30 };
 	bool isWKeyPressed = false;
 }
