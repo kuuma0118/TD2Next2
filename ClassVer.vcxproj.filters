@@ -84,6 +84,9 @@
     <Filter Include="Enemy\AI">
       <UniqueIdentifier>{8acb7659-8908-4a59-ba5d-73a162cb6d44}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Enemy\MoveEasing">
+      <UniqueIdentifier>{20f30cd5-13bb-457b-b1f4-ece647182cec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui_impl_dx12.cpp">
@@ -191,6 +194,9 @@
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveEasing.cpp">
+      <Filter>Enemy\MoveEasing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -325,6 +331,9 @@
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveEasing.h">
+      <Filter>Enemy\MoveEasing</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

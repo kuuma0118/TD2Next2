@@ -11,10 +11,10 @@ enum class AI_TYPE {
 
 // ノード構造体
 struct Node {
-	int32_t x, y;	// ノードの座標
-	int32_t g;		// 開始ノードからの実際のコスト
-	int32_t h;		// 終了ノードまでのManhattan距離
-	int32_t f;		// g + h　の合計評価値
+	float x, y;	// ノードの座標
+	float g;		// 開始ノードからの実際のコスト
+	float h;		// 終了ノードまでのManhattan距離
+	float f;		// g + h　の合計評価値
 	Node* parent;	// 親ノードへのポインタ
 
 	bool operator<(const Node& other) const {
@@ -36,8 +36,8 @@ public:	// ** メンバ関数 ** //
 
 	std::vector<Node>AStar(const Node& start, const Node& end);
 
-	bool IsValid(int32_t x, int32_t y);
-	int ManhattanDistance(const Node& a, const Node& b);
+	bool IsValid(float x, float y);
+	float ManhattanDistance(const Node& a, const Node& b);
 
 	// ゲッタ
 
@@ -85,5 +85,13 @@ private:// ** メンバ変数 ** //
 	{0,0,0,0,0}
 	};
 
+	// 初期地点
+	Node start = { 0, 0, 0, 0, 0, nullptr };
+	// ターゲットの位置
+	Node end = { 4, 4, 0, 0, 0, nullptr };
+	// 現在地
+	Node now = { 0,0,0,0,0,nullptr };
+	// moveTimer
+	float moveT = 0.0f;
 };
 

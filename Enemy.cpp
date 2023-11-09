@@ -3,7 +3,7 @@
 #include <vector>
 #include <set>
 #include <cmath>
-
+#include "MoveEasing.h"
 
 Enemy::Enemy() {
 
@@ -28,14 +28,14 @@ void Enemy::Initialize() {
 	model_ = new Model;
 	model_->Initialize();
 	model_->textureNum = BLOCK;
-	model_->transform.translate = { 0.0f,2.0f,0.0f };
+	model_->transform.translate = { 0.0f,0.0f,-2.0f };
 
 	for (int x = 0; x < map.size(); ++x) {
 		for (int y = 0; y < map[0].size(); ++y) {
 			mapChip[x][y] = new Model;
 			mapChip[x][y]->Initialize();
 			mapChip[x][y]->transform.translate.x = (float)x * 2;
-			mapChip[x][y]->transform.translate.z = (float)y * 2;
+			mapChip[x][y]->transform.translate.y = (float)y * 2;
 		}
 	}
 
@@ -54,19 +54,102 @@ void Enemy::Initialize() {
 
 void Enemy::Update() {
 
+
 	// isActive == false であれば早期リターンする
 	if (isActive == false) { return; }
 
-	// プレイヤーの座標を取得
-	// プレイヤーに最も近いマップチップを取得?
+	////////////////////////////////////
+	/// プレイヤーの座標を取得
+	/// プレイヤーに最も近いマップチップを取得?
+	////////////////////////////////////
 
-	// 経路探索をする
+	//ImGui::Begin("Target");
+	//if (ImGui::TreeNode("Move:X")) {
+	//	if (ImGui::Button("Node:X = 0")) {
+	//		moveT = 0.0f;
+	//		start = now;
+	//		end.x = 0.0f;
+	//	}
+	//	if (ImGui::Button("Node:X = 1")) {
+	//		moveT = 0.0f;
+	//		start = now;
+	//		end.x = 1.0f * 2;
+	//	}
+	//	if (ImGui::Button("Node:X = 2")) {
+	//		moveT = 0.0f;
+	//		start = now;
+	//		end.x = 2.0f * 2;
+	//	}
+	//	if (ImGui::Button("Node:X = 3")) {
+	//		moveT = 0.0f;
+	//		start = now;
+	//		end.x = 3.0f * 2;
+	//	}
+	//	if (ImGui::Button("Node:X = 4")) {
+	//		moveT = 0.0f;
+	//		start = now;
+	//		end.x = 4.0f * 2;
+	//	}
+	//	ImGui::TreePop();
+	//}
+	//if (ImGui::TreeNode("Move:Y")) {
+	//	if (ImGui::Button("Node:Y = 0")) {
+	//		moveT = 0.0f;
+	//		start = now;
+	//		end.y = 0.0f * 2;
+	//	}
+	//	if (ImGui::Button("Node:Y = 1")) {
+	//		moveT = 0.0f;
+	//		start = now;
+	//		end.y = 1.0f * 2;
+	//	}
+	//	if (ImGui::Button("Node:Y = 2")) {
+	//		moveT = 0.0f;
+	//		start = now;
+	//		end.y = 2.0f * 2;
+	//	}
+	//	if (ImGui::Button("Node:Y = 3")) {
+	//		moveT = 0.0f;
+	//		start = now;
+	//		end.y = 3.0f * 2;
+	//	}
+	//	if (ImGui::Button("Node:Y = 4")) {
+	//		moveT = 0.0f;
+	//		start = now;
+	//		end.y = 4.0f * 2;
+	//	}
+	//	ImGui::TreePop();
+	//}
+	//ImGui::End();
+
+	///////////////////////////////////////
+	/// 追従を行う
+	///////////////////////////////////////
+
+	// イージング用の数値を加算
+	if (moveT < 1.0f) {
+		moveT += 0.01f;
+		if (moveT > 1.0f) {	moveT = 1.0f;}
+	}
+
+	// 線形補間を行い、ターゲットまでの距離を詰める
+	now.x = MoveEasing::Vec3::EaseNomal({ start.x,start.y,1.0f },
+		{ end.x,end.y,1.0f }, moveT).x;
+	now.y = MoveEasing::Vec3::EaseNomal({ start.x,start.y,1.0f },
+		{ end.x,end.y,1.0f }, moveT).y;
+
+	// 線形補間で取得した座標を代入
+	model_->transform.translate = { now.x,now.y,-2.0f };
+
+	///////////////////////////////////////
+	/// 経路探索をする
+	///////////////////////////////////////
+	
 	// A*アルゴリズムを用いて最短経路を探索する
 
 	// 開始ノードと終了ノードを設定
 	// マップ変更時・障害物消滅時・一定時間経過後に行う?
-	Node start = { 0, 0, 0, 0, 0, nullptr };
-	Node end = { 4, 4, 0, 0, 0, nullptr };
+
 
 }
 
@@ -85,9 +168,12 @@ void Enemy::Draw() {
 }
 
 
-bool Enemy::IsValid(int32_t x, int32_t y) {
-	// マップの境界チェックや障害物のチェックなどを行う
-	// 実際のアプリケーションに合わせて実装
+bool Enemy::IsValid(float x, float y) {
+
+	/////////////////////////////////////////////
+	/// マップの境界チェックや障害物のチェックなどを行う
+	/// 実際のアプリケーションに合わせて実装
+	/////////////////////////////////////////////
 
 	// マップの境界チェック
 	if (x < 0 || x >= map.size() || y < 0 || y >= map[0].size()) {
@@ -95,14 +181,14 @@ bool Enemy::IsValid(int32_t x, int32_t y) {
 	}
 
 	// マップの障害物チェック
-	if (map[x][y] == 1) {
+	if (map[(int)x][(int)y] == 1) {
 		return false;// 障害物がある場合は移動できない
 	}
 
 	return true;// 移動可能な場合
 }
 
-int Enemy::ManhattanDistance(const Node& a, const Node& b) {
+float Enemy::ManhattanDistance(const Node& a, const Node& b) {
 	return abs(a.x - b.x) + abs(a.y - b.y);
 }
 
@@ -136,8 +222,8 @@ std::vector<Node> Enemy::AStar(const Node& start, const Node& end) {
 					continue; // current ノード自体をスキップ	
 				}
 
-				int  newX = current.x + dx;
-				int  newY = current.y + dy;
+				float  newX = current.x + (float)dx;
+				float  newY = current.y + (float)dy;
 				
 				if (IsValid(newX, newY)) {
 					// neighbor のノード評価値を計算
