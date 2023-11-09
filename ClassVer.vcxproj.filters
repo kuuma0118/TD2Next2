@@ -186,10 +186,10 @@
     <ClCompile Include="Necessary\Models\stage.cpp">
       <Filter>Necessary\Models</Filter>
     </ClCompile>
-    <ClCompile Include="UpsideTank.cpp">
+    <ClCompile Include="Necessary\Models\DownsideTank.cpp">
       <Filter>Necessary\Models</Filter>
     </ClCompile>
-    <ClCompile Include="DownsideTank.cpp">
+    <ClCompile Include="Necessary\Models\UpsideTank.cpp">
       <Filter>Necessary\Models</Filter>
     </ClCompile>
   </ItemGroup>

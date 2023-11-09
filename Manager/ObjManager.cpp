@@ -15,6 +15,8 @@ void ObjManager::LoadObjFiles() {
 	modelData_[block] = LoadObjFile("Resources/block", "block.obj");
 	modelData_[player] = LoadObjFile("Resources/player", "player.obj");
 	modelData_[stage] = LoadObjFile("Resources/stage", "stage.obj");
+	modelData_[UpsideTankM] = LoadObjFile("Resources/UpsideTank", "UpsideTank.obj");
+	modelData_[DownsideTankM] = LoadObjFile("Resources/DownsideTank", "DownsideTank.obj");
 	//modelData_[MULTIMESH] = LoadObjFile("resources", "multiMesh.obj");
 	//modelData_[MULTIMATERIAL] = LoadObjFile("resources", "multiMaterial.obj");
 	//modelData_[BUNNY] = LoadObjFile("resources", "bunny.obj");

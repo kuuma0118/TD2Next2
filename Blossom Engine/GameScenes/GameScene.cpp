@@ -12,9 +12,17 @@ void GameScene::Initialize() {
 	sphere_->Initialize();
 	textureNum_ = UVCHEKER;
 	input_ = Input::GetInstance();
+	//stage
 	stage_ = new Stage();
 	stage_->Initialize();
 	stage_->textureNum = STAGETEXTURE;
+	//tank
+	upsidetank_ = new UpsideTank();
+	upsidetank_->Initialize();
+	upsidetank_->textureNum = UVCHEKER;
+	downsidetank_ = new DownsideTank();
+	downsidetank_->Initialize();
+	downsidetank_->textureNum = UVCHEKER;
 	pos_ = { 0,0,30 };
 }
 
@@ -32,6 +40,8 @@ void GameScene::Draw() {
 	ObjManager::GetInstance()->GetObjModelData()[stage];
 	//map_->Draw();
 	stage_->Draw();
+	upsidetank_->Draw();
+	downsidetank_->Draw();
 	//sprite_->Draw(pos_, UVCHEKER);
 }
 
@@ -39,4 +49,6 @@ void GameScene::Finalize() {
 	delete sprite_;
 	delete sphere_;
 	delete stage_;
+	delete upsidetank_;
+	delete downsidetank_;
 }
