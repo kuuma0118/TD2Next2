@@ -11,6 +11,7 @@
 #include "../externals/ImGui/imgui.h"
 #include "../externals/ImGui/imgui_impl_dx12.h"
 #include "../externals/ImGui/imgui_impl_win32.h"
+
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 DirectXCommon* DirectXCommon::GetInstance() {
@@ -79,31 +80,6 @@ void DirectXCommon::CreateD3D12Device() {
 	assert(device_ != nullptr);
 	WinApp::Log("Complate create D3D12Device!!\n"); // 初期化完了のログを出す
 
-}
-
-Microsoft::WRL::ComPtr<ID3D12Resource> DirectXCommon::CreateBufferResource(size_t sizeInBytes) {
-	//リソース用のヒープの設定
-	D3D12_HEAP_PROPERTIES uploadHeapProperties{};
-	uploadHeapProperties.Type = D3D12_HEAP_TYPE_UPLOAD;//UploadHeapを使う
-	//リソースの設定
-	D3D12_RESOURCE_DESC resourceDesc{};
-	resourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
-	resourceDesc.Width = sizeInBytes;
-	//バッファの場合はこれらは1にする決まり
-	resourceDesc.Height = 1;
-	resourceDesc.DepthOrArraySize = 1;
-	resourceDesc.MipLevels = 1;
-	resourceDesc.SampleDesc.Count = 1;
-	//バッファの場合はこれにする決まり
-	resourceDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
-	//実際にリソースを作る
-	Microsoft::WRL::ComPtr<ID3D12Resource> resource = nullptr;
-	HRESULT hr = device_->CreateCommittedResource(&uploadHeapProperties, D3D12_HEAP_FLAG_NONE,
-		&resourceDesc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr,
-		IID_PPV_ARGS(&resource));
-	assert(SUCCEEDED(hr));
-
-	return resource;
 }
 
 void DirectXCommon::StopError() {
@@ -179,14 +155,35 @@ void DirectXCommon::CreateSwapChain(HWND hwnd) {
 	assert(SUCCEEDED(hr));
 }
 
+Microsoft::WRL::ComPtr<ID3D12Resource> DirectXCommon::CreateBufferResource(size_t sizeInBytes)
+{
+	Microsoft::WRL::ComPtr<ID3D12Resource> Resource = nullptr;
+	D3D12_HEAP_PROPERTIES uploadHeapProperties{};
+	uploadHeapProperties.Type = D3D12_HEAP_TYPE_UPLOAD;
+	D3D12_RESOURCE_DESC ResourceDesc{};
+	ResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
+	ResourceDesc.Width = sizeInBytes;
+	ResourceDesc.Height = 1;
+	ResourceDesc.DepthOrArraySize = 1;
+	ResourceDesc.MipLevels = 1;
+	ResourceDesc.SampleDesc.Count = 1;
+	ResourceDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
+	HRESULT hr{};
+	//頂点リソースを作る
+	hr = device_.Get()->CreateCommittedResource(&uploadHeapProperties, D3D12_HEAP_FLAG_NONE, &ResourceDesc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&Resource));
+	assert(SUCCEEDED(hr));
+	return Resource;
+}
+
 Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> DirectXCommon::CreateDescriptorHeap(const Microsoft::WRL::ComPtr<ID3D12Device>& device, D3D12_DESCRIPTOR_HEAP_TYPE heapType, UINT numDescriptors, bool shaderVisible) {
-	//ディスクリプタヒープの作成
-	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descriptorHeap = nullptr;
-	D3D12_DESCRIPTOR_HEAP_DESC descriptorHeapDesc{};
-	descriptorHeapDesc.Type = heapType;
-	descriptorHeapDesc.NumDescriptors = numDescriptors;
-	descriptorHeapDesc.Flags = shaderVisible ? D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE : D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
-	HRESULT hr = device_->CreateDescriptorHeap(&descriptorHeapDesc, IID_PPV_ARGS(&descriptorHeap));
+	HRESULT hr;
+	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descriptorHeap;
+	D3D12_DESCRIPTOR_HEAP_DESC rtvDescriptorHeapDesc{};
+	rtvDescriptorHeapDesc.Type = heapType; // レンダーターゲットビュー用
+	rtvDescriptorHeapDesc.NumDescriptors = numDescriptors; // ダブルバッファ用に2つ。多くても別に構わない
+	rtvDescriptorHeapDesc.Flags = shaderVisible ? D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE : D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
+	hr = device.Get()->CreateDescriptorHeap(&rtvDescriptorHeapDesc, IID_PPV_ARGS(&descriptorHeap));
+	// DiscriptorHeapが作れなかったので起動できない
 	assert(SUCCEEDED(hr));
 
 	return descriptorHeap;
@@ -368,21 +365,5 @@ void DirectXCommon::PostDraw() {
 }
 
 void DirectXCommon::Release() {
-#pragma region 解放処理
-
 	CloseHandle(fenceEvent_);
-	fence_.Reset();
-	srvDescriptorHeap_.Reset();
-	rtvDescriptorHeap_.Reset();
-	swapChainResources_[0].Reset();
-	swapChainResources_[1].Reset();
-	swapChain_.Reset();
-	commandList_.Reset();
-	commandAllocator_.Reset();
-	commandQueue_.Reset();
-	device_.Reset();
-	useAdapter_.Reset();
-	dxgiFactory_.Reset();
-
-#pragma endregion
 }

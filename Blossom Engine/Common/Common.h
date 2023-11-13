@@ -20,10 +20,8 @@ public:
 	D3D12_GPU_DESCRIPTOR_HANDLE GetGPUDescriptorHandle(const Microsoft::WRL::ComPtr<ID3D12DescriptorHeap>& descriptorHeap, uint32_t descriptorSize, uint32_t index);
 
 	// Getter
-	ID3D12Device* GetDevice() const { return device_.Get(); };
-	ID3D12GraphicsCommandList* GetCommandList() const { return commandList_.Get(); };
-	//Microsoft::WRL::ComPtr<ID3D12Device> GetDevice() { return this->device_.Get(); }
-	//Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> GetCommandList() { return this->commandList_.Get(); }
+	Microsoft::WRL::ComPtr<ID3D12Device> GetDevice() { return this->device_.Get(); }
+	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> GetCommandList() { return this->commandList_.Get(); }
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> GetSrvDescriptorHeap() { return this->srvDescriptorHeap_.Get(); }
 	D3D12_RENDER_TARGET_VIEW_DESC GetRtvDesc() { return rtvDesc_; }
 	DXGI_SWAP_CHAIN_DESC1 GetSwapChainDesc() { return swapChainDesc_; }
@@ -46,8 +44,10 @@ public:
 	// SwapChainの生成
 	void CreateSwapChain(HWND hwnd);
 
+	Microsoft::WRL::ComPtr<ID3D12Resource> CreateBufferResource(size_t sizeInBytes);
+
 	// DescriptorHeapの生成
-	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> CreateDescriptorHeap(D3D12_DESCRIPTOR_HEAP_TYPE heapType, UINT numDescriptors, bool shaderVisible);
+	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> CreateDescriptorHeap(const Microsoft::WRL::ComPtr<ID3D12Device>& device, D3D12_DESCRIPTOR_HEAP_TYPE heapType, UINT numDescriptors, bool shaderVisible);
 
 	// 二つのswapChainResoucesを取得
 	void GetSwapChainResources();
@@ -66,12 +66,6 @@ public:
 
 	// 解放処理とリソースチェック
 	void Release();
-
-	/// リソースの作成
-/// </summary>
-/// <param name="sizeInBytes"></param>
-/// <returns></returns>
-	Microsoft::WRL::ComPtr<ID3D12Resource> CreateBufferResource(size_t sizeInBytes);
 
 private:
 	UINT backBufferIndex_;
@@ -94,4 +88,3 @@ private:
 	HANDLE fenceEvent_;
 	D3D12_RESOURCE_BARRIER barrier_;
 };
-
