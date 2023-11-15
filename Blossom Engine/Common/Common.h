@@ -67,6 +67,16 @@ public:
 	// 解放処理とリソースチェック
 	void Release();
 
+	/// <summary>
+	/// FPS固定初期化
+	/// </summary>
+	void InitializeFixFPS();
+
+	/// <summary>
+	/// FPS固定更新
+	/// </summary>
+	void UpdateFixFPS();
+
 private:
 	UINT backBufferIndex_;
 	Microsoft::WRL::ComPtr<IDXGIFactory7> dxgiFactory_;
@@ -87,4 +97,7 @@ private:
 	uint64_t fenceValue_;
 	HANDLE fenceEvent_;
 	D3D12_RESOURCE_BARRIER barrier_;
+
+	//記録時間(FPS固定用)
+	std::chrono::steady_clock::time_point reference_{};
 };
