@@ -81,6 +81,12 @@
     <Filter Include="Necessary\Effect\ParticleEffect">
       <UniqueIdentifier>{007c42de-3067-425f-83ae-10856910f3d3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Blossom Engine\utility\Collision">
+      <UniqueIdentifier>{177db6f8-517a-41cb-aa4c-b30476cf57c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Necessary\Effect\Sprite">
+      <UniqueIdentifier>{c40cdb9a-6911-4c24-b649-a1a7674d3d01}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui_impl_dx12.cpp">
@@ -215,6 +221,12 @@
     </ClCompile>
     <ClCompile Include="SampleParticle.cpp">
       <Filter>Necessary\Effect\ParticleEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Blossom Engine\utility\Collision\CollisionManager.cpp">
+      <Filter>Blossom Engine\utility\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Necessary\Effect\Sprite\Sprite.cpp">
+      <Filter>Necessary\Effect\Sprite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -376,6 +388,21 @@
     </ClInclude>
     <ClInclude Include="SampleParticle.h">
       <Filter>Necessary\Effect\ParticleEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Blossom Engine\utility\Collision\Collision.h">
+      <Filter>Blossom Engine\utility\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Blossom Engine\utility\Collision\CollisionConfig.h">
+      <Filter>Blossom Engine\utility\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Blossom Engine\utility\Collision\CollisionManager.h">
+      <Filter>Blossom Engine\utility\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Blossom Engine\utility\Collision\Collider.h">
+      <Filter>Blossom Engine\utility\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Necessary\Effect\Sprite\Sprite.h">
+      <Filter>Necessary\Effect\Sprite</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

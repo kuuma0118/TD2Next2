@@ -3,11 +3,12 @@
 #include "Blossom Engine/Math/MatrixCalculate.h"
 #include "Blossom Engine/Math/WorldTransform.h"
 #include "ImGui/ImGuiManager.h"
+#include "Blossom Engine/utility/Collision/Collider.h"
 #include "Blossom Engine/components/Input/Input.h"
 #include "Blossom Engine/Model/ParticleModel.h"
 #include "Necessary/Effect/Particle/ParticleSystem.h"
 
-class Sample
+class Sample : public Collider
 {
 public:
 

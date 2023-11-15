@@ -43,6 +43,11 @@ struct DirectionalLight {
 	float intensity;
 };
 
+struct AABB {
+	Vector3 min;
+	Vector3 max;
+};
+
 //struct MaterialData {
 //	std::string textureFilePath;
 //};
@@ -73,6 +78,8 @@ Matrix4x4 Add(const Matrix4x4& m1, const Matrix4x4& m2);
 Vector3 V3Add(const Vector3& pos, const Vector3& vector);
 
 Matrix4x4 Sub(const Matrix4x4& m1, const Matrix4x4& m2);
+
+Vector3 V3Sub(const Vector3& vector1, const Vector3& vector2);
 
 Matrix4x4 Multiply(const Matrix4x4& m1, const Matrix4x4& m2);
 
