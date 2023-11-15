@@ -1,5 +1,6 @@
 #include "WinApp.h"
 #include <string>
+#pragma comment(lib,"winmm.lib")
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -54,6 +55,9 @@ void WinApp::CreateGameWindow(const wchar_t* title, int32_t clientWidth, int32_t
 #endif // _DEBUG
 
 	ShowWindow(hwnd_, SW_SHOW);
+
+	//システムタイマーの分解能をあげる
+	timeBeginPeriod(1);
 }
 
 bool WinApp::ProcessMessage() {
@@ -91,6 +95,7 @@ void WinApp::DebugLayer() {
 void WinApp::Initialize(const wchar_t* title, int32_t kClientWidth, int32_t kClientHeight) {
 	CreateGameWindow(title, kClientWidth, kClientHeight);
 	DebugLayer();
+
 }
 
 // 出力ウィンドウに文字を出す
