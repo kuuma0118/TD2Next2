@@ -78,6 +78,9 @@
     <Filter Include="Necessary\WinApp">
       <UniqueIdentifier>{b1d5c354-6878-4b5d-af27-f86c9a83bf07}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Necessary\Effect\ParticleEffect">
+      <UniqueIdentifier>{007c42de-3067-425f-83ae-10856910f3d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui_impl_dx12.cpp">
@@ -209,6 +212,9 @@
     </ClCompile>
     <ClCompile Include="Blossom Engine\Model\ParicleModel.cpp">
       <Filter>Blossom Engine\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleParticle.cpp">
+      <Filter>Necessary\Effect\ParticleEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -367,6 +373,9 @@
     </ClInclude>
     <ClInclude Include="Blossom Engine\Model\ParticleModel.h">
       <Filter>Blossom Engine\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleParticle.h">
+      <Filter>Necessary\Effect\ParticleEffect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
