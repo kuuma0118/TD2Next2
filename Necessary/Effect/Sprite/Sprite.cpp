@@ -14,9 +14,9 @@ Matrix4x4 Sprite::sMatProjection_{};
 void Sprite::StaticInitialize() {
 
 	//デバイスの取得
-	sDevice_ = DirectXCommon::GetInstance()->GetDevice();
+	sDevice_ = DirectXCommon::GetInstance()->GetDevice().Get();
 	//コマンドリストの取得
-	sCommandList_ = DirectXCommon::GetInstance()->GetCommandList();
+	sCommandList_ = DirectXCommon::GetInstance()->GetCommandList().Get();
 
 	//DXCの初期化
 	Sprite::InitializeDXC();

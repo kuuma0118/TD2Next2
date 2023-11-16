@@ -320,6 +320,15 @@ void TextureManager::SetGraphicsRootDescriptorTable(UINT rootParameterIndex, uin
 	commandList_->SetGraphicsRootDescriptorTable(rootParameterIndex, textures_[textureHandle].srvHandleGPU);
 }
 
+const D3D12_RESOURCE_DESC TextureManager::GetResourceDesc(uint32_t textureHandle) {
+
+	//テクスチャの情報を取得
+	D3D12_RESOURCE_DESC resourceDesc{};
+	resourceDesc = textures_[textureHandle].resource->GetDesc();
+
+	return resourceDesc;
+}
+
 void TextureManager::SettingDepthStencilState() {
 	// Depthの機能を有効化する
 	depthStencilDesc_.DepthEnable = true;

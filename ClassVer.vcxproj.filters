@@ -87,6 +87,9 @@
     <Filter Include="Necessary\Effect\Sprite">
       <UniqueIdentifier>{c40cdb9a-6911-4c24-b649-a1a7674d3d01}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Necessary\Effect\UI">
+      <UniqueIdentifier>{b449e414-ab0e-413f-af79-d48f893dbedc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui_impl_dx12.cpp">
@@ -403,6 +406,9 @@
     </ClInclude>
     <ClInclude Include="Necessary\Effect\Sprite\Sprite.h">
       <Filter>Necessary\Effect\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Necessary\UI\UI.h">
+      <Filter>Necessary\Effect\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

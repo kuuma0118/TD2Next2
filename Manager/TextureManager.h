@@ -102,6 +102,13 @@ public:
 	/// ディスクリプタテーブルを設定
 	void SetGraphicsRootDescriptorTable(UINT rootParameterIndex, uint32_t textureHandle);
 
+	/// <summary>
+	/// テクスチャの情報を取得
+	/// </summary>
+	/// <param name="textureHandle">テクスチャハンドル</param>
+	/// <returns>テクスチャの情報</returns>
+	const D3D12_RESOURCE_DESC GetResourceDesc(uint32_t textureHandle);
+
 public:
 	// [0]はSpriteに使用しているuvChecker.png(textureSrvHandleGPUは三角形にも使用)[1]はSphereに使用しているmonsterBall.png
 	static const uint32_t kMaxImages = 3;

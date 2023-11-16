@@ -200,6 +200,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Necessary\Map\Map.h" />
     <ClInclude Include="Necessary\Map\MapManager.h" />
     <ClInclude Include="Necessary\Models\Block.h" />
+    <ClInclude Include="Necessary\UI\UI.h" />
     <ClInclude Include="SampleParticle.h" />
   </ItemGroup>
   <ItemGroup>
