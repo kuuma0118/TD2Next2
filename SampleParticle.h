@@ -7,6 +7,7 @@
 #include "Blossom Engine/components/Input/Input.h"
 #include "Blossom Engine/Model/ParticleModel.h"
 #include "Necessary/Effect/Particle/ParticleSystem.h"
+#include "Necessary/UI/UI.h"
 
 class Sample : public Collider
 {
@@ -23,6 +24,8 @@ public:
 	void Draw(const ViewProjection viewProjection);
 
 	void ApplyGlobalVariables();
+
+	void OnCollision(uint32_t collisionAttribute, float damage);
 
 	int GetInvolvedMissileCount() { return involvedCount_; };
 
@@ -49,7 +52,7 @@ public:
 
 	void DrawParticle(const ViewProjection& viewProjection);
 
-	void StartAnimaion();
+	void StartAnimation();
 
 	void GetBossIsDead(bool IsDeadAnimation) { IsDeadAnimation_ = IsDeadAnimation; };
 
@@ -159,6 +162,9 @@ private:
 
 	weaponMotionStruct weaponMotion_;
 	weaponMotionStruct weaponRodMotion_;
+
+	//UI
+	UIStruct heartUI_[MaxHp_];
 
 	//パーティクル
 	std::unique_ptr<ParticleModel> particleModel_ = nullptr;

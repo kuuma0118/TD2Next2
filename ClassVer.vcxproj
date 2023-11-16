@@ -136,7 +136,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Necessary\Effect\Particle\ParticleBase.cpp" />
     <ClCompile Include="Necessary\Effect\Particle\ParticleEmitter.cpp" />
     <ClCompile Include="Necessary\Effect\Particle\ParticleSystem.cpp" />
-    <ClCompile Include="Necessary\Effect\Sprite\Sprite.cpp" />
     <ClCompile Include="Necessary\Map\Map.cpp" />
     <ClCompile Include="Necessary\Map\MapManager.cpp" />
     <ClCompile Include="Necessary\Models\Block.cpp" />
@@ -196,7 +195,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Necessary\Effect\Particle\ParticleBase.h" />
     <ClInclude Include="Necessary\Effect\Particle\ParticleEmitter.h" />
     <ClInclude Include="Necessary\Effect\Particle\ParticleSystem.h" />
-    <ClInclude Include="Necessary\Effect\Sprite\Sprite.h" />
     <ClInclude Include="Necessary\Map\Map.h" />
     <ClInclude Include="Necessary\Map\MapManager.h" />
     <ClInclude Include="Necessary\Models\Block.h" />
