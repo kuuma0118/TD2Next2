@@ -368,6 +368,7 @@
     <ClInclude Include="Necessary\Models\DownsideTank.h">
       <Filter>Necessary\Models</Filter>
     </ClInclude>
+    <ClInclude Include="MapChip.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
