@@ -1,10 +1,14 @@
 #pragma once
 #include "IScene.h"
-#include "../Blossom Engine/Sprite/Sprite.h"
 #include "../Blossom Engine/Sphere/Sphere.h"
 #include "../Blossom Engine/components/Input/Input.h"
 #include "../Necessary/Models/Block.h"
 #include "../Blossom Engine/Math/ViewProjection.h"
+#include "../Necessary/UI/UI.h"
+
+#include "../SampleParticle.h"
+
+#include <memory>
 
 class GameManager;
 
@@ -23,7 +27,9 @@ private:
 	//TextureManager
 	TextureManager* textureManager_ = nullptr;
 
-	Sprite* sprite_;
+	//Particle 
+	std::unique_ptr<Sample> sample_ = nullptr;
+
 	Sphere* sphere_;
 	int textureNum_;
 	Input* input_;

@@ -36,15 +36,7 @@ public:
 
 	WorldTransform& GetWeaponWorldTransform() { return weaponWorldTransform_; }
 
-	bool GetIsCharge() { return IsCharge_; }
-
-	bool GetIsAttack() { return IsAttack_; }
-
 	bool GetIsHit() { return IsHit_; };
-
-	bool GetIsCoolDown() {
-		return IsCoolDown_;
-	};
 
 	int GetHP() { return Hp_; };
 
@@ -61,44 +53,16 @@ private:
 
 	XINPUT_STATE joyState_;
 
-	std::unique_ptr<Model> weaponModelDummy_ = nullptr;
-
-	std::unique_ptr<Model> weaponModel_ = nullptr;
-	std::unique_ptr<Model> weaponRodModel_ = nullptr;
-	std::unique_ptr<Model> involvedMissile_ = nullptr;
-
 	WorldTransform weaponWorldTransform_;
 	WorldTransform involvedMissileWorldTransform_;
 
 	uint32_t textureHandle_ = 0u;
-
-	uint32_t soundHandle_[4] = {};
-
-	//武器の横移動スピード
-	float weaponMoveSpeed_ = 0.05f;
-
-	//チャージ時のスピード
-	float chargeSpeed_ = 0.05f;
-
-	//攻撃時のスピード
-	float attackSpeed_[4] = { 0.03f ,0.085f ,0.15f , 0.2f };
-
-	//クールダウン中のスピード
-	float coolDownSpeed_ = 0.4f;
-
-	//チャージ時のカウント
-	int chargeCount_ = 0;
 
 	//キーを押しているときのカウント
 	int pushCount_ = 0;
 
 	//クールダウン中のタイマー
 	int coolDownTimer_ = 30;
-
-	bool IsNormal_ = true;
-	bool IsCharge_ = false;
-	bool IsAttack_ = false;
-	bool IsCoolDown_ = false;
 
 	bool IsHit_ = false;
 
@@ -110,13 +74,10 @@ private:
 	bool invincibleFlag_ = false;
 	int invincibleTimer_ = 0;
 
-	//攻撃時のダメージ
-	float attackDamage_[4] = { 1.0f,2.0f,3.0f,4.0f };
-
 	//ミサイルを巻き込んでいるか
 	bool isInvolvedMissile_ = false;
 	int involvedCount_ = 0;
-	float missileDamage = 7.0f;
+
 	Vector4 missileColor_[5]{
 		{1.0f,1.0f,1.0f,1.0f},
 		{1.0f,0.5f,0.5f,1.0f},

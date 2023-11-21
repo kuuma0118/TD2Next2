@@ -6,7 +6,7 @@
 #include "../Manager/TextureManager.h"
 #include "../Blossom Engine/components/light/Light.h"
 #include "../Blossom Engine/Sphere/Sphere.h"
-#include "../Blossom Engine/Sprite/Sprite.h"
+#include "../Necessary/Effect/Sprite/Sprite.h"
 //#include "../object/Plane.h"
 
 class BlossomEngine {

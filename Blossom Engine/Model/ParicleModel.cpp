@@ -59,7 +59,7 @@ void ParticleModel::PreDraw() {
 	sCommandList_->SetGraphicsRootSignature(sRootSignature_.Get());
 	//PSOを設定
 	sCommandList_->SetPipelineState(sGraphicsPipelineState_.Get());
-}
+};
 
 
 void ParticleModel::PostDraw() {
