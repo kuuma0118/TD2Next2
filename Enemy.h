@@ -56,12 +56,12 @@ public:	// ** メンバ関数 ** //
 	void Initialize(DownsideTank* player);
 	void Update(const Node& playerPos);
 	void Draw();
-
-	std::vector<Node*>AStar(const Node& start, const Node& end);
-	void EnemyAI(const Node& enemyPos, const Node& playerPos);
-
-	bool IsValid(int32_t x, int32_t y);
-	int32_t ManhattanDistance(const Node& a, const Node& b);
+	std::vector<Node*>GetAStar(const Node& start, const Node& end);
+	void LoadAI(const Node& enemyPos, const Node& playerPos);
+	void ResetRoute(const Node& enemyPos, const Node& playerPos);
+	void DeleteRoute();
+	bool GetIsValid(int32_t x, int32_t y);
+	int32_t GetManhattanDistance(const Node& a, const Node& b);
 	int32_t ManhattanDistanceWithDiagonal(const Node& a, const Node& b);
 
 	// ゲッタ
@@ -112,7 +112,7 @@ private:// ** メンバ変数 ** //
 	bool isActive;
 
 	// 経路探索クールタイム(仮で一定フレームごとに追跡を行う)
-	const int32_t kSearchTimeMax_ = 480;
+	const int32_t kSearchTimeMax_ = 330;
 	int32_t searchTime_ = kSearchTimeMax_;
 
 	// 攻撃クールタイム(最速で一秒ごとに一発)
@@ -137,7 +137,9 @@ private:// ** メンバ変数 ** //
 	Node prev_ = now;
 	// ターゲットの位置
 	Node next_ = now;
-	
+	// プレイヤーの最近地点のノード
+	Node nearestGrid = { 0,0,0,0,0,nullptr };
+
 	// moveTimer
 	float moveT = 0.0f;
 	// 経路を保存

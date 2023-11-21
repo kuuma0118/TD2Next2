@@ -95,6 +95,11 @@ void GameScene::Update() {
 		upsidetank_->transform.rotate.z -= 0.02f;
 	}
 
+	////////////////////////////////////////////
+	/// プレイヤーの座標をマップチップ座標に変換(仮)
+	////////////////////////////////////////////
+
+
 	ImGui::Begin("AStar Debug");
 	ImGui::SliderInt("X", &pX, 0, 9);
 	ImGui::SliderInt("Y", &pY, 0, 9);
