@@ -9,7 +9,7 @@
 #include "../Necessary/Models/stage.h"
 #include "../Necessary/Models/UpsideTank.h"
 #include "../Necessary/Models/DownsideTank.h"
-#include "../Enemy.h"
+#include "../EnemyManager.h"
 
 class GameManager;
 
@@ -38,6 +38,7 @@ private:
 	Stage* stage_;
 	UpsideTank* upsidetank_;
 	DownsideTank* downsidetank_;
+	EnemyManager* enemyManager_ = nullptr;
 	Enemy* enemy_ = nullptr;
 
 	int32_t pX = 6;

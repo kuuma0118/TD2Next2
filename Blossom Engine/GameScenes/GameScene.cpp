@@ -27,8 +27,8 @@ void GameScene::Initialize() {
 	bool isWKeyPressed = false;
 
 	// enemy　一体仮置き
-	enemy_ = new Enemy;
-	enemy_->Initialize(downsidetank_);
+	enemyManager_ = new EnemyManager;
+	enemyManager_->Initialize(downsidetank_);
 }
 
 void GameScene::Update() {
@@ -99,15 +99,14 @@ void GameScene::Update() {
 	/// プレイヤーの座標をマップチップ座標に変換(仮)
 	////////////////////////////////////////////
 
-
-	ImGui::Begin("AStar Debug");
-	ImGui::SliderInt("X", &pX, 0, 9);
-	ImGui::SliderInt("Y", &pY, 0, 9);
-	ImGui::End();
-
 	// エネミーの更新処理
-	enemy_->Update({ pX,pY,0,0,0,nullptr });
-
+	enemyManager_->Update();
+	if (input_->TriggerKey(DIK_9)) {
+		enemyManager_->AddEnemy();
+	}
+	if (input_->TriggerKey(DIK_0)) {
+		enemyManager_->DeleteEnemy();
+	}
 }
 
 void GameScene::Draw() {
@@ -115,7 +114,7 @@ void GameScene::Draw() {
 	stage_->Draw();
 	upsidetank_->Draw();
 	downsidetank_->Draw();
-	enemy_->Draw();
+	enemyManager_->Draw();
 	//sprite_->Draw(pos_, UVCHEKER);
 }
 
@@ -125,4 +124,5 @@ void GameScene::Finalize() {
 	delete stage_;
 	delete upsidetank_;
 	delete downsidetank_;
+	delete enemyManager_;
 }

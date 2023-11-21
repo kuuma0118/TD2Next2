@@ -44,8 +44,6 @@ struct Node {
 	}
 };
 
-class DownsideTank;
-
 class Enemy
 {
 public:	// ** メンバ関数 ** //
@@ -53,7 +51,7 @@ public:	// ** メンバ関数 ** //
 	Enemy();
 	~Enemy();
 
-	void Initialize(DownsideTank* player);
+	void Initialize(std::vector < std::vector<int32_t>> map, Model* mapchip[10][10]);
 	void Update(const Node& playerPos);
 	void Draw();
 	std::vector<Node*>GetAStar(const Node& start, const Node& end);
@@ -74,6 +72,7 @@ public:	// ** メンバ関数 ** //
 		
 		return false;
 	}
+	bool GetIsActive() { return isActive_; }
 
 	// セッタ
 
@@ -83,8 +82,10 @@ public:	// ** メンバ関数 ** //
 
 private:// ** メンバ変数 ** //
 
-	// プレイヤーのポインタを取得
-	DownsideTank* player_;
+	//　外部変数のポインタ //
+
+	std::vector < std::vector<int32_t>> pMap_;
+	Model* pMapchip_[10][10];
 
 	// 座標 //
 
@@ -98,7 +99,6 @@ private:// ** メンバ変数 ** //
 
 	// モデル //
 	Model* model_ = nullptr;
-	Model* mapChip[10][10];
 
 	// テクスチャ
 	
@@ -109,7 +109,7 @@ private:// ** メンバ変数 ** //
 	AI_TYPE type_;
 
 	// 生存フラグ(tureなら生存)
-	bool isActive;
+	bool isActive_;
 
 	// 経路探索クールタイム(仮で一定フレームごとに追跡を行う)
 	const int32_t kSearchTimeMax_ = 330;
@@ -118,27 +118,11 @@ private:// ** メンバ変数 ** //
 	// 攻撃クールタイム(最速で一秒ごとに一発)
 	int32_t shotCoolTime_;
 	const int32_t kMaxShotCoolTime_ = 60;
-
-	// 仮マップ
-	std::vector < std::vector<int32_t>>map = {
-	{0,0,0,0,0,0,0,1,1,1},
-	{0,1,1,1,0,0,0,0,0,0},
-	{0,1,1,1,0,0,0,0,0,0},
-	{0,0,0,0,1,1,1,0,0,0},
-	{0,0,0,0,0,0,1,0,0,0},
-	{0,0,1,1,0,0,0,0,0,0},
-	{0,0,1,0,0,1,1,1,0,0},
-	{0,0,1,0,0,1,0,0,0,0},
-	{0,0,1,0,0,1,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	};
 	
 	// 初期地点
 	Node prev_ = now;
 	// ターゲットの位置
 	Node next_ = now;
-	// プレイヤーの最近地点のノード
-	Node nearestGrid = { 0,0,0,0,0,nullptr };
 
 	// moveTimer
 	float moveT = 0.0f;
