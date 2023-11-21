@@ -1,17 +1,27 @@
 #include "Enemy.h"
 #include <iostream>
+#include <algorithm> 
 #include <vector>
 #include <set>
+#include <queue>
 #include <cmath>
 #include "MoveEasing.h"
 #include "Necessary/Models/DownsideTank.h"
 
-Enemy::Enemy() {
-
-}
+Enemy::Enemy() { }
 
 Enemy::~Enemy() {
+	delete model_;
 
+	for (int y = 0; y < map.size(); ++y) {
+		for (int x = 0; x < map[0].size(); ++x) {
+			delete mapChip[y][x];
+		}
+	}
+
+	for (int i = 0; i < path_.size(); ++i) {
+		delete path_[i];
+	}
 }
 
 void Enemy::Initialize(DownsideTank* player) {
@@ -23,9 +33,9 @@ void Enemy::Initialize(DownsideTank* player) {
 	transform_ = { {1.0f,1.0f,1.0f}, {0.0f,0.0f,0.0f}, { 0.0f, 0.0f, 0.0f } };
 	// 敵視界　トランスフォーム
 	visionTransform_ = { {1.0f,1.0f,1.0f}, {0.0f,0.0f,0.0f}, { 0.0f, 0.0f, 0.0f } };
-	visionVertex[0] = {visionTransform_.translate.x,visionTransform_.translate.y,visionTransform_.translate.z };
-	visionVertex[1] = {visionTransform_.translate.x,visionTransform_.translate.y,visionTransform_.translate.z };
-	visionVertex[2] = {visionTransform_.translate.x,visionTransform_.translate.y,visionTransform_.translate.z };
+	visionVertex[0] = { visionTransform_.translate.x,visionTransform_.translate.y,visionTransform_.translate.z };
+	visionVertex[1] = { visionTransform_.translate.x,visionTransform_.translate.y,visionTransform_.translate.z };
+	visionVertex[2] = { visionTransform_.translate.x,visionTransform_.translate.y,visionTransform_.translate.z };
 	// 敵砲台　トランスフォーム
 	cannonTransform_ = { {1.0f,1.0f,1.0f}, {0.0f,0.0f,0.0f}, { 0.0f, 0.0f, 0.0f } };
 	// モデル //
@@ -34,14 +44,24 @@ void Enemy::Initialize(DownsideTank* player) {
 	model_->textureNum = BLOCK;
 	model_->transform.translate = { 0.0f,0.0f,-2.0f };
 
-	for (int x = 0; x < map.size(); ++x) {
-		for (int y = 0; y < map[0].size(); ++y) {
-			mapChip[x][y] = new Model;
-			mapChip[x][y]->Initialize();
-			mapChip[x][y]->transform.translate.x = (float)x * 2;
-			mapChip[x][y]->transform.translate.y = (float)y * 2;
+	for (int y = 0; y < map.size(); ++y) {
+		for (int x = 0; x < map[0].size(); ++x) {
+			mapChip[y][x] = new Model;
+			mapChip[y][x]->Initialize();
+			mapChip[y][x]->transform.translate.x = (float)x * 2;
+			mapChip[y][x]->transform.translate.y = (float)y * -2;
+
+
+			// マップにブロックが配置状態の場合
+			if (map[y][x] == 1) {
+				mapChip[y][x]->textureNum = TextureName::STAGETEXTURE;
+				mapChip[y][x]->transform.translate.z -= 2;
+			}
 		}
 	}
+
+	model_->transform.translate = mapChip[now.x][now.y]->transform.translate;
+	model_->transform.translate.z = -2.0f;
 
 	// AIのタイプ(動き方や一部パラメータに影響する)
 	type_ = AI_TYPE::NOMAL;
@@ -56,107 +76,57 @@ void Enemy::Initialize(DownsideTank* player) {
 
 }
 
-void Enemy::Update() {
-
+void Enemy::Update(const Node& playerPos) {
 
 	// isActive == false であれば早期リターンする
 	if (isActive == false) { return; }
+
+	// 探索待ち時間を減少
+	if (searchTime_ > 0) { --searchTime_; }
 
 	////////////////////////////////////
 	/// プレイヤーの座標を取得
 	/// プレイヤーに最も近いマップチップを取得?
 	////////////////////////////////////
 
-	//ImGui::Begin("Target");
-	//if (ImGui::TreeNode("Move:X")) {
-	//	if (ImGui::Button("Node:X = 0")) {
-	//		moveT = 0.0f;
-	//		start = now;
-	//		end.x = 0.0f;
-	//	}
-	//	if (ImGui::Button("Node:X = 1")) {
-	//		moveT = 0.0f;
-	//		start = now;
-	//		end.x = 1.0f * 2;
-	//	}
-	//	if (ImGui::Button("Node:X = 2")) {
-	//		moveT = 0.0f;
-	//		start = now;
-	//		end.x = 2.0f * 2;
-	//	}
-	//	if (ImGui::Button("Node:X = 3")) {
-	//		moveT = 0.0f;
-	//		start = now;
-	//		end.x = 3.0f * 2;
-	//	}
-	//	if (ImGui::Button("Node:X = 4")) {
-	//		moveT = 0.0f;
-	//		start = now;
-	//		end.x = 4.0f * 2;
-	//	}
-	//	ImGui::TreePop();
-	//}
-	//if (ImGui::TreeNode("Move:Y")) {
-	//	if (ImGui::Button("Node:Y = 0")) {
-	//		moveT = 0.0f;
-	//		start = now;
-	//		end.y = 0.0f * 2;
-	//	}
-	//	if (ImGui::Button("Node:Y = 1")) {
-	//		moveT = 0.0f;
-	//		start = now;
-	//		end.y = 1.0f * 2;
-	//	}
-	//	if (ImGui::Button("Node:Y = 2")) {
-	//		moveT = 0.0f;
-	//		start = now;
-	//		end.y = 2.0f * 2;
-	//	}
-	//	if (ImGui::Button("Node:Y = 3")) {
-	//		moveT = 0.0f;
-	//		start = now;
-	//		end.y = 3.0f * 2;
-	//	}
-	//	if (ImGui::Button("Node:Y = 4")) {
-	//		moveT = 0.0f;
-	//		start = now;
-	//		end.y = 4.0f * 2;
-	//	}
-	//	ImGui::TreePop();
-	//}
-	//ImGui::End();
 
-	
 
 	///////////////////////////////////////
 	/// 追従を行う
 	///////////////////////////////////////
 
-	// イージング用の数値を加算
+
+
+	// 
 	if (moveT == 1.0f) {
+		now = next_;
+		prev_ = next_;
 		moveT = 0.0f;
-		start = now;
-		end.x = player_->transform.translate.x;
-		end.y = player_->transform.translate.y;
 	}
+	// イージング用の数値を加算
 	if (moveT < 1.0f) {
-		moveT += 0.01f;
-		if (moveT > 1.0f) {	moveT = 1.0f;}
+		if (moveT == 0.0f) { EnemyAI(now, playerPos); }
+		moveT += (1.0f / 85.0f);
+		if (moveT > 1.0f) { moveT = 1.0f; }
 	}
 
 	// 線形補間を行い、ターゲットまでの距離を詰める
-	now.x = MoveEasing::Vec3::EaseNomal({ start.x,start.y,1.0f },
-		{ end.x,end.y,1.0f }, moveT).x;
-	now.y = MoveEasing::Vec3::EaseNomal({ start.x,start.y,1.0f },
-		{ end.x,end.y,1.0f }, moveT).y;
-
 	// 線形補間で取得した座標を代入
-	model_->transform.translate = { now.x,now.y,-2.0f };
+	model_->transform.translate.x = MoveEasing::Vec3::EaseNomal(
+		{ mapChip[prev_.y][prev_.x]->transform.translate.x,mapChip[prev_.y][prev_.x]->transform.translate.y,1.0f },
+		{ mapChip[next_.y][next_.x]->transform.translate.x,mapChip[next_.y][next_.x]->transform.translate.y,1.0f },
+		moveT).x;
+
+	model_->transform.translate.y = MoveEasing::Vec3::EaseNomal(
+		{ mapChip[prev_.y][prev_.x]->transform.translate.x,mapChip[prev_.y][prev_.x]->transform.translate.y,1.0f },
+		{ mapChip[next_.y][next_.x]->transform.translate.x,mapChip[next_.y][next_.x]->transform.translate.y,1.0f },
+		moveT).y;
+
 
 	///////////////////////////////////////
 	/// 経路探索をする
 	///////////////////////////////////////
-	
+
 	// A*アルゴリズムを用いて最短経路を探索する
 
 	// 開始ノードと終了ノードを設定
@@ -166,21 +136,22 @@ void Enemy::Update() {
 }
 
 void Enemy::Draw() {
-	
+
 	// 仮のマップチップ
-	for (int x = 0; x < map.size(); ++x) {
-		for (int y = 0; y < map[0].size(); ++y) {
-			mapChip[x][y]->Draw();
+	for (int y = 0; y < map.size(); ++y) {
+		for (int x = 0; x < map[0].size(); ++x) {
+			mapChip[y][x]->Draw();
 		}
 	}
 
 	// 仮のエネミー
+
 	model_->Draw();
 
 }
 
-
-bool Enemy::IsValid(float x, float y) {
+// マップの境界・障害物チェック
+bool Enemy::IsValid(int32_t x, int32_t y) {
 
 	/////////////////////////////////////////////
 	/// マップの境界チェックや障害物のチェックなどを行う
@@ -188,75 +159,143 @@ bool Enemy::IsValid(float x, float y) {
 	/////////////////////////////////////////////
 
 	// マップの境界チェック
-	if (x < 0 || x >= map.size() || y < 0 || y >= map[0].size()) {
+	if (x < 0 || x >= map[0].size() || y < 0 || y >= map.size()) {
 		return false;
 	}
 
 	// マップの障害物チェック
-	if (map[(int)x][(int)y] == 1) {
+	if (map[y][x] == 1) {
 		return false;// 障害物がある場合は移動できない
 	}
 
 	return true;// 移動可能な場合
 }
 
-float Enemy::ManhattanDistance(const Node& a, const Node& b) {
-	return abs(a.x - b.x) + abs(a.y - b.y);
+// マンハッタン距離を計算する
+int32_t Enemy::ManhattanDistance(const Node& a, const Node& b) {
+	return abs(b.x - a.x) + abs(b.y - a.y);
 }
 
-std::vector<Node> Enemy::AStar(const Node& start, const Node& end) {
-	std::set<Node> openSet;
-	std::vector<Node> closeSet;
+int32_t manhattanDistanceWithDiagonal(const Node& a, const Node& b) {
+	if (std::abs(b.x - a.x) >= std::abs(b.y - a.y)) {
+		return std::abs(b.x - a.x);
+	}
+	return std::abs(b.y - a.y);
+}
 
-	openSet.insert(start);
+// AStarアルゴリズム(斜め移動なし)
+std::vector<Node*> Enemy::AStar(const Node& start, const Node& end) {
+	std::set<Node*> openSet{};
+	std::vector<Node*> closedSet{};
 
-	while (!openSet.empty())
-	{
-		Node current = *openSet.begin();// オープンリストから最小評価値のノードを選択
+	openSet.insert(new Node(start));
+
+	while (!openSet.empty()) {
+		Node* current = *openSet.begin();
 		openSet.erase(openSet.begin());
+		closedSet.push_back(current);
 
-		if (current.x == end.x && current.y == end.y) {
-			// 終了ノードに到達した場合、経路を復元して返す
-			std::vector<Node>path;
-			while (current.parent != nullptr)
-			{
-				path.push_back(current);
-				current = *current.parent;
+		if (current->x == end.x && current->y == end.y) {
+			std::reverse(closedSet.begin(), closedSet.end());
+			while (current->parent != nullptr) {
+				path_.push_back(current);
+				current = current->parent;
+
+				if (current->parent == current) {
+					break;
+				}
 			}
-			std::reverse(path.begin(), path.end());
-			return path;
+			std::reverse(path_.begin(), path_.end());
+			return path_;
 		}
 
-		// current　の隣接ノードを取得し、評価値を計算
-		for (int dx = -1; dx <= 1; ++dx) {
-			for (int dy = -1; dy <= 1; ++dy) {
+		for (int32_t dy = -1; dy <= 1; ++dy) {
+			for (int32_t dx = -1; dx <= 1; ++dx) {
+				// 現在のマスは除外する
 				if (dx == 0 && dy == 0) {
-					continue; // current ノード自体をスキップ	
+					continue;
+				}
+				// 斜め移動をしない
+				if ((dx == -1 && dy == -1) || (dx == 1 && dy == -1) ||
+					(dx == -1 && dy == 1) || (dx == 1 && dy == 1)) {
+					continue;
 				}
 
-				float  newX = current.x + (float)dx;
-				float  newY = current.y + (float)dy;
-				
+				// 隣接した点の計算
+				int32_t newX = current->x + dx;
+				int32_t newY = current->y + dy;
+
+				// 進行可能な場合のみ
 				if (IsValid(newX, newY)) {
-					// neighbor のノード評価値を計算
-					Node neighbor = { 
-						newX,newY,
-						current.g + 1,// g: current.g + 1
-						ManhattanDistance({newX,newY},end),//  h: 終了ノードまでのManhattan距離
-						0,
-						&current
-					};
-				
-					// そして neighbor をオープンリストに追加
-					openSet.insert(neighbor);
-				}
+					if (std::find_if(closedSet.begin(), closedSet.end(), [newX, newY](const Node* node) {
+						return node->x == newX && node->y == newY;
+						}) == closedSet.end()) {
 
+						Node* newNode = new Node{
+							newX, newY,
+							current->g + 1,
+							ManhattanDistance({ newX, newY, 0, 0, 0, nullptr }, { end.x, end.y, 0, 0, 0, nullptr }),
+							0,
+							nullptr
+						};
+
+						newNode->f = newNode->g + newNode->h;
+
+						if (!closedSet.empty()) {
+							Node* lastClosedNode = closedSet.back();
+							newNode->parent = lastClosedNode;
+						}
+
+						if (std::find_if(openSet.begin(), openSet.end(), [newX, newY](const Node* node) {
+							return node->x == newX && node->y == newY;
+							}) != openSet.end()) {
+							auto it = std::find_if(openSet.begin(), openSet.end(), [newX, newY](const Node* node) {
+								return node->x == newX && node->y == newY;
+								});
+
+							if (newNode->f < (*it)->f) {
+								openSet.erase(it);
+								openSet.insert(newNode);
+							}
+						}
+						else {
+							openSet.insert(newNode);
+						}
+					}
+				}
 			}
 		}
-
-		closeSet.push_back(current);
 	}
 
-	// ゴールに到達できなかった場合は空の経路を返す
-	return std::vector<Node>();
+	return std::vector<Node*>();
+}
+
+// EnemyのAI(計算)
+void Enemy::EnemyAI(const Node& enemyPos, const Node& playerPos) {
+
+	// 経路がまだ計算されていない場合や、経路が空の場合は新たに計算を行う
+	if (path_.empty()) {
+		Node start = { enemyPos.x, enemyPos.y, 0, 0, 0, nullptr };
+		Node end = { playerPos.x, playerPos.y, 0, 0, 0, nullptr };
+		path_ = AStar(start, end);
+	}
+
+	// 経路が存在する場合
+	if (!path_.empty()) {
+
+		// 最初のノードが敵の次の移動先
+		Node* nextMove = path_.front();
+
+		// 次に移動するマスを設定
+		next_.x = nextMove->x;
+		next_.y = nextMove->y;
+
+		//model_->transform.translate.x = mapChip[nextMove->y][nextMove->x]->transform.translate.x;
+		//model_->transform.translate.y = mapChip[nextMove->y][nextMove->x]->transform.translate.y;
+
+		// 経路から最初のノードを削除
+		path_.erase(path_.begin());
+
+	}
+
 }

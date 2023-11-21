@@ -95,7 +95,14 @@ void GameScene::Update() {
 		upsidetank_->transform.rotate.z -= 0.02f;
 	}
 
-	enemy_->Update();
+	ImGui::Begin("AStar Debug");
+	ImGui::SliderInt("X", &pX, 0, 9);
+	ImGui::SliderInt("Y", &pY, 0, 9);
+	ImGui::End();
+
+	// エネミーの更新処理
+	enemy_->Update({ pX,pY,0,0,0,nullptr });
+
 }
 
 void GameScene::Draw() {

@@ -39,4 +39,7 @@ private:
 	UpsideTank* upsidetank_;
 	DownsideTank* downsidetank_;
 	Enemy* enemy_ = nullptr;
+
+	int32_t pX = 6;
+	int32_t pY = 2;
 };
