@@ -90,9 +90,6 @@
     <Filter Include="Blossom Engine\utility\Collision">
       <UniqueIdentifier>{a043f162-39d5-48e4-be4c-0eddb1a68157}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Bullet">
-      <UniqueIdentifier>{b5f601ff-c8bd-469d-bb91-ee3acdf58407}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui_impl_dx12.cpp">
@@ -216,8 +213,8 @@
     <ClCompile Include="Blossom Engine\utility\Collision\CollisionManager.cpp">
       <Filter>Blossom Engine\utility\Collision</Filter>
     </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>Bullet</Filter>
+    <ClCompile Include="Necessary\Models\Bullet.cpp">
+      <Filter>Necessary\Models</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -371,11 +368,11 @@
     <ClInclude Include="Blossom Engine\utility\Collision\Collider.h">
       <Filter>Blossom Engine\utility\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>Bullet</Filter>
-    </ClInclude>
     <ClInclude Include="Necessary\Models\UpsideTank.h" />
     <ClInclude Include="Necessary\Models\DownsideTank.h">
+      <Filter>Necessary\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Necessary\Models\Bullet.h">
       <Filter>Necessary\Models</Filter>
     </ClInclude>
   </ItemGroup>

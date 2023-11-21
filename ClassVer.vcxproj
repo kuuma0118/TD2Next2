@@ -113,7 +113,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Blossom Engine\utility\GlobalVariables.cpp" />
     <ClCompile Include="Blossom Engine\utility\MaterialData.cpp" />
     <ClCompile Include="Blossom Engine\WinApp\WinApp.cpp" />
-    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="externals\imgui\imgui.cpp" />
     <ClCompile Include="externals\imgui\imgui_demo.cpp" />
@@ -133,6 +132,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Necessary\Map\Map.cpp" />
     <ClCompile Include="Necessary\Map\MapManager.cpp" />
     <ClCompile Include="Necessary\Models\Block.cpp" />
+    <ClCompile Include="Necessary\Models\Bullet.cpp" />
     <ClCompile Include="Necessary\Models\DownsideTank.cpp" />
     <ClCompile Include="Necessary\Models\stage.cpp" />
     <ClCompile Include="Necessary\Models\UpsideTank.cpp" />
@@ -165,7 +165,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Blossom Engine\utility\MaterialData.h" />
     <ClInclude Include="Blossom Engine\utility\resource.h" />
     <ClInclude Include="Blossom Engine\WinApp\WinApp.h" />
-    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="externals\imgui\imconfig.h" />
     <ClInclude Include="externals\imgui\imgui.h" />
@@ -187,6 +186,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Necessary\Map\Map.h" />
     <ClInclude Include="Necessary\Map\MapManager.h" />
     <ClInclude Include="Necessary\Models\Block.h" />
+    <ClInclude Include="Necessary\Models\Bullet.h" />
     <ClInclude Include="Necessary\Models\DownsideTank.h" />
     <ClInclude Include="Necessary\Models\stage.h" />
     <ClInclude Include="Necessary\Models\UpsideTank.h" />

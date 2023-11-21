@@ -23,12 +23,16 @@ void GameScene::Initialize() {
 	downsidetank_ = new DownsideTank();
 	downsidetank_->Initialize();
 	downsidetank_->textureNum = DOWNSIDETANK;
+	//bullet
+	bullet_ = new Bullet();
+	bullet_->Initialize();
+	bullet_->textureNum = UVCHEKER;
+
 	pos_ = { 0,0,30 };
 	bool isWKeyPressed = false;
 }
 
 void GameScene::Update() {
-
 	/*ImGui::Begin("GameScene Debug");
 	ImGui::SliderInt("loadStageLevel", &loadStageNum_, 0, 7);
 	ImGui::End();
@@ -43,6 +47,7 @@ void GameScene::Update() {
 		}
 		if (input_->PressKey(DIK_D)) {
 			downsidetank_->transform.rotate.z = -0.77f;
+
 		}
 	}
 	if (input_->PressKey(DIK_S)) {
@@ -72,6 +77,7 @@ void GameScene::Update() {
 		}
 	}
 	if (input_->PressKey(DIK_D)) {
+
 		downsidetank_->transform.translate.x += 0.02f;
 		downsidetank_->transform.rotate.z = -1.55f;
 		upsidetank_->transform.translate.x += 0.02f;
@@ -85,11 +91,17 @@ void GameScene::Update() {
 		}
 	}
 	if (input_->PressKey(DIK_Q)) {
-		upsidetank_->transform.rotate.z += 0.02f;
+		bullet_->angle += 1.0f;
+		upsidetank_->transform.rotate.z += 0.017425f;
+		bullet_->transform.rotate.z += 0.017425f;
 	}
 	if (input_->PressKey(DIK_E)) {
-		upsidetank_->transform.rotate.z -= 0.02f;
+		bullet_->angle -= 1.0f;
+		upsidetank_->transform.rotate.z -= 0.017425f;
+		bullet_->transform.rotate.z -= 0.017425f;
+
 	}
+	bullet_->Update();
 }
 
 void GameScene::Draw() {
@@ -97,6 +109,8 @@ void GameScene::Draw() {
 	stage_->Draw();
 	upsidetank_->Draw();
 	downsidetank_->Draw();
+	bullet_->Draw();
+
 	//sprite_->Draw(pos_, UVCHEKER);
 }
 
@@ -105,5 +119,6 @@ void GameScene::Finalize() {
 	delete sphere_;
 	delete stage_;
 	delete upsidetank_;
+	delete bullet_;
 	delete downsidetank_;
 }

@@ -9,6 +9,8 @@
 #include "../Necessary/Models/stage.h"
 #include "../Necessary/Models/UpsideTank.h"
 #include "../Necessary/Models/DownsideTank.h"
+#include "../Necessary/Models/Bullet.h"
+
 class GameManager;
 
 class GameScene : public IScene
@@ -35,6 +37,7 @@ private:
 	Vector3 pos_;
 	Stage* stage_;
 	UpsideTank* upsidetank_;
+	Bullet* bullet_;
 	DownsideTank* downsidetank_;
 	
 };
