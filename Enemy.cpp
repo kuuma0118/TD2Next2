@@ -160,9 +160,14 @@ std::vector<Node*> Enemy::GetAStar(const Node& start, const Node& end) {
 
 	openSet.insert(new Node(start));
 
+	// オープンリストがから出ない場合
 	while (!openSet.empty()) {
+
+		// オープンリストから最小評価値のノードを取り出す
 		Node* current = *openSet.begin();
+		// オープンリスト内の取り出したノードを削除
 		openSet.erase(openSet.begin());
+		// クローズドリストに取り出したノードを入れる
 		closedSet.push_back(current);
 
 		if (current->x == end.x && current->y == end.y) {
