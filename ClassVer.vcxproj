@@ -127,6 +127,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Manager\ObjManager.cpp" />
     <ClCompile Include="Manager\Pipelinemanager.cpp" />
     <ClCompile Include="Manager\TextureManager.cpp" />
+    <ClCompile Include="MapChip.cpp" />
     <ClCompile Include="MoveEasing.cpp" />
     <ClCompile Include="Necessary\Effect\EffectManager.cpp" />
     <ClCompile Include="Necessary\Map\Map.cpp" />
