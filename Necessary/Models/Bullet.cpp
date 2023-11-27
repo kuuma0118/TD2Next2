@@ -76,6 +76,7 @@ void Bullet::Initialize() {
 	transform = { {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };
 	speed = 0.05f;
 	angle = 90.0f;
+	time = 0.0f;
 	isBulletDeth = true;
 	rotationAngle = 0.0f;
 	rotateAmount = 0.0f;
@@ -84,9 +85,7 @@ void Bullet::Initialize() {
 		{0.0f,0.0f,0.0f},
 		{0.0f,0.0f,0.0f}
 	};
-
 	materialData_->enableLightning = false;
-
 	materialData_->uvTransform = MakeIdentity4x4();
 }
 

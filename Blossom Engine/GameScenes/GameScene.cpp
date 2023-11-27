@@ -82,11 +82,9 @@ void GameScene::Update() {
 		upsidetank_->transform.translate.x += 0.02f;
 		if (input_->PressKey(DIK_W)) {
 			downsidetank_->transform.rotate.z = -0.77f;
-
 		}
 		if (input_->PressKey(DIK_S)) {
 			downsidetank_->transform.rotate.z = -2.37f;
-
 		}
 	}
 	if (input_->PressKey(DIK_Q)) {
@@ -98,7 +96,6 @@ void GameScene::Update() {
 		bullet_->rotationAngle -= 1.0f;
 		upsidetank_->transform.rotate.z -= 0.017425f;
 		bullet_->rotateAmount -= 0.017425f;
-
 	}
 	if (input_->PressKey(DIK_SPACE) == 0 && input_->ReleaseKey(DIK_SPACE) != 0 && bullet_->isBulletDeth == true) {
 		bullet_->angle = bullet_->rotationAngle + 90.0f;
@@ -107,8 +104,9 @@ void GameScene::Update() {
 		bullet_->transform.translate.y = upsidetank_->transform.translate.y;
 		bullet_->isBulletDeth = false;
 	}
-	if (input_->PressKey(DIK_R)) {
+	if (bullet_->time >= 10.0f) {
 		bullet_->isBulletDeth = true;
+		bullet_->time = 0.0f;
 	}
 	bullet_->Update();
 }
@@ -119,6 +117,7 @@ void GameScene::Draw() {
 	upsidetank_->Draw();
 	downsidetank_->Draw();
 	if (bullet_->isBulletDeth == false) {
+		bullet_->time += bullet_->speed;
 		bullet_->Draw();
 	}
 

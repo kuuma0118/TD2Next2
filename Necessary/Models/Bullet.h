@@ -47,6 +47,7 @@ public:
 	float x = transform.translate.x;
 	float y = transform.translate.y;
 	bool isBulletDeth;
+	float time;
 	// テクスチャナンバー
 	int textureNum;
 
