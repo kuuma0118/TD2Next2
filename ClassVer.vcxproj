@@ -190,7 +190,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Necessary\Models\DownsideTank.h" />
     <ClInclude Include="Necessary\Models\stage.h" />
     <ClInclude Include="Necessary\Models\UpsideTank.h" />
-    <ClInclude Include="UpsideTank.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />

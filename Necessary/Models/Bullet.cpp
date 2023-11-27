@@ -74,6 +74,7 @@ void Bullet::Initialize() {
 	std::memcpy(vertexData_, modelData_.verticles.data(), sizeof(VertexData) * modelData_.verticles.size());
 
 	transform = { {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };
+	velotity_ = { 0.0f,0.0f,0.0f };
 	speed = 0.05f;
 	angle = 90.0f;
 	time = 0.0f;
@@ -90,11 +91,11 @@ void Bullet::Initialize() {
 }
 
 void Bullet::Update() {
-		trueangle = angle * (PI / 180.0f);
-		float vx = speed * cos(trueangle);
-		float vy = speed * sin(trueangle);
-		transform.translate.x += vx;
-		transform.translate.y += vy;
+
+
+		transform.translate.x += velotity_.x/10;
+		transform.translate.y += velotity_.y/10;
+
 }
 
 void Bullet::Draw() {
@@ -124,3 +125,4 @@ void Bullet::Draw() {
 	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(0, materialResource_.Get()->GetGPUVirtualAddress());
 	DirectXCommon::GetInstance()->GetCommandList()->DrawInstanced(UINT(modelData_.verticles.size()), 1, 0, 0);
 }
+

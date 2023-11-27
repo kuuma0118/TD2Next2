@@ -36,9 +36,12 @@ public: // メンバ関数
 	/// <param name="textureNum">textureManagerで作ったenum型の番号</param>
 	void Draw();	// 描画
 
+	void SetVelotity(Vector3 velotity) { velotity_ = velotity; }
+
 public:
 	// SRT
 	Transform transform;
+	Vector3 velotity_;
 	float speed;
 	float angle;
 	float rotationAngle;

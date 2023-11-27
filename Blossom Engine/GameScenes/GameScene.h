@@ -37,7 +37,7 @@ private:
 	Vector3 pos_;
 	Stage* stage_;
 	UpsideTank* upsidetank_;
-	Bullet* bullet_;
+	std::list<Bullet*> playerBullets_;
 	DownsideTank* downsidetank_;
 	
 };

@@ -1,5 +1,6 @@
 #include "GameScene.h"
 #include "../Manager/GameManager.h"
+#include "../Blossom Engine/Math/MatrixCalculate.h"
 
 void GameScene::Initialize() {
 	/*camera_ = DebugCamera::GetInstance();
@@ -23,10 +24,7 @@ void GameScene::Initialize() {
 	downsidetank_ = new DownsideTank();
 	downsidetank_->Initialize();
 	downsidetank_->textureNum = DOWNSIDETANK;
-	//bullet
-	bullet_ = new Bullet();
-	bullet_->Initialize();
-	bullet_->textureNum = UVCHEKER;
+	
 
 	pos_ = { 0,0,30 };
 	bool isWKeyPressed = false;
@@ -88,37 +86,65 @@ void GameScene::Update() {
 		}
 	}
 	if (input_->PressKey(DIK_Q)) {
-		bullet_->rotationAngle += 1.0f;
-		bullet_->rotateAmount += 0.017425f;
 		upsidetank_->transform.rotate.z += 0.017425f;
 	}
 	if (input_->PressKey(DIK_E)) {
-		bullet_->rotationAngle -= 1.0f;
 		upsidetank_->transform.rotate.z -= 0.017425f;
-		bullet_->rotateAmount -= 0.017425f;
 	}
-	if (input_->PressKey(DIK_SPACE) == 0 && input_->ReleaseKey(DIK_SPACE) != 0 && bullet_->isBulletDeth == true) {
-		bullet_->angle = bullet_->rotationAngle + 90.0f;
-		bullet_->transform.rotate.z = bullet_->rotateAmount;
-		bullet_->transform.translate.x = upsidetank_->transform.translate.x;
-		bullet_->transform.translate.y = upsidetank_->transform.translate.y;
-		bullet_->isBulletDeth = false;
+
+	// プレイヤーの弾の生成処理
+	if (input_->PressKey(DIK_SPACE) == 0 && input_->ReleaseKey(DIK_SPACE) != 0) {
+		Bullet* newBullet = new Bullet;
+		newBullet->Initialize();
+		newBullet->textureNum = UVCHEKER;
+		newBullet->transform.translate.x = downsidetank_->transform.translate.x;
+		newBullet->transform.translate.y = downsidetank_->transform.translate.y;
+		newBullet->isBulletDeth = false;// 死亡しているか
+
+		// 弾の速度・角度の設定
+		const float kBulletSpeed = 0.1f;
+		Vector3 vel(0, kBulletSpeed, 0);
+
+		// 速度ベクトルを自機の向きに合わせて回転
+		vel = TransformNormal(vel, MakeAffineMatrix(downsidetank_->transform.scale,
+			upsidetank_->transform.rotate, downsidetank_->transform.translate));
+		newBullet->transform.rotate.z = -atan2(vel.x, vel.y);
+		newBullet->SetVelotity(vel);	
+		
+		// 弾の登録
+		playerBullets_.push_back(newBullet);
+
 	}
-	if (bullet_->time >= 10.0f) {
-		bullet_->isBulletDeth = true;
-		bullet_->time = 0.0f;
+
+	// プレイヤーの弾(複数)の更新処理
+	for (Bullet* bullet : playerBullets_)
+	{
+		// 更新処理
+		bullet->Update();
+		//　時間を加算
+		bullet->time += bullet->speed;
+
+		// 弾が発射されてから一定時間立つと消滅する
+		if (bullet->time >= 10.0f) {
+			bullet->isBulletDeth = true;
+			bullet->time = 0.0f;
+		}
 	}
-	bullet_->Update();
+
 }
+
 
 void GameScene::Draw() {
 	//map_->Draw();
 	stage_->Draw();
 	upsidetank_->Draw();
 	downsidetank_->Draw();
-	if (bullet_->isBulletDeth == false) {
-		bullet_->time += bullet_->speed;
-		bullet_->Draw();
+	// プレイヤーの弾(複数)の描画処理
+	for (Bullet* bullet : playerBullets_)
+	{
+		if (bullet->isBulletDeth == false) {
+			bullet->Draw();
+		}
 	}
 
 	//sprite_->Draw(pos_, UVCHEKER);
@@ -129,6 +155,8 @@ void GameScene::Finalize() {
 	delete sphere_;
 	delete stage_;
 	delete upsidetank_;
-	delete bullet_;
+	for (Bullet* bullet : playerBullets_) {
+		delete bullet;
+	}
 	delete downsidetank_;
 }
