@@ -36,7 +36,6 @@ void GameScene::Update() {
 	/*ImGui::Begin("GameScene Debug");
 	ImGui::SliderInt("loadStageLevel", &loadStageNum_, 0, 7);
 	ImGui::End();
-
 	map_->Update();*/
 	if (input_->PressKey(DIK_W)) {
 		downsidetank_->transform.translate.y += 0.02f;
@@ -101,11 +100,15 @@ void GameScene::Update() {
 		bullet_->rotateAmount -= 0.017425f;
 
 	}
-	if (input_->PressKey(DIK_SPACE) == 0 && input_->ReleaseKey(DIK_SPACE) != 0) {
+	if (input_->PressKey(DIK_SPACE) == 0 && input_->ReleaseKey(DIK_SPACE) != 0 && bullet_->isBulletDeth == true) {
 		bullet_->angle = bullet_->rotationAngle + 90.0f;
 		bullet_->transform.rotate.z = bullet_->rotateAmount;
 		bullet_->transform.translate.x = upsidetank_->transform.translate.x;
 		bullet_->transform.translate.y = upsidetank_->transform.translate.y;
+		bullet_->isBulletDeth = false;
+	}
+	if (input_->PressKey(DIK_R)) {
+		bullet_->isBulletDeth = true;
 	}
 	bullet_->Update();
 }
@@ -115,7 +118,9 @@ void GameScene::Draw() {
 	stage_->Draw();
 	upsidetank_->Draw();
 	downsidetank_->Draw();
-	bullet_->Draw();
+	if (bullet_->isBulletDeth == false) {
+		bullet_->Draw();
+	}
 
 	//sprite_->Draw(pos_, UVCHEKER);
 }

@@ -76,6 +76,7 @@ void Bullet::Initialize() {
 	transform = { {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };
 	speed = 0.05f;
 	angle = 90.0f;
+	isBulletDeth = true;
 	rotationAngle = 0.0f;
 	rotateAmount = 0.0f;
 	uvTransform_ = {
@@ -90,11 +91,11 @@ void Bullet::Initialize() {
 }
 
 void Bullet::Update() {
-	trueangle = angle * (PI / 180.0f);
-	float vx = speed * cos(trueangle);
-	float vy = speed * sin(trueangle);
-	transform.translate.x += vx;
-	transform.translate.y += vy;
+		trueangle = angle * (PI / 180.0f);
+		float vx = speed * cos(trueangle);
+		float vy = speed * sin(trueangle);
+		transform.translate.x += vx;
+		transform.translate.y += vy;
 }
 
 void Bullet::Draw() {

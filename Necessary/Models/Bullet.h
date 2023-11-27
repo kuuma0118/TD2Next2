@@ -46,7 +46,7 @@ public:
 	float trueangle;
 	float x = transform.translate.x;
 	float y = transform.translate.y;
-
+	bool isBulletDeth;
 	// テクスチャナンバー
 	int textureNum;
 
