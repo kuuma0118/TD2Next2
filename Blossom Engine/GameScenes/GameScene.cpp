@@ -101,6 +101,10 @@ void GameScene::Update() {
 		bullet_->transform.rotate.z -= 0.017425f;
 
 	}
+	if (input_->PressKey(DIK_SPACE)) {
+		bullet_->transform.translate.x = upsidetank_->transform.translate.x;
+		bullet_->transform.translate.y = upsidetank_->transform.translate.y;
+	}
 	bullet_->Update();
 }
 
