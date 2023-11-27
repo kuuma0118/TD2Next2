@@ -213,8 +213,8 @@
     <ClCompile Include="Blossom Engine\utility\Collision\CollisionManager.cpp">
       <Filter>Blossom Engine\utility\Collision</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyManager.cpp">
-      <Filter>Enemy</Filter>
+    <ClCompile Include="Necessary\Models\Bullet.cpp">
+      <Filter>Necessary\Models</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -356,9 +356,6 @@
     <ClInclude Include="Necessary\Models\stage.h">
       <Filter>Necessary\Models</Filter>
     </ClInclude>
-    <ClInclude Include="UpsideTank.h">
-      <Filter>Necessary\Models</Filter>
-    </ClInclude>
     <ClInclude Include="Blossom Engine\utility\Collision\CollisionConfig.h">
       <Filter>Blossom Engine\utility\Collision</Filter>
     </ClInclude>
@@ -371,8 +368,11 @@
     <ClInclude Include="Necessary\Models\DownsideTank.h">
       <Filter>Necessary\Models</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyManager.h">
-      <Filter>Enemy</Filter>
+    <ClInclude Include="Necessary\Models\Bullet.h">
+      <Filter>Necessary\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Necessary\Models\UpsideTank.h">
+      <Filter>Necessary\Models</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

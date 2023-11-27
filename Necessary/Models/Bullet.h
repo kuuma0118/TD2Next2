@@ -11,9 +11,10 @@
 #include "../Blossom Engine/Math/MatrixCalculate.h"
 #include "../Manager/TextureManager.h"
 #include "../Blossom Engine/Common/Common.h"
-class DownsideTank {
+class Bullet {
 
 public: // メンバ関数
+
 	ModelData GetModelData() { return modelData_; }
 
 	Microsoft::WRL::ComPtr<ID3D12Resource> CreateBufferResource(const Microsoft::WRL::ComPtr<ID3D12Device>& device, size_t sizeInBytes);
@@ -27,7 +28,7 @@ public: // メンバ関数
 	void CreateWvpResource();
 
 	void Initialize();	// 初期化
-	//void Update();	// 更新
+	void Update();	// 更新
 
 	/// <summary>
 	/// 描画
@@ -35,10 +36,21 @@ public: // メンバ関数
 	/// <param name="textureNum">textureManagerで作ったenum型の番号</param>
 	void Draw();	// 描画
 
+	void SetVelotity(Vector3 velotity) { velotity_ = velotity; }
+
 public:
 	// SRT
 	Transform transform;
-
+	Vector3 velotity_;
+	float speed;
+	float angle;
+	float rotationAngle;
+	float rotateAmount;
+	float trueangle;
+	float x = transform.translate.x;
+	float y = transform.translate.y;
+	bool isBulletDeth;
+	float time;
 	// テクスチャナンバー
 	int textureNum;
 
@@ -63,7 +75,7 @@ private: // メンバ変数
 	ModelData modelData_;
 	// ワールドトランスフォーム
 	//WorldTransform worldTransform_;
-
+	
 };
 
 

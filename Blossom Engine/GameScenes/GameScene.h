@@ -9,6 +9,8 @@
 #include "../Necessary/Models/stage.h"
 #include "../Necessary/Models/UpsideTank.h"
 #include "../Necessary/Models/DownsideTank.h"
+#include "../Necessary/Models/Bullet.h"
+
 #include "../EnemyManager.h"
 
 class GameManager;
@@ -37,6 +39,7 @@ private:
 	Vector3 pos_;
 	Stage* stage_;
 	UpsideTank* upsidetank_;
+	std::list<Bullet*> playerBullets_;
 	DownsideTank* downsidetank_;
 	EnemyManager* enemyManager_ = nullptr;
 	Enemy* enemy_ = nullptr;

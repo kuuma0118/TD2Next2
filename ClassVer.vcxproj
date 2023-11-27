@@ -133,6 +133,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Necessary\Map\Map.cpp" />
     <ClCompile Include="Necessary\Map\MapManager.cpp" />
     <ClCompile Include="Necessary\Models\Block.cpp" />
+    <ClCompile Include="Necessary\Models\Bullet.cpp" />
     <ClCompile Include="Necessary\Models\DownsideTank.cpp" />
     <ClCompile Include="Necessary\Models\stage.cpp" />
     <ClCompile Include="Necessary\Models\UpsideTank.cpp" />
@@ -187,9 +188,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Necessary\Map\Map.h" />
     <ClInclude Include="Necessary\Map\MapManager.h" />
     <ClInclude Include="Necessary\Models\Block.h" />
+    <ClInclude Include="Necessary\Models\Bullet.h" />
     <ClInclude Include="Necessary\Models\DownsideTank.h" />
     <ClInclude Include="Necessary\Models\stage.h" />
-    <ClInclude Include="UpsideTank.h" />
+    <ClInclude Include="Necessary\Models\UpsideTank.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
