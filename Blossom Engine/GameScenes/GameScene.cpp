@@ -91,17 +91,19 @@ void GameScene::Update() {
 		}
 	}
 	if (input_->PressKey(DIK_Q)) {
-		bullet_->angle += 1.0f;
+		bullet_->rotationAngle += 1.0f;
+		bullet_->rotateAmount += 0.017425f;
 		upsidetank_->transform.rotate.z += 0.017425f;
-		bullet_->transform.rotate.z += 0.017425f;
 	}
 	if (input_->PressKey(DIK_E)) {
-		bullet_->angle -= 1.0f;
+		bullet_->rotationAngle -= 1.0f;
 		upsidetank_->transform.rotate.z -= 0.017425f;
-		bullet_->transform.rotate.z -= 0.017425f;
+		bullet_->rotateAmount -= 0.017425f;
 
 	}
-	if (input_->PressKey(DIK_SPACE)) {
+	if (input_->PressKey(DIK_SPACE) == 0 && input_->ReleaseKey(DIK_SPACE) != 0) {
+		bullet_->angle = bullet_->rotationAngle + 90.0f;
+		bullet_->transform.rotate.z = bullet_->rotateAmount;
 		bullet_->transform.translate.x = upsidetank_->transform.translate.x;
 		bullet_->transform.translate.y = upsidetank_->transform.translate.y;
 	}

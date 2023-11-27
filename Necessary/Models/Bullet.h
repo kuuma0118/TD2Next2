@@ -41,6 +41,8 @@ public:
 	Transform transform;
 	float speed;
 	float angle;
+	float rotationAngle;
+	float rotateAmount;
 	float trueangle;
 	float x = transform.translate.x;
 	float y = transform.translate.y;
