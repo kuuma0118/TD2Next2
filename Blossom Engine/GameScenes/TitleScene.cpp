@@ -11,22 +11,19 @@ void TitleScene::Initialize() {
 	block_->Initialize();
 	block_->textureNum = BLOCK;
 	pos_ = { 0,0,30 };
-	mapChip_ = new MapChip;
-	mapChip_->Initialize();
-	mapChip_->LoadMapData(2);
-	mapChip_->SetNextMapData();
+
 }
 
 void TitleScene::Update() {
 	if(input_->TriggerKey(DIK_SPACE)){
 		sceneNum = GAME_SCENE;
 	}
-	mapChip_->Update();
+	
 }
 
 void TitleScene::Draw() {
 	//block_->Draw();
-	mapChip_->Draw();
+	
 }
 
 void TitleScene::Finalize() {

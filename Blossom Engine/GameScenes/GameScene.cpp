@@ -26,9 +26,16 @@ void GameScene::Initialize() {
 	pos_ = { 0,0,30 };
 	bool isWKeyPressed = false;
 
+	// マップチップ
+	mapChip_ = new MapChip;
+	mapChip_->Initialize();
+	mapChip_->LoadMapData(2);
+	mapChip_->SetNextMapData();
+
 	// enemy　一体仮置き
 	enemy_ = new Enemy;
 	enemy_->Initialize(downsidetank_);
+	
 }
 
 void GameScene::Update() {
@@ -100,6 +107,8 @@ void GameScene::Update() {
 	ImGui::SliderInt("Y", &pY, 0, 9);
 	ImGui::End();
 
+	//マップチップの更新処理
+	mapChip_->Update();
 	// エネミーの更新処理
 	enemy_->Update({ pX,pY,0,0,0,nullptr });
 
@@ -107,7 +116,8 @@ void GameScene::Update() {
 
 void GameScene::Draw() {
 	//map_->Draw();
-	stage_->Draw();
+	//stage_->Draw();
+	mapChip_->Draw();
 	upsidetank_->Draw();
 	downsidetank_->Draw();
 	enemy_->Draw();

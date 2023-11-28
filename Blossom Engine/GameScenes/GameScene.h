@@ -10,6 +10,7 @@
 #include "../Necessary/Models/UpsideTank.h"
 #include "../Necessary/Models/DownsideTank.h"
 #include "../Enemy.h"
+#include "../MapChip.h"
 
 class GameManager;
 
@@ -42,4 +43,7 @@ private:
 
 	int32_t pX = 6;
 	int32_t pY = 2;
+
+	// マップチップ
+	MapChip* mapChip_;
 };
