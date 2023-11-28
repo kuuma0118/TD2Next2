@@ -85,10 +85,10 @@ void GameScene::Update() {
 			downsidetank_->transform.rotate.z = -2.37f;
 		}
 	}
-	if (input_->PressKey(DIK_Q)) {
+	if (input_->PressKey(DIK_Q) || input_->PressKey(DIK_LEFTARROW)) {
 		upsidetank_->transform.rotate.z += 0.017425f;
 	}
-	if (input_->PressKey(DIK_E)) {
+	if (input_->PressKey(DIK_E) || input_->PressKey(DIK_RIGHTARROW)) {
 		upsidetank_->transform.rotate.z -= 0.017425f;
 	}
 
@@ -96,7 +96,7 @@ void GameScene::Update() {
 	if (input_->PressKey(DIK_SPACE) == 0 && input_->ReleaseKey(DIK_SPACE) != 0) {
 		Bullet* newBullet = new Bullet;
 		newBullet->Initialize();
-		newBullet->textureNum = UVCHEKER;
+		newBullet->textureNum = UPSIDETANK;
 		newBullet->transform.translate.x = downsidetank_->transform.translate.x;
 		newBullet->transform.translate.y = downsidetank_->transform.translate.y;
 		newBullet->isBulletDeth = false;// 死亡しているか

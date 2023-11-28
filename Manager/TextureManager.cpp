@@ -26,6 +26,8 @@ void TextureManager::TransferTexture(const Microsoft::WRL::ComPtr<ID3D12Descript
 	mipImages_[STAGETEXTURE] = LoadTexture("Resources/stage.png");
 	mipImages_[UPSIDETANK] = LoadTexture("Resources/tank.png");
 	mipImages_[DOWNSIDETANK] = LoadTexture("Resources/tank.png");
+	mipImages_[UPSIDEENEMYTANK] = LoadTexture("Resources/enemytank.png");
+	mipImages_[DOWNSIDEENEMYTANK] = LoadTexture("Resources/enemytank.png");
 
 	DirectX::TexMetadata metadata[kMaxImages]{};
 	for (uint32_t i = 0; i < kMaxImages; i++) {
