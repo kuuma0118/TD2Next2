@@ -102,7 +102,7 @@ void GameScene::Update() {
 		newBullet->isBulletDeth = false;// 死亡しているか
 
 		// 弾の速度・角度の設定
-		const float kBulletSpeed = 0.1f;
+		const float kBulletSpeed = 0.5f;
 		Vector3 vel(0, kBulletSpeed, 0);
 
 		// 速度ベクトルを自機の向きに合わせて回転
@@ -125,7 +125,7 @@ void GameScene::Update() {
 		bullet->time += bullet->speed;
 
 		// 弾が発射されてから一定時間立つと消滅する
-		if (bullet->time >= 10.0f) {
+		if (bullet->time >= 700.0f) {
 			bullet->isBulletDeth = true;
 			bullet->time = 0.0f;
 		}
