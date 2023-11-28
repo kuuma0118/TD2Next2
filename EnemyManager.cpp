@@ -76,11 +76,13 @@ void EnemyManager::Update() {
 	mapChip[nearestNode_.y][nearestNode_.x]->textureNum = TextureName::BLOCK;
 
 
-	// イテレータを使用して要素を削除する
+
 	for (Enemy* enemy : enemies_) {
 		// 更新処理を行う
 		enemy->Update(nearestNode_);
+		enemy->SetAngle(player_->transform);
 
+		// イテレータを使用して要素を削除する
 		if (!enemy->GetIsActive()) {
 			delete enemy;
 		}

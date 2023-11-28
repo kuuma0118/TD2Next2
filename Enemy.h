@@ -60,7 +60,8 @@ public:	// ** メンバ関数 ** //
 	void DeleteRoute();
 	bool GetIsValid(int32_t x, int32_t y);
 	int32_t GetManhattanDistance(const Node& a, const Node& b);
-	int32_t ManhattanDistanceWithDiagonal(const Node& a, const Node& b);
+
+	void SetAngle(const Transform& player);
 
 	// ゲッタ
 	bool GetSearchTimeZero() { 

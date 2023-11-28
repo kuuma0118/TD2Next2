@@ -110,6 +110,8 @@ void Enemy::Update(const Node& nearestNode) {
 		{ pMapchip_[next_.y][next_.x]->transform.translate.x,pMapchip_[next_.y][next_.x]->transform.translate.y,1.0f },
 		moveT).y;
 
+
+
 }
 
 void Enemy::Draw() {
@@ -293,4 +295,21 @@ void Enemy::DeleteRoute() {
 		path_.erase(path_.begin());
 	}
 
+}
+
+void Enemy::SetAngle(const Transform& player) {
+
+	//////////////////////////////////
+	/// 砲台をプレイヤーに向ける
+	//////////////////////////////////
+
+	// 角度を設定
+	Vector3 vel(
+		player.translate.x - model_->transform.translate.x,
+		player.translate.y - model_->transform.translate.y,
+		0);
+
+	// 回転
+	model_->transform.rotate.z = -atan2(vel.x, vel.y);
+	
 }
