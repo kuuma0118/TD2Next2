@@ -1,11 +1,14 @@
 #include "ViewProjection.h"
 #include "../Blossom Engine/Common/Common.h"
 
-void ViewProjection::Initialize() {
+ViewProjection::ViewProjection() {
 	//CBVの作成
 	constBuff_ = DirectXCommon::GetInstance()->CreateBufferResource(sizeof(ConstBuffDataViewProjection));
 }
 
+ViewProjection::~ViewProjection() {
+
+}
 
 void ViewProjection::TransferMatrix() {
 	//Resourceに書き込む
@@ -39,3 +42,4 @@ void ViewProjection::UpdateMatrix() {
 	//ビュープロジェクションを転送する
 	ViewProjection::TransferMatrix();
 }
+

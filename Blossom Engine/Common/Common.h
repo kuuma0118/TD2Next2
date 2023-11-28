@@ -68,6 +68,51 @@ public:
 	void Release();
 
 	/// <summary>
+	/// デバイスの取得
+	/// </summary>
+	/// <returns></returns>
+	ID3D12Device* GetDevice() const { return device_.Get(); };
+
+private:
+	/// <summary>
+	/// DXGIデバイスの作成
+	/// </summary>
+	void CreateDXGIDevice();
+
+	/// <summary>
+	/// コマンド関連の作成
+	/// </summary>
+	void CreateCommand();
+
+	/// <summary>
+	/// スワップチェーンの作成
+	/// </summary>
+	void CreateSwapChain();
+
+	/// <summary>
+	/// レンダーターゲットビューの作成
+	/// </summary>
+	void CreateRenderTargetView();
+
+	/// <summary>
+	/// DepthStencilViewの作成
+	/// </summary>
+	void CreateDepthStencilView();
+
+	/// <summary>
+	/// フェンスの作成
+	/// </summary>
+	void CreateFence();
+
+	/// <summary>
+	/// DepthStencilTextureの作成
+	/// </summary>
+	/// <param name="width">幅</param>
+	/// <param name="height">高さ</param>
+	/// <returns></returns>
+	Microsoft::WRL::ComPtr<ID3D12Resource> CreateDepthStencilTextureResource(int32_t width, int32_t height);
+
+	/// <summary>
 	/// FPS固定初期化
 	/// </summary>
 	void InitializeFixFPS();
@@ -76,6 +121,7 @@ public:
 	/// FPS固定更新
 	/// </summary>
 	void UpdateFixFPS();
+
 
 private:
 	UINT backBufferIndex_;

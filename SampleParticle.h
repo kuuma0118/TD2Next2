@@ -34,7 +34,7 @@ public:
 
 	void ModelMotion();
 
-	WorldTransform& GetWeaponWorldTransform() { return weaponWorldTransform_; }
+	WorldTransform& GetsampleWorldTransform() { return sampleWorldTransform_; }
 
 	bool GetIsHit() { return IsHit_; };
 
@@ -53,7 +53,7 @@ private:
 
 	XINPUT_STATE joyState_;
 
-	WorldTransform weaponWorldTransform_;
+	WorldTransform sampleWorldTransform_;
 	WorldTransform involvedMissileWorldTransform_;
 
 	uint32_t textureHandle_ = 0u;

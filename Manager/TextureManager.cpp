@@ -123,6 +123,19 @@ void TextureManager::Initialize() {
 	modelData_ = ObjManager::GetInstance()->GetObjModelData();
 	TransferTexture(DirectXCommon::GetInstance()->GetSrvDescriptorHeap());
 
+	//デバイスの取得
+	device_ = DirectXCommon::GetInstance()->GetDevice().Get();
+	//コマンドリストの取得
+	commandList_ = DirectXCommon::GetInstance()->GetCommandList().Get();
+
+
+	//インクリメントサイズの初期化
+	TextureManager::descriptorSizeSRV = device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+
+
+	//ディスクリプタヒープの作成
+	srvDescriptorHeap_ = DirectXCommon::GetInstance()->CreateDescriptorHeap(device_,D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, kNumDescriptors, true);
+
 	CreateDepthStencilView();
 }
 

@@ -11,7 +11,17 @@ struct ConstBuffDataViewProjection {
 /// <summary>
 /// ビュープロジェクション
 /// </summary>
-struct ViewProjection {
+struct ViewProjection{
+
+	/// <summary>
+    /// コンストラクタ
+    /// </summary>
+	ViewProjection();
+
+	/// <summary>
+	/// デストラクタ
+	/// </summary>
+	~ViewProjection();
 
 	/// <summary>
 	/// 初期化

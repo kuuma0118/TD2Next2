@@ -19,8 +19,10 @@ void Sample::Initialize()
 
 	ModelMotion();
 
-
-
+	//パーティクルの初期化
+	particleModel_.reset(ParticleModel::CreateFromOBJ("Resources/Particle", "Particle.obj"));
+	particleSystem_ = std::make_unique<ParticleSystem>();
+	particleSystem_->Initialize();
 }
 
 void Sample::Update()
@@ -63,7 +65,7 @@ void Sample::OnCollision(uint32_t collisionAttribute, float damage)
 
 	//火花
 	ParticleEmitter* particleEmitter = EmitterBuilder()
-		.SetTranslation(weaponWorldTransform_.translation_)
+		.SetTranslation(sampleWorldTransform_.translation_)
 		.SetArea({ 0.0f,0.0f,0.0f }, { 0.0f,0.0f,0.0f })
 		.SetRotation({ 0.0f,0.0f,0.0f }, { 0.0f,0.0f,0.0f })
 		.SetScale({ 0.1f,0.1f,0.1f }, { 0.1f,0.1f,0.1f })
@@ -82,9 +84,9 @@ void Sample::OnCollision(uint32_t collisionAttribute, float damage)
 Vector3 Sample::GetWorldPosition()
 {
 	Vector3 pos;
-	pos.x = weaponWorldTransform_.matWorld_.m[3][0];
-	pos.y = weaponWorldTransform_.matWorld_.m[3][1];
-	pos.z = weaponWorldTransform_.matWorld_.m[3][2];
+	pos.x = sampleWorldTransform_.matWorld_.m[3][0];
+	pos.y = sampleWorldTransform_.matWorld_.m[3][1];
+	pos.z = sampleWorldTransform_.matWorld_.m[3][2];
 	return pos;
 }
 

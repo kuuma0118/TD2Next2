@@ -42,6 +42,20 @@ public:
 	// テクスチャナンバー
 	int textureNum;
 
+	/// <summary>
+/// 静的初期化
+/// </summary>
+	static void StaticInitialize();
+
+	/// <summary>
+	/// 静的メンバ変数の解放
+	/// </summary>
+	static void Release();
+
+private:
+
+
+
 private: // メンバ変数
 	// Material
 	Material* materialData_;

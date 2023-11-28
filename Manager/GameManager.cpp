@@ -4,11 +4,10 @@
 //#include "../../Class/Map/MapManager.h"
 
 GameManager::GameManager() {
-	// 各シーンの配列
-	sceneArr_[TITLE_SCENE] = new TitleScene();
-	sceneArr_[GAME_SCENE] = new GameScene();
-	//sceneArr_[GAMECLEAR_SCENE] = new GameClear();
-	//sceneArr_[GAMEOVER_SCENE] = new GameOver();
+}
+
+GameManager::~GameManager() {
+
 }
 
 void GameManager::Initialize() {
@@ -71,10 +70,19 @@ void GameManager::Initialize() {
 	mapManager->Initialize();
 	mapManager->SetCurrentMap(0);
 
+
+	// 各シーンの配列
+	sceneArr_[TITLE_SCENE] = new TitleScene();
+	sceneArr_[GAME_SCENE] = new GameScene();
+	//sceneArr_[GAMECLEAR_SCENE] = new GameClear();
+	//sceneArr_[GAMEOVER_SCENE] = new GameOver();
 	//初期シーンの設定
 	sceneNum_ = TITLE_SCENE;
 	// シーンごとの初期化
 	sceneArr_[sceneNum_]->Initialize();
+
+	//パーティクルの静的初期化
+	ParticleModel::StaticInitialize();
 }
 
 void GameManager::Run() {

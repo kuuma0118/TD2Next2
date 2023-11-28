@@ -27,6 +27,7 @@ Microsoft::WRL::ComPtr<ID3D12Resource> Model::CreateBufferResource(const Microso
 	return vertexResource;
 }
 
+
 void Model::CreateVertexResource() {
 	vertexResource_ = CreateBufferResource(DirectXCommon::GetInstance()->GetDevice(), sizeof(VertexData) * modelDate_.verticles.size()).Get();
 }
