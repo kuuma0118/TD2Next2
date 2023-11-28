@@ -30,10 +30,12 @@ void EnemyManager::Initialize(DownsideTank* player) {
 			mapChip[y][x]->transform.scale = { 0.5f,0.5f ,0.5f };
 			mapChip[y][x]->transform.translate.x = ((float)x * 1) - (map.size() * 0.5f);
 			mapChip[y][x]->transform.translate.y = ((float)y * -1) + (map.size() * 0.5f);
+			mapChip[y][x]->transform.translate.z += 0.5f;
+			mapChip[y][x]->textureNum = TextureName::STAGETEXTURE;
 
 			// マップにブロックが配置状態の場合
 			if (map[y][x] == 1) {
-				mapChip[y][x]->textureNum = TextureName::STAGETEXTURE;
+				mapChip[y][x]->textureNum = TextureName::DOWNSIDETANK;
 				mapChip[y][x]->transform.translate.z -= 1;
 			}
 		}
@@ -56,14 +58,17 @@ void EnemyManager::Update() {
 		for (int x = 0; x < map[0].size(); ++x) {
 			if (map[y][x] == 0) {
 				double distance = std::sqrt(
-					std::pow(player_->transform.translate.x - mapChip[y][x]->transform.translate.x, 2) +
-					std::pow(player_->transform.translate.y - mapChip[y][x]->transform.translate.y, 2));
-				mapChip[y][x]->textureNum = TextureName::UVCHEKER;
+				std::pow(player_->transform.translate.x - mapChip[y][x]->transform.translate.x, 2) +
+				std::pow(player_->transform.translate.y - mapChip[y][x]->transform.translate.y, 2));
+				mapChip[y][x]->textureNum = TextureName::STAGETEXTURE;
 
 				if (distance < minDistance) {
 					minDistance = distance;
 					nearestNode_ = Node(x, y, 0, 0, 0, nullptr);
 				}
+			}
+			else if (map[y][x] == 1) {
+				mapChip[y][x]->textureNum = TextureName::DOWNSIDETANK;
 			}
 		}
 	}

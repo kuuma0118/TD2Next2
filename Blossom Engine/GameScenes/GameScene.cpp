@@ -113,8 +113,8 @@ void GameScene::Update() {
 		vel = TransformNormal(vel, MakeAffineMatrix(downsidetank_->transform.scale,
 			upsidetank_->transform.rotate, downsidetank_->transform.translate));
 		newBullet->transform.rotate.z = -atan2(vel.x, vel.y);
-		newBullet->SetVelotity(vel);	
-		
+		newBullet->SetVelotity(vel);
+
 		// 弾の登録
 		playerBullets_.push_back(newBullet);
 
@@ -135,13 +135,13 @@ void GameScene::Update() {
 		}
 	}
 
-}
+
 
 	////////////////////////////////////////////
 	/// プレイヤーの座標をマップチップ座標に変換(仮)
 	////////////////////////////////////////////
 
-	// エネミーの更新処理
+	// エネミーの更新処理	
 	enemyManager_->Update();
 	if (input_->TriggerKey(DIK_9)) {
 		enemyManager_->AddEnemy();

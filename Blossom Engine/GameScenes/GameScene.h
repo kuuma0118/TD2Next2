@@ -10,7 +10,6 @@
 #include "../Necessary/Models/UpsideTank.h"
 #include "../Necessary/Models/DownsideTank.h"
 #include "../Necessary/Models/Bullet.h"
-
 #include "../EnemyManager.h"
 
 class GameManager;

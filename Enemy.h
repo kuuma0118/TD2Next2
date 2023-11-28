@@ -51,7 +51,7 @@ public:	// ** メンバ関数 ** //
 	Enemy();
 	~Enemy();
 
-	void Initialize(std::vector < std::vector<int32_t>> map, Model* mapchip[10][10]);
+	void Initialize(std::vector < std::vector<int32_t>> map, Model* mapchip[12][12]);
 	void Update(const Node& playerPos);
 	void Draw();
 	std::vector<Node*>GetAStar(const Node& start, const Node& end);
@@ -85,7 +85,7 @@ private:// ** メンバ変数 ** //
 	//　外部変数のポインタ //
 
 	std::vector < std::vector<int32_t>> pMap_;
-	Model* pMapchip_[10][10];
+	Model* pMapchip_[12][12];
 
 	// 座標 //
 

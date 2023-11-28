@@ -18,11 +18,11 @@ Enemy::~Enemy() {
 	}
 }
 
-void Enemy::Initialize(std::vector < std::vector<int32_t>> map, Model* mapchip[10][10]) {
+void Enemy::Initialize(std::vector < std::vector<int32_t>> map, Model* mapchip[12][12]) {
 
 	pMap_ = map;
-	for (int y = 0; y < 10; ++y) {
-		for (int x = 0; x < 10; ++x) {
+	for (int y = 0; y < map.size(); ++y) {
+		for (int x = 0; x < map[y].size(); ++x) {
 			pMapchip_[y][x] = mapchip[y][x];
 		}
 	}
@@ -94,7 +94,7 @@ void Enemy::Update(const Node& nearestNode) {
 	// 線形補間用の数値を加算
 	if (moveT < 1.0f) {
 		if (moveT == 0.0f) { LoadAI(now, nearestNode); }
-		moveT += (1.0f / 45.0f);
+		moveT += (1.0f / 90.0f);
 		if (moveT > 1.0f) { moveT = 1.0f; }
 	}
 
