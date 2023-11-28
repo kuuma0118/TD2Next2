@@ -3,6 +3,9 @@
 #include "./Blossom Engine/Model/Model.h"
 #include "Necessary/Models/Block.h"
 
+#include "../Necessary/Models/UpsideTank.h"
+#include "../Necessary/Models/DownsideTank.h"
+
 enum class AI_TYPE {
 	NOMAL,
 	RAPID,
@@ -99,7 +102,8 @@ private:// ** メンバ変数 ** //
 	Transform cannonTransform_;
 
 	// モデル //
-	Model* model_ = nullptr;
+	UpsideTank* upsidetank_;
+	DownsideTank* downsidetank_;
 
 	// テクスチャ
 	

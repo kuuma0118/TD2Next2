@@ -29,7 +29,7 @@ void GameScene::Initialize() {
 	pos_ = { 0,0,30 };
 	bool isWKeyPressed = false;
 
-	// enemy　一体仮置き
+	// enemyManager
 	enemyManager_ = new EnemyManager;
 	enemyManager_->Initialize(downsidetank_);
 }

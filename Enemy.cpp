@@ -11,7 +11,8 @@
 Enemy::Enemy() { }
 
 Enemy::~Enemy() {
-	delete model_;
+	delete upsidetank_;
+	delete downsidetank_;
 
 	for (int i = 0; i < path_.size(); ++i) {
 		delete path_[i];
@@ -37,15 +38,21 @@ void Enemy::Initialize(std::vector < std::vector<int32_t>> map, Model* mapchip[1
 	// 敵砲台　トランスフォーム
 	cannonTransform_ = { {1.0f,1.0f,1.0f}, {0.0f,0.0f,0.0f}, { 0.0f, 0.0f, 0.0f } };
 	// モデル //
-	model_ = new Model;
-	model_->Initialize();
-	model_->textureNum = BLOCK;
-	model_->transform.translate = { 0.0f,0.0f,-2.0f };
+	upsidetank_ = new UpsideTank;
+	upsidetank_->Initialize();
+	upsidetank_->textureNum = UPSIDEENEMYTANK;
+	upsidetank_->transform.translate = { 0.0f,0.0f,-2.0f };
+
+	downsidetank_ = new DownsideTank;
+	downsidetank_->Initialize();
+	downsidetank_->textureNum = DOWNSIDEENEMYTANK;
+	downsidetank_->transform.translate = { 0.0f,0.0f,-2.0f };
 
 	// 初期位置を設定
-	model_->transform.scale = { 0.5f,0.5f ,0.5f };
-	model_->transform.translate = pMapchip_[now.x][now.y]->transform.translate;
-	model_->transform.translate.z = -1.0f;
+	upsidetank_->transform.scale = { 0.5f,0.5f ,0.5f };
+	upsidetank_->transform.translate = pMapchip_[now.x][now.y]->transform.translate;
+	upsidetank_->transform.translate.z = -1.0f;
+	downsidetank_->transform = upsidetank_->transform;
 
 	// AIのタイプ(動き方や一部パラメータに影響する)
 	type_ = AI_TYPE::NOMAL;
@@ -100,16 +107,16 @@ void Enemy::Update(const Node& nearestNode) {
 
 	// 線形補間を行い、ターゲットまでの距離を詰める
 	// 線形補間で取得した座標を代入
-	model_->transform.translate.x = MoveEasing::Vec3::EaseNomal(
+	downsidetank_->transform.translate.x = MoveEasing::Vec3::EaseNomal(
 		{ pMapchip_[prev_.y][prev_.x]->transform.translate.x,pMapchip_[prev_.y][prev_.x]->transform.translate.y,1.0f },
 		{ pMapchip_[next_.y][next_.x]->transform.translate.x,pMapchip_[next_.y][next_.x]->transform.translate.y,1.0f },
 		moveT).x;
 
-	model_->transform.translate.y = MoveEasing::Vec3::EaseNomal(
+	downsidetank_->transform.translate.y = MoveEasing::Vec3::EaseNomal(
 		{ pMapchip_[prev_.y][prev_.x]->transform.translate.x,pMapchip_[prev_.y][prev_.x]->transform.translate.y,1.0f },
 		{ pMapchip_[next_.y][next_.x]->transform.translate.x,pMapchip_[next_.y][next_.x]->transform.translate.y,1.0f },
 		moveT).y;
-
+	upsidetank_->transform.translate = downsidetank_->transform.translate;
 
 
 }
@@ -117,7 +124,8 @@ void Enemy::Update(const Node& nearestNode) {
 void Enemy::Draw() {
 
 	// 仮のエネミー
-	model_->Draw();
+	upsidetank_->Draw();
+	downsidetank_->Draw();
 
 }
 
@@ -305,11 +313,11 @@ void Enemy::SetAngle(const Transform& player) {
 
 	// 角度を設定
 	Vector3 vel(
-		player.translate.x - model_->transform.translate.x,
-		player.translate.y - model_->transform.translate.y,
+		player.translate.x - upsidetank_->transform.translate.x,
+		player.translate.y - upsidetank_->transform.translate.y,
 		0);
 
 	// 回転
-	model_->transform.rotate.z = -atan2(vel.x, vel.y);
+	upsidetank_->transform.rotate.z = -atan2(vel.x, vel.y);
 	
 }
