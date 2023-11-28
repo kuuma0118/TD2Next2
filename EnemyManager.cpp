@@ -6,11 +6,6 @@ EnemyManager::EnemyManager() {}
 
 // デストラクタ
 EnemyManager::~EnemyManager() {
-	for (int y = 0; y < map.size(); ++y) {
-		for (int x = 0; x < map[0].size(); ++x) {
-			delete mapChip[y][x];
-		}
-	}
 
 	// イテレータを使用して要素を削除する
 	for (Enemy* enemy : enemies_) {
@@ -19,28 +14,11 @@ EnemyManager::~EnemyManager() {
 }
 
 // 初期化処理
-void EnemyManager::Initialize(DownsideTank* player) {
+void EnemyManager::Initialize(DownsideTank* player, MapChip* mapChip) {
 	// プレイヤーのポインタを取得
 	player_ = player;
-
-	for (int y = 0; y < map.size(); ++y) {
-		for (int x = 0; x < map[0].size(); ++x) {
-			mapChip[y][x] = new Model;
-			mapChip[y][x]->Initialize();
-			mapChip[y][x]->transform.scale = { 0.5f,0.5f ,0.5f };
-			mapChip[y][x]->transform.translate.x = ((float)x * 1) - (map.size() * 0.5f);
-			mapChip[y][x]->transform.translate.y = ((float)y * -1) + (map.size() * 0.5f);
-			mapChip[y][x]->transform.translate.z += 0.5f;
-			mapChip[y][x]->textureNum = TextureName::STAGETEXTURE;
-
-			// マップにブロックが配置状態の場合
-			if (map[y][x] == 1) {
-				mapChip[y][x]->textureNum = TextureName::DOWNSIDETANK;
-				mapChip[y][x]->transform.translate.z -= 1;
-			}
-		}
-	}
-
+	// マップチップのポインタを取得
+	mapChip_ = mapChip;
 }
 
 // 更新処理
@@ -54,26 +32,27 @@ void EnemyManager::Update() {
 		std::sqrt(std::pow(player_->transform.translate.x - nearestNode_.x, 2) +
 			std::pow(player_->transform.translate.y - nearestNode_.y, 2));
 
-	for (int y = 0; y < map.size(); ++y) {
-		for (int x = 0; x < map[0].size(); ++x) {
-			if (map[y][x] == 0) {
+	for (int y = 0; y < mapChip_->data_[0].size(); ++y) {
+		for (int x = 0; x < mapChip_->data_[0][0].size(); ++x) {
+			if (mapChip_->data_[0][y][x] == 0) {
 				double distance = std::sqrt(
-				std::pow(player_->transform.translate.x - mapChip[y][x]->transform.translate.x, 2) +
-				std::pow(player_->transform.translate.y - mapChip[y][x]->transform.translate.y, 2));
-				mapChip[y][x]->textureNum = TextureName::STAGETEXTURE;
+				std::pow(player_->transform.translate.x - mapChip_->mapChip[y][x]->transform.translate.x, 2) +
+				std::pow(player_->transform.translate.y - mapChip_->mapChip[y][x]->transform.translate.y, 2));
+				mapChip_->mapChip[y][x]->textureNum = TextureName::STAGETEXTURE;
 
 				if (distance < minDistance) {
 					minDistance = distance;
 					nearestNode_ = Node(x, y, 0, 0, 0, nullptr);
 				}
 			}
-			else if (map[y][x] == 1) {
-				mapChip[y][x]->textureNum = TextureName::DOWNSIDETANK;
+			else if (mapChip_->data_[0][y][x] == 1) {
+				mapChip_->mapChip[y][x]->textureNum = TextureName::UPSIDETANK;
 			}
 		}
 	}
+
 	// プレイヤーが居る地点のマップチップのテクスチャを切り替えてわかりやすくする
-	mapChip[nearestNode_.y][nearestNode_.x]->textureNum = TextureName::BLOCK;
+	mapChip_->mapChip[nearestNode_.y][nearestNode_.x]->textureNum = TextureName::BLOCK;
 
 
 
@@ -91,13 +70,7 @@ void EnemyManager::Update() {
 
 // 描画処理
 void EnemyManager::Draw() {
-	// 仮のマップチップ
-	for (int y = 0; y < map.size(); ++y) {
-		for (int x = 0; x < map[0].size(); ++x) {
-			mapChip[y][x]->Draw();
-		}
-	}
-
+	
 	//　描画を行う
 	for (Enemy* enemy : enemies_) {
 		enemy->Draw();
@@ -108,7 +81,7 @@ void EnemyManager::Draw() {
 void EnemyManager::AddEnemy() {
 	// 生成した敵を初期化
 	Enemy* newEnemy = new Enemy();
-	newEnemy->Initialize(map, mapChip);
+	newEnemy->Initialize(mapChip_->data_[0], mapChip_->mapChip);
 	// リストに追加
 	enemies_.push_back(newEnemy);
 }

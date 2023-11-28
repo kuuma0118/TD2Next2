@@ -1,6 +1,7 @@
 #pragma once
 #include "Enemy.h"
 #include <list>
+#include "../MapChip.h"
 
 // 前方宣言 (プレイヤー)
 class DownsideTank;
@@ -12,7 +13,7 @@ public:	// メンバ関数
 	EnemyManager();
 	~EnemyManager();
 
-	void Initialize(DownsideTank* player);
+	void Initialize(DownsideTank* player, MapChip* mapChip);
 	void Update();
 	void Draw();
 	void AddEnemy();
@@ -27,27 +28,7 @@ private: // メンバ変数
 	DownsideTank* player_;
 	// プレイヤーの最近地点のノード
 	Node nearestNode_ = { 0,0,0,0,0,nullptr };
-
-	// 仮マップチップ
-	Model* mapChip[12][12];
-
-	// 仮マップ
-	std::vector < std::vector<int32_t>>map ={
-	{1,1,1,1,1,1,1,1,1,1,1,1},
-	{1,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,1,0,1,0,0,1,0,1,0,1},
-	{1,0,1,0,1,0,0,1,0,1,0,1},
-	{1,0,1,0,1,0,0,1,0,1,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,1,1,1,0,0,1,1,1,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,1},
-	{1,1,1,0,1,1,1,1,0,1,1,1},
-	{1,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,1},
-	{1,1,1,1,1,1,1,1,1,1,1,1},
-	};
-
-
-
+	// マップチップ
+	MapChip* mapChip_;
 };
 

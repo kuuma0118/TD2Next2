@@ -54,7 +54,7 @@ public:	// ** メンバ関数 ** //
 	Enemy();
 	~Enemy();
 
-	void Initialize(std::vector < std::vector<int32_t>> map, Model* mapchip[12][12]);
+	void Initialize(std::vector < std::vector<int32_t>> map, std::vector<std::vector<Model*>> mapchip);
 	void Update(const Node& playerPos);
 	void Draw();
 	std::vector<Node*>GetAStar(const Node& start, const Node& end);

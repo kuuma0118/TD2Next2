@@ -19,7 +19,7 @@ Enemy::~Enemy() {
 	}
 }
 
-void Enemy::Initialize(std::vector < std::vector<int32_t>> map, Model* mapchip[12][12]) {
+void Enemy::Initialize(std::vector < std::vector<int32_t>> map, std::vector<std::vector<Model*>> mapchip) {
 
 	pMap_ = map;
 	for (int y = 0; y < map.size(); ++y) {

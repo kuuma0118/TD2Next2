@@ -29,9 +29,15 @@ void GameScene::Initialize() {
 	pos_ = { 0,0,30 };
 	bool isWKeyPressed = false;
 
+	mapChip_ = new MapChip;
+	mapChip_->LoadMapData(1);
+	mapChip_->SetNextMapData();
+	mapChip_->Initialize();
+	
+
 	// enemyManager
 	enemyManager_ = new EnemyManager;
-	enemyManager_->Initialize(downsidetank_);
+	enemyManager_->Initialize(downsidetank_,mapChip_);
 }
 
 void GameScene::Update() {
@@ -135,7 +141,7 @@ void GameScene::Update() {
 		}
 	}
 
-
+	mapChip_->Update();
 
 	////////////////////////////////////////////
 	/// プレイヤーの座標をマップチップ座標に変換(仮)
@@ -154,7 +160,8 @@ void GameScene::Update() {
 
 void GameScene::Draw() {
 	//map_->Draw();
-	stage_->Draw();
+	//stage_->Draw();
+	mapChip_->Draw();
 	upsidetank_->Draw();
 	downsidetank_->Draw();
 	// プレイヤーの弾(複数)の描画処理

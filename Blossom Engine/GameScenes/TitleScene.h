@@ -5,6 +5,7 @@
 #include "../Blossom Engine/components/Input/Input.h"
 #include "../Necessary/Models/Block.h"
 
+
 class GameManager;
 
 class TitleScene : public IScene
@@ -21,4 +22,5 @@ private:
 	Input* input_;
 	Vector3 pos_;
 	Block* block_;
+	
 };

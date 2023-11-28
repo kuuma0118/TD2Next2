@@ -18,10 +18,12 @@ void TitleScene::Update() {
 	if(input_->TriggerKey(DIK_SPACE)){
 		sceneNum = GAME_SCENE;
 	}
+	
 }
 
 void TitleScene::Draw() {
 	//block_->Draw();
+	
 }
 
 void TitleScene::Finalize() {
