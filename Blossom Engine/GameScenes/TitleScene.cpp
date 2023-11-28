@@ -17,13 +17,9 @@ void TitleScene::Initialize() {
 	downsidetank_->Initialize();
 	downsidetank_->textureNum = DOWNSIDETANK;
 	pos_ = { 0,0,30 };
-	debugcamera_ = new DebugCamera();
 }
 
 void TitleScene::Update() {
-	if (input_->PressKey(DIK_W)) {
-		debugcamera_->translation_.z += 3.00f;
-	}
 	if (input_->TriggerKey(DIK_SPACE)) {
 		sceneNum = GAME_SCENE;
 	}
@@ -41,5 +37,4 @@ void TitleScene::Finalize() {
 	delete block_;
 	delete upsidetank_;
 	delete downsidetank_;
-	delete debugcamera_;
 }
