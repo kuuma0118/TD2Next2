@@ -89,10 +89,10 @@ void GameScene::Update() {
 			downsidetank_->transform.rotate.z = -2.37f;
 		}
 	}
-	if (input_->PressKey(DIK_Q)) {
+	if (input_->PressKey(DIK_Q) || input_->PressKey(DIK_LEFTARROW)) {
 		upsidetank_->transform.rotate.z += 0.017425f;
 	}
-	if (input_->PressKey(DIK_E)) {
+	if (input_->PressKey(DIK_E) || input_->PressKey(DIK_RIGHTARROW)) {
 		upsidetank_->transform.rotate.z -= 0.017425f;
 	}
 
@@ -100,13 +100,13 @@ void GameScene::Update() {
 	if (input_->PressKey(DIK_SPACE) == 0 && input_->ReleaseKey(DIK_SPACE) != 0) {
 		Bullet* newBullet = new Bullet;
 		newBullet->Initialize();
-		newBullet->textureNum = UVCHEKER;
+		newBullet->textureNum = UPSIDETANK;
 		newBullet->transform.translate.x = downsidetank_->transform.translate.x;
 		newBullet->transform.translate.y = downsidetank_->transform.translate.y;
 		newBullet->isBulletDeth = false;// 死亡しているか
 
 		// 弾の速度・角度の設定
-		const float kBulletSpeed = 0.1f;
+		const float kBulletSpeed = 0.5f;
 		Vector3 vel(0, kBulletSpeed, 0);
 
 		// 速度ベクトルを自機の向きに合わせて回転
@@ -129,7 +129,7 @@ void GameScene::Update() {
 		bullet->time += bullet->speed;
 
 		// 弾が発射されてから一定時間立つと消滅する
-		if (bullet->time >= 10.0f) {
+		if (bullet->time >= 700.0f) {
 			bullet->isBulletDeth = true;
 			bullet->time = 0.0f;
 		}
