@@ -16,7 +16,6 @@ public:
 	void Draw() override;
 	void Finalize()override;
 private:
-	DebugCamera* debugcamera_;
 	Sprite* sprite_;
 	Sphere* sphere_;
 	int textureNum_;

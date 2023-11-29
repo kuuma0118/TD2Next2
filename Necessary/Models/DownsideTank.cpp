@@ -57,6 +57,7 @@ void DownsideTank::CreateWvpResource() {
 
 void DownsideTank::Initialize() {
 
+	
 	modelData_ = ObjManager::GetInstance()->GetObjModelData()[DownsideTankM];
 
 	CreateVertexResource();

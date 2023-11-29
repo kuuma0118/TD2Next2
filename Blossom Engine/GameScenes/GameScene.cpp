@@ -35,6 +35,25 @@ void GameScene::Initialize() {
 }
 
 void GameScene::Update() {
+	if (downsidetank_->transform.translate.x > 9.4f) {
+		downsidetank_->transform.translate.x = 9.4f;
+		upsidetank_->transform.translate.x = 9.4f;
+	}
+	if (downsidetank_->transform.translate.x < -9.4f) {
+		downsidetank_->transform.translate.x = -9.4f;
+		upsidetank_->transform.translate.x = -9.4f;
+	}
+	if (downsidetank_->transform.translate.y > 7.2f) {
+		downsidetank_->transform.translate.y = 7.2f;
+		upsidetank_->transform.translate.y = 7.2f;
+	}
+	if (downsidetank_->transform.translate.y < -5.6f) {
+		downsidetank_->transform.translate.y = -5.6f;
+		upsidetank_->transform.translate.y = -5.6f;
+	}
+	ImGui::Begin("pos");
+	ImGui::DragFloat3("tnak offset", &downsidetank_->transform.translate.x, 0.1f);
+	ImGui::End();
 	/*ImGui::Begin("GameScene Debug");
 	ImGui::SliderInt("loadStageLevel", &loadStageNum_, 0, 7);
 	ImGui::End();
