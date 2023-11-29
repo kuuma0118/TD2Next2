@@ -84,14 +84,14 @@ public:	// ** メンバ関数 ** //
 
 
 	// 現在地
-	Node now = { 3,4,0,0,0,nullptr };
+	Node now;
 
 private:// ** メンバ変数 ** //
 
 	//　外部変数のポインタ //
 
 	std::vector < std::vector<int32_t>> pMap_;
-	Model* pMapchip_[12][12];
+	std::vector<std::vector<Model*>>  pMapchip_;
 
 	// 座標 //
 
@@ -127,9 +127,9 @@ private:// ** メンバ変数 ** //
 	const int32_t kMaxShotCoolTime_ = 60;
 	
 	// 初期地点
-	Node prev_ = now;
+	Node prev_;
 	// ターゲットの位置
-	Node next_ = now;
+	Node next_;
 
 	// moveTimer
 	float moveT = 0.0f;

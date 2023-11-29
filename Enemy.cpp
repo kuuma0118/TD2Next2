@@ -22,10 +22,13 @@ Enemy::~Enemy() {
 void Enemy::Initialize(std::vector < std::vector<int32_t>> map, std::vector<std::vector<MapChip*>> mapchip) {
 
 	pMap_ = map;
+
 	for (int y = 0; y < map.size(); ++y) {
+		std::vector<Model*> line;
 		for (int x = 0; x < map[y].size(); ++x) {
-			pMapchip_[y][x] = mapchip[y][x]->model_;
+			line.push_back(mapchip[y][x]->model_);
 		}
+		pMapchip_.push_back(line);
 	}
 
 	// 敵本体 トランスフォーム
@@ -48,9 +51,12 @@ void Enemy::Initialize(std::vector < std::vector<int32_t>> map, std::vector<std:
 	downsidetank_->textureNum = DOWNSIDEENEMYTANK;
 	downsidetank_->transform.translate = { 0.0f,0.0f,-2.0f };
 
+	now = { 6,4,0,0,0,nullptr };
+	prev_ = now;
+	next_ = now;
+
 	// 初期位置を設定
-	upsidetank_->transform.scale = { 0.5f,0.5f ,0.5f };
-	upsidetank_->transform.translate = pMapchip_[now.x][now.y]->transform.translate;
+	upsidetank_->transform.translate = pMapchip_[now.y][now.x]->transform.translate;
 	upsidetank_->transform.translate.z = -1.0f;
 	downsidetank_->transform = upsidetank_->transform;
 
