@@ -58,9 +58,9 @@ void GameScene::Initialize() {
 
 	collisionManager_->SetColliderList(downsidetank_);
 	//downsidetank_->transform.translate = mapChipManager_->mapChip[0][10][10]->model_->transform.translate;
-	downsidetank_->transform.translate.z -= 1.0f;
+	downsidetank_->transform.translate.z -= 1.2f;
 	//upsidetank_->transform.translate = mapChipManager_->mapChip[0][10][10]->model_->transform.translate;
-	upsidetank_->transform.translate.z -= 1.0f;
+	upsidetank_->transform.translate.z -= 1.2f;
 }
 
 void GameScene::Update() {
@@ -149,6 +149,7 @@ void GameScene::Update() {
 		newBullet->textureNum = UPSIDETANK;
 		newBullet->transform.translate.x = downsidetank_->transform.translate.x;
 		newBullet->transform.translate.y = downsidetank_->transform.translate.y;
+		newBullet->transform.translate.z = downsidetank_->transform.translate.z;
 		newBullet->isBulletDeth = false;// 死亡しているか
 
 		// 弾の速度・角度の設定
