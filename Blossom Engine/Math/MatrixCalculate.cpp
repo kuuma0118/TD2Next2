@@ -102,6 +102,12 @@ Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Ve
 	return result;
 }
 
+float Lerp(const float& v1, const float& v2, float t) {
+	float result{};
+	result = v1 + t * (v2 - v1);
+	return result;
+}
+
 Vector3 Normalize(const Vector3& v) {
 	float len = Length(v);
 	if (len != 0) {

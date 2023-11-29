@@ -100,3 +100,12 @@ Matrix4x4 MakeTranslateMatrix(const Vector3& translate);
 
 // ベクトル変換
 Vector3 TransformNormal(const Vector3& v, const Matrix4x4& m);
+
+/// <summary>
+/// 線形補間
+/// </summary>
+/// <param name="v1"></param>
+/// <param name="v2"></param>
+/// <param name="t"></param>
+/// <returns></returns>
+float Lerp(const float& v1, const float& v2, float t);
