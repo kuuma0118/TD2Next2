@@ -28,6 +28,9 @@ void TextureManager::TransferTexture(const Microsoft::WRL::ComPtr<ID3D12Descript
 	mipImages_[DOWNSIDETANK] = LoadTexture("Resources/tank.png");
 	mipImages_[UPSIDEENEMYTANK] = LoadTexture("Resources/enemytank.png");
 	mipImages_[DOWNSIDEENEMYTANK] = LoadTexture("Resources/enemytank.png");
+	mipImages_[TITLE] = LoadTexture("Resources/uvChecker.png");
+	mipImages_[GAMECLEAR] = LoadTexture("Resources/uvChecker.png");
+	mipImages_[GAMEOVER] = LoadTexture("Resources/uvChecker.png");
 
 	DirectX::TexMetadata metadata[kMaxImages]{};
 	for (uint32_t i = 0; i < kMaxImages; i++) {

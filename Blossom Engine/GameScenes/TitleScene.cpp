@@ -3,8 +3,6 @@
 void TitleScene::Initialize() {
 	sprite_ = new Sprite();
 	sprite_->Initialize();
-	sphere_ = new Sphere();
-	sphere_->Initialize();
 	textureNum_ = UVCHEKER;
 	input_ = Input::GetInstance();
 	block_ = new Block();
@@ -20,20 +18,20 @@ void TitleScene::Initialize() {
 }
 
 void TitleScene::Update() {
+	sprite_->ImGuiAdjustParameter();
 	if (input_->TriggerKey(DIK_SPACE)) {
 		sceneNum = GAME_SCENE;
 	}
 }
 
 void TitleScene::Draw() {
-	//block_->Draw();
+	sprite_->Draw(pos_,textureNum_);
 	upsidetank_->Draw();
 	downsidetank_->Draw();
 }
 
 void TitleScene::Finalize() {
 	delete sprite_;
-	delete sphere_;
 	delete block_;
 	delete upsidetank_;
 	delete downsidetank_;
