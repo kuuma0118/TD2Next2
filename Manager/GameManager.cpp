@@ -4,6 +4,14 @@
 //#include "../../Class/Map/MapManager.h"
 
 GameManager::GameManager() {
+	//パーティクルの静的初期化
+	ParticleModel::StaticInitialize();
+
+	//スプライトの静的初期化
+	Sprite::StaticInitialize();
+
+	//ランダムエンジンの初期化
+	Random::Initialize();
 }
 
 GameManager::~GameManager() {
@@ -81,11 +89,6 @@ void GameManager::Initialize() {
 	sceneNum_ = TITLE_SCENE;
 	// シーンごとの初期化
 	sceneArr_[sceneNum_]->Initialize();
-
-	//パーティクルの静的初期化
-	ParticleModel::StaticInitialize();
-	//ランダムエンジンの初期化
-	Random::Initialize();
 }
 
 void GameManager::Run() {

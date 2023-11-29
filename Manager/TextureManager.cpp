@@ -9,6 +9,9 @@
 #include <sstream>
 #include "ObjManager.h"
 
+//実体定義
+uint32_t TextureManager::descriptorSizeSRV = 0;
+
 TextureManager* TextureManager::GetInstance() {
 	static TextureManager instance;
 
@@ -73,7 +76,6 @@ uint32_t TextureManager::LoadInternal(const std::string& filePath) {
 	//SRVの作成
 	device_->CreateShaderResourceView(textures_[textureHandle_].resource.Get(), &srvDesc, textures_[textureHandle_].srvHandleCPU);
 
-
 	//テクスチャの名前を保存する
 	textures_[textureHandle_].name = filePath;
 	//テクスチャハンドルを保存する
@@ -82,8 +84,6 @@ uint32_t TextureManager::LoadInternal(const std::string& filePath) {
 
 	return textureHandle_;
 }
-
-uint32_t TextureManager::descriptorSizeSRV = 0;
 
 void TextureManager::TransferTexture(const Microsoft::WRL::ComPtr<ID3D12DescriptorHeap>& srvDescriptorHeap) {
 	// 画像の読み込み
@@ -136,6 +136,9 @@ void TextureManager::Initialize() {
 
 	////ディスクリプタヒープの作成
 	//srvDescriptorHeap_ = DirectXCommon::GetInstance()->CreateDescriptorHeap(device_,D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, kNumDescriptors, true);
+
+	//デフォルト画像を読み込む
+	LoadInternal("Resources/white.png");
 
 	CreateDepthStencilView();
 }
