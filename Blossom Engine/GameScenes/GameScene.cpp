@@ -152,6 +152,14 @@ void GameScene::Update() {
 		}
 	}
 
+	playerBullets_.remove_if([](Bullet* bullet) {
+		if (bullet->isBulletDeth) {
+			delete bullet;
+			return true;
+		}
+		return false;
+		});
+
 	////////////////////////////////////////////
 	/// プレイヤーの座標をマップチップ座標に変換(仮)
 	////////////////////////////////////////////
