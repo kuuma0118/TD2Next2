@@ -68,7 +68,7 @@ void CollisionManager::CheckCollisionPair(Collider* colliderA, Collider* collide
 			posA.y + aabbA.min.y <= posB.y + aabbB.max.y && posA.y + aabbA.max.y >= posB.y + aabbB.min.y &&
 			posA.z + aabbA.min.z <= posB.z + aabbB.max.z && posA.z + aabbA.max.z >= posB.z + aabbB.min.z) {
 			//コライダーAの衝突時コールバックを呼び出す
-			colliderA->OnCollision(colliderB->GetCollisionAttribute(), colliderB->GetDamage());
+ 			colliderA->OnCollision(colliderB->GetCollisionAttribute(), colliderB->GetDamage());
 			//コライダーBの衝突時コールバックを呼び出す
 			colliderB->OnCollision(colliderA->GetCollisionAttribute(), colliderA->GetDamage());
 		}

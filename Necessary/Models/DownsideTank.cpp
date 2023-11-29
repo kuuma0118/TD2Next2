@@ -127,3 +127,7 @@ void DownsideTank::Draw() {
 	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(0, materialResource_.Get()->GetGPUVirtualAddress());
 	DirectXCommon::GetInstance()->GetCommandList()->DrawInstanced(UINT(modelData_.verticles.size()), 1, 0, 0);
 }
+
+Vector3 DownsideTank::GetWorldPosition() {
+	return transform.translate;
+};

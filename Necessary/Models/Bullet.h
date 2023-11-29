@@ -11,8 +11,10 @@
 #include "../Blossom Engine/Math/MatrixCalculate.h"
 #include "../Manager/TextureManager.h"
 #include "../Blossom Engine/Common/Common.h"
-class Bullet {
-
+#include "../Blossom Engine/utility/Collision/Collider.h"
+class Bullet :
+	public Collider
+{
 public: // メンバ関数
 
 	ModelData GetModelData() { return modelData_; }
@@ -37,6 +39,8 @@ public: // メンバ関数
 	void Draw();	// 描画
 
 	void SetVelotity(Vector3 velotity) { velotity_ = velotity; }
+	Vector3 GetWorldPosition()override;
+
 
 public:
 	// SRT
@@ -75,7 +79,7 @@ private: // メンバ変数
 	ModelData modelData_;
 	// ワールドトランスフォーム
 	//WorldTransform worldTransform_;
-	
+
 };
 
 

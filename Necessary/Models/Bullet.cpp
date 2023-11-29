@@ -88,6 +88,23 @@ void Bullet::Initialize() {
 	};
 	materialData_->enableLightning = false;
 	materialData_->uvTransform = MakeIdentity4x4();
+
+	/// コライダー
+
+	//衝突半径
+	SetRadius(1.0f);
+	//AABB
+	AABB newAABB = { { -1.0f,-1.0f,-1.0f }, { 1.0f,1.0f,1.0f } };
+	SetAABB(newAABB);
+	//衝突属性(自分)
+	SetCollisionAttribute(kCollisionAttributePlayer);
+	//衝突マスク(相手)
+	SetCollisionMask(kCollisionMaskPlayer);
+	//形状(デフォルトは球に設定)
+	SetCollisionPrimitive(kCollisionPrimitiveAABB);
+	//ダメージ
+	SetDamage(0.0f);
+
 }
 
 void Bullet::Update() {
@@ -128,3 +145,6 @@ void Bullet::Draw() {
 	DirectXCommon::GetInstance()->GetCommandList()->DrawInstanced(UINT(modelData_.verticles.size()), 1, 0, 0);
 }
 
+Vector3 Bullet::GetWorldPosition(){
+	return transform.translate;
+};

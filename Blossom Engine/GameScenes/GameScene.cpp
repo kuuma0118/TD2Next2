@@ -43,20 +43,6 @@ void GameScene::Initialize() {
 	// リストをクリアにする
 	collisionManager_->ClearColliderList();
 
-	// マップチップをコライダーリストに追加する
-	for (int32_t z = 0; z < mapChipManager_->map_.size(); ++z) {
-		for (int32_t y = 0; y < mapChipManager_->map_[z].size(); ++y) {
-			for (int32_t x = 0; x < mapChipManager_->map_[z][y].size(); ++x) {
-				if (mapChipManager_->map_[z][y][x] == 1) {
-					collisionManager_->SetColliderList(mapChipManager_->mapChip[z][y][x]);
-				}
-
-			}
-		}
-	}
-
-
-	collisionManager_->SetColliderList(downsidetank_);
 	//downsidetank_->transform.translate = mapChipManager_->mapChip[0][10][10]->model_->transform.translate;
 	downsidetank_->transform.translate.z -= 1.2f;
 	//upsidetank_->transform.translate = mapChipManager_->mapChip[0][10][10]->model_->transform.translate;
@@ -64,6 +50,10 @@ void GameScene::Initialize() {
 }
 
 void GameScene::Update() {
+
+	// リストをクリア
+	collisionManager_->ClearColliderList();
+
 	if (downsidetank_->transform.translate.x > 9.4f) {
 		downsidetank_->transform.translate.x = 9.4f;
 		upsidetank_->transform.translate.x = 9.4f;
@@ -164,7 +154,7 @@ void GameScene::Update() {
 
 		// 弾の登録
 		playerBullets_.push_back(newBullet);
-
+	
 	}
 
 	// プレイヤーの弾(複数)の更新処理
@@ -172,6 +162,7 @@ void GameScene::Update() {
 	{
 		// 更新処理
 		bullet->Update();
+		collisionManager_->SetColliderList(bullet);
 		//　時間を加算
 		bullet->time += bullet->speed;
 
@@ -209,7 +200,19 @@ void GameScene::Update() {
 		enemyManager_->DeleteEnemy();
 	}
 
+	// マップチップをコライダーリストに追加する
+	for (int32_t z = 0; z < mapChipManager_->map_.size(); ++z) {
+		for (int32_t y = 0; y < mapChipManager_->map_[z].size(); ++y) {
+			for (int32_t x = 0; x < mapChipManager_->map_[z][y].size(); ++x) {
+				if (mapChipManager_->map_[z][y][x] == 1) {
+					collisionManager_->SetColliderList(mapChipManager_->mapChip[z][y][x]);
+				}
 
+			}
+		}
+	}
+
+	collisionManager_->SetColliderList(downsidetank_);
 	collisionManager_->CheckAllCollisions();
 
 }

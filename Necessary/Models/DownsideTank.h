@@ -37,9 +37,7 @@ public: // メンバ関数
 	/// <param name="textureNum">textureManagerで作ったenum型の番号</param>
 	void Draw();	// 描画
 
-	Vector3 GetWorldPosition()override {
-		return transform.translate;
-	}
+	Vector3 GetWorldPosition()override;
 
 public:
 	// SRT
