@@ -13,9 +13,15 @@ public:
     void Draw();
     Vector3 GetWorldPosition()override;
 
+	/// <summary>
+	/// 衝突時に呼ばれる関数
+	/// </summary>
+	void OnCollision(uint32_t collisionAttribute, float damage) override{
+	};
+
 public:
 
+    // モデル
     Model* model_;
-
 };
 

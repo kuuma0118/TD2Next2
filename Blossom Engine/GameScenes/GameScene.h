@@ -12,6 +12,7 @@
 #include "../Necessary/Models/Bullet.h"
 #include "../EnemyManager.h"
 #include "../MapChipManager.h"
+#include "../Blossom Engine/utility/Collision/CollisionManager.h"
 
 class GameManager;
 
@@ -49,4 +50,5 @@ private:
 
 	// マップチップ
 	MapChipManager* mapChipManager_;
+	CollisionManager* collisionManager_;
 };

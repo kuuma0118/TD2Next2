@@ -26,9 +26,9 @@ void MapChipManager::Initialize() {
 				MapChip* newMapChip = new MapChip;
 				newMapChip->Init();
 				newMapChip->model_->Initialize();
-				newMapChip->model_->transform.scale = { 0.5f,0.5f,0.5f };
-				newMapChip->model_->transform.translate.x = ((float)x * 1) - (map_[y].size() * 0.5f);
-				newMapChip->model_->transform.translate.y = ((float)y * -1) + (map_.size() * 0.5f);
+				//newMapChip->model_->transform.scale = { 0.5f,0.5f,0.5f };
+				newMapChip->model_->transform.translate.x = ((float)x * 1) - (map_[z][y].size());
+				newMapChip->model_->transform.translate.y = ((float)y * -1) + (map_[y].size());
 				newMapChip->model_->textureNum = TextureName::STAGETEXTURE;
 
 				// Map[y][x]が1である場合
@@ -177,9 +177,9 @@ void MapChipManager::FallNextStage() {
 				MapChip* newMapChip = new MapChip;
 				newMapChip->Init();
 				newMapChip->model_->Initialize();
-				newMapChip->model_->transform.scale = { 0.5f,0.5f,0.5f };
-				newMapChip->model_->transform.translate.x = ((float)x * 1) - (map_[dataZ_][y].size() * 0.5f);
-				newMapChip->model_->transform.translate.y = ((float)y * -1) + (map_[dataZ_].size() * 0.5f);
+				//newMapChip->model_->transform.scale = { 0.5f,0.5f,0.5f };
+				newMapChip->model_->transform.translate.x = ((float)x * 2) - (map_[dataZ_][y].size() );
+				newMapChip->model_->transform.translate.y = ((float)y * -2) + (map_[dataZ_].size()  );
 				newMapChip->model_->textureNum = TextureName::STAGETEXTURE;
 
 				// Map[y][x]が1である場合

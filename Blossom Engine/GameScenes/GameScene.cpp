@@ -24,7 +24,6 @@ void GameScene::Initialize() {
 	downsidetank_ = new DownsideTank();
 	downsidetank_->Initialize();
 	downsidetank_->textureNum = DOWNSIDETANK;
-	
 
 	pos_ = { 0,0,30 };
 	bool isWKeyPressed = false;
@@ -33,12 +32,35 @@ void GameScene::Initialize() {
 	mapChipManager_->LoadMapData(3);
 	mapChipManager_->SetNextMapData();
 	mapChipManager_->FallNextStage();
-	
+
 
 	// enemyManager
 	enemyManager_ = new EnemyManager;
-	enemyManager_->Initialize(downsidetank_,mapChipManager_);
+	enemyManager_->Initialize(downsidetank_, mapChipManager_);
 
+	// 衝突判定マネージャー
+	collisionManager_ = new CollisionManager;
+	// リストをクリアにする
+	collisionManager_->ClearColliderList();
+
+	// マップチップをコライダーリストに追加する
+	for (int32_t z = 0; z < mapChipManager_->map_.size(); ++z) {
+		for (int32_t y = 0; y < mapChipManager_->map_[z].size(); ++y) {
+			for (int32_t x = 0; x < mapChipManager_->map_[z][y].size(); ++x) {
+				if (mapChipManager_->map_[z][y][x] == 1) {
+					collisionManager_->SetColliderList(mapChipManager_->mapChip[z][y][x]);
+				}
+
+			}
+		}
+	}
+
+
+	collisionManager_->SetColliderList(downsidetank_);
+	//downsidetank_->transform.translate = mapChipManager_->mapChip[0][10][10]->model_->transform.translate;
+	downsidetank_->transform.translate.z -= 1.0f;
+	//upsidetank_->transform.translate = mapChipManager_->mapChip[0][10][10]->model_->transform.translate;
+	upsidetank_->transform.translate.z -= 1.0f;
 }
 
 void GameScene::Update() {
@@ -146,7 +168,7 @@ void GameScene::Update() {
 		mapChipManager_->FallNextStage();
 	}
 	mapChipManager_->Update();
-	
+
 
 	////////////////////////////////////////////
 	/// プレイヤーの座標をマップチップ座標に変換(仮)
@@ -161,6 +183,10 @@ void GameScene::Update() {
 	if (input_->TriggerKey(DIK_0)) {
 		enemyManager_->DeleteEnemy();
 	}
+
+
+	collisionManager_->CheckAllCollisions();
+
 }
 
 

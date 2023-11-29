@@ -11,8 +11,10 @@
 #include "../Blossom Engine/Math/MatrixCalculate.h"
 #include "../Manager/TextureManager.h"
 #include "../Blossom Engine/Common/Common.h"
-class DownsideTank {
-
+#include "../Blossom Engine/utility/Collision/Collider.h"
+class DownsideTank :
+	public Collider
+{
 public: // メンバ関数
 	ModelData GetModelData() { return modelData_; }
 
@@ -34,6 +36,10 @@ public: // メンバ関数
 	/// </summary>
 	/// <param name="textureNum">textureManagerで作ったenum型の番号</param>
 	void Draw();	// 描画
+
+	Vector3 GetWorldPosition()override {
+		return transform.translate;
+	}
 
 public:
 	// SRT
