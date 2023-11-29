@@ -82,7 +82,7 @@ public:
 	/// <summary>
 	/// 描画
 	/// </summary>
-	void Draw();
+	void Draw(Vector3 pos, int textureNum);
 
 	/// <summary>
 	/// 座標を取得

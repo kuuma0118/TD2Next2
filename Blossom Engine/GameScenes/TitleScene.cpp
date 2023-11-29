@@ -20,6 +20,12 @@ void TitleScene::Initialize() {
 	sample_->Initialize();
 
 	viewProjection_.UpdateMatrix();
+
+	//パーティクルモデルの作成
+	particleModel_.reset(ParticleModel::CreateFromOBJ("Resources/Particle", "Particle.obj"));
+	particleSystem_ = std::make_unique<ParticleSystem>();
+	particleSystem_->Initialize();
+	textureHandle_ = TextureManager::Load("Resources/Particle.png");
 };
 
 void TitleScene::Update() {
@@ -49,6 +55,8 @@ void TitleScene::Draw() {
 	sample_->DrawParticle(viewProjection_);
 
 	ParticleModel::PostDraw();
+
+
 
 #pragma endregion
 };

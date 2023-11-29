@@ -7,7 +7,8 @@ GameManager::GameManager() {
 }
 
 GameManager::~GameManager() {
-
+	ParticleModel::Release();
+	Sprite::Release();
 }
 
 void GameManager::Initialize() {
@@ -83,6 +84,8 @@ void GameManager::Initialize() {
 
 	//パーティクルの静的初期化
 	ParticleModel::StaticInitialize();
+	//ランダムエンジンの初期化
+	Random::Initialize();
 }
 
 void GameManager::Run() {

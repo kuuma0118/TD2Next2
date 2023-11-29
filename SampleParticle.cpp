@@ -19,7 +19,6 @@ void Sample::Initialize()
 
 	ModelMotion();
 
-	//パーティクルの初期化
 	particleModel_.reset(ParticleModel::CreateFromOBJ("Resources/Particle", "Particle.obj"));
 	particleSystem_ = std::make_unique<ParticleSystem>();
 	particleSystem_->Initialize();

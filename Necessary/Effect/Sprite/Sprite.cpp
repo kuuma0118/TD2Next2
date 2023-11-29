@@ -62,7 +62,7 @@ void Sprite::PreDraw(BlendMode blendMode) {
 void Sprite::PostDraw() {}
 
 
-void Sprite::Draw() {
+void Sprite::Draw(Vector3 pos, int textureNum) {
 
 	//マテリアルの更新
 	Sprite::UpdateMaterial();
@@ -78,10 +78,12 @@ void Sprite::Draw() {
 	sCommandList_->SetGraphicsRootConstantBufferView(0, materialResource_->GetGPUVirtualAddress());
 	//wvp用のCBufferの場所を設定
 	sCommandList_->SetGraphicsRootConstantBufferView(1, wvpResource_->GetGPUVirtualAddress());
-	//DescriptorHeapを設定
-	TextureManager::GetInstance()->SetGraphicsDescriptorHeap();
-	//DescriptorTableを設定
-	TextureManager::GetInstance()->SetGraphicsRootDescriptorTable(2, textureHandle_);
+	////DescriptorHeapを設定
+	//TextureManager::GetInstance()->SetGraphicsDescriptorHeap();
+	////DescriptorTableを設定
+	//TextureManager::GetInstance()->SetGraphicsRootDescriptorTable(2, textureHandle_);
+    // DescriptorTableの設定
+	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootDescriptorTable(2, TextureManager::GetInstance()->GetTextureSrvHandleGPU()[textureNum]);
 	//描画!(DrawCall/ドローコール)。3頂点で1つのインスタンス。インスタンスについては今後
 	sCommandList_->DrawInstanced(6, 1, 0, 0);
 }
@@ -250,10 +252,10 @@ void Sprite::CreatePipelineStateObject() {
 
 
 	//Shaderをコンパイルする
-	Microsoft::WRL::ComPtr<IDxcBlob> vertexShaderBlob = CompileShader(L"Resources/Shader/SpriteVS.hlsl", L"vs_6_0");
+	Microsoft::WRL::ComPtr<IDxcBlob> vertexShaderBlob = CompileShader(L"shader/SpriteVS.hlsl", L"vs_6_0");
 	assert(vertexShaderBlob != nullptr);
 
-	Microsoft::WRL::ComPtr<IDxcBlob> pixelShaderBlob = CompileShader(L"Resources/Shader/SpritePS.hlsl", L"ps_6_0");
+	Microsoft::WRL::ComPtr<IDxcBlob> pixelShaderBlob = CompileShader(L"shader/SpritePS.hlsl", L"ps_6_0");
 	assert(pixelShaderBlob != nullptr);
 
 

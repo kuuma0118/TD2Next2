@@ -68,8 +68,8 @@ void ParticleModel::PostDraw() {
 
 
 void ParticleModel::Draw(const ParticleSystem* particleSystem, const ViewProjection& viewProjection) {
-	//DescriptorHeapを設定
-	TextureManager::GetInstance()->SetGraphicsDescriptorHeap();
+	////DescriptorHeapを設定
+	DirectXCommon::GetInstance()->SetGraphicsDescriptorHeap();
 	//VBVを設定
 	sCommandList_->IASetVertexBuffers(0, 1, &vertexBufferView_);
 	//形状を設定。PSOに設定しているものとは別。同じものを設定すると考えておけば良い
@@ -80,32 +80,11 @@ void ParticleModel::Draw(const ParticleSystem* particleSystem, const ViewProject
 	TextureManager::GetInstance()->SetGraphicsRootDescriptorTable(1, particleSystem->GetSrvIndex());
 	//ViewProjection用のCBufferの場所を設定
 	sCommandList_->SetGraphicsRootConstantBufferView(2, viewProjection.constBuff_->GetGPUVirtualAddress());
-	//DescriptorTableを設定
-	TextureManager::GetInstance()->SetGraphicsRootDescriptorTable(3, textureHandle_);
+	// DescriptorTableの設定
+	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootDescriptorTable(3, TextureManager::GetInstance()->GetTextureSrvHandleGPU()[textureHandle_]);
 	//描画!(DrawCall/ドローコール)。3頂点で1つのインスタンス。インスタンスについては今後
 	sCommandList_->DrawInstanced(UINT(vertices_.size()), particleSystem->GetNumInstance(), 0, 0);
 }
-
-
-void ParticleModel::Draw(const ParticleSystem* particleSystem, const ViewProjection& viewProjection, uint32_t textureHandle) {
-	//DescriptorHeapを設定
-	TextureManager::GetInstance()->SetGraphicsDescriptorHeap();
-	//VBVを設定
-	sCommandList_->IASetVertexBuffers(0, 1, &vertexBufferView_);
-	//形状を設定。PSOに設定しているものとは別。同じものを設定すると考えておけば良い
-	sCommandList_->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	//マテリアルCBufferの場所を設定
-	sCommandList_->SetGraphicsRootConstantBufferView(0, materialResource_->GetGPUVirtualAddress());
-	//WorldTransform用のCBufferの場所を設定
-	TextureManager::GetInstance()->SetGraphicsRootDescriptorTable(1, particleSystem->GetSrvIndex());
-	//ViewProjection用のCBufferの場所を設定
-	sCommandList_->SetGraphicsRootConstantBufferView(2, viewProjection.constBuff_->GetGPUVirtualAddress());
-	//DescriptorTableを設定
-	TextureManager::GetInstance()->SetGraphicsRootDescriptorTable(3, textureHandle);
-	//描画!(DrawCall/ドローコール)。3頂点で1つのインスタンス。インスタンスについては今後
-	sCommandList_->DrawInstanced(UINT(vertices_.size()), particleSystem->GetNumInstance(), 0, 0);
-}
-
 
 void ParticleModel::InitializeDXC() {
 	//dxccompilerを初期化

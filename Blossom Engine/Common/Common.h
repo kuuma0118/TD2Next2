@@ -68,6 +68,18 @@ public:
 	void Release();
 
 	/// <summary>
+    /// ディスクリプタヒープを設定
+    /// </summary>
+	void SetGraphicsDescriptorHeap();
+
+	/// <summary>
+	/// ディスクリプタテーブルを設定
+	/// </summary>
+	/// <param name="rootParameterIndex">ルートパラメータの番号</param>
+	/// <param name="textureHandle">テクスチャ番号</param>
+	void SetGraphicsRootDescriptorTable(UINT rootParameterIndex, uint32_t textureHandle);
+
+	/// <summary>
 	/// デバイスの取得
 	/// </summary>
 	/// <returns></returns>
@@ -143,6 +155,7 @@ private:
 	uint64_t fenceValue_;
 	HANDLE fenceEvent_;
 	D3D12_RESOURCE_BARRIER barrier_;
+
 
 	//記録時間(FPS固定用)
 	std::chrono::steady_clock::time_point reference_{};
