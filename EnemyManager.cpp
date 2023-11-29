@@ -32,28 +32,31 @@ void EnemyManager::Update() {
 		std::sqrt(std::pow(player_->transform.translate.x - nearestNode_.x, 2) +
 			std::pow(player_->transform.translate.y - nearestNode_.y, 2));
 
-	for (int y = 0; y < mapChip_->data_[0].size(); ++y) {
-		for (int x = 0; x < mapChip_->data_[0][0].size(); ++x) {
-			if (mapChip_->data_[0][y][x] == 0) {
-				double distance = std::sqrt(
-				std::pow(player_->transform.translate.x - mapChip_->mapChip[y][x]->transform.translate.x, 2) +
-				std::pow(player_->transform.translate.y - mapChip_->mapChip[y][x]->transform.translate.y, 2));
-				mapChip_->mapChip[y][x]->textureNum = TextureName::STAGETEXTURE;
+	if (!mapChip_->map_.empty()) {
 
-				if (distance < minDistance) {
-					minDistance = distance;
-					nearestNode_ = Node(x, y, 0, 0, 0, nullptr);
+		for (int y = 0; y < mapChip_->map_[0].size(); ++y) {
+			for (int x = 0; x < mapChip_->map_[0][y].size(); ++x) {
+
+				if (mapChip_->map_[0][y][x] == 0) {
+					double distance = std::sqrt(
+						std::pow(player_->transform.translate.x - mapChip_->mapChip[0][y][x]->transform.translate.x, 2) +
+						std::pow(player_->transform.translate.y - mapChip_->mapChip[0][y][x]->transform.translate.y, 2));
+					mapChip_->mapChip[0][y][x]->textureNum = TextureName::STAGETEXTURE;
+
+					if (distance < minDistance) {
+						minDistance = distance;
+						nearestNode_ = Node(x, y, 0, 0, 0, nullptr);
+					}
+				}
+				else if (mapChip_->map_[0][y][x] == 1) {
+					mapChip_->mapChip[0][y][x]->textureNum = TextureName::UPSIDETANK;
 				}
 			}
-			else if (mapChip_->data_[0][y][x] == 1) {
-				mapChip_->mapChip[y][x]->textureNum = TextureName::UPSIDETANK;
-			}
 		}
+
+		// プレイヤーが居る地点のマップチップのテクスチャを切り替えてわかりやすくする
+		mapChip_->mapChip[0][nearestNode_.y][nearestNode_.x]->textureNum = TextureName::BLOCK;
 	}
-
-	// プレイヤーが居る地点のマップチップのテクスチャを切り替えてわかりやすくする
-	mapChip_->mapChip[nearestNode_.y][nearestNode_.x]->textureNum = TextureName::BLOCK;
-
 
 
 	for (Enemy* enemy : enemies_) {
@@ -70,7 +73,7 @@ void EnemyManager::Update() {
 
 // 描画処理
 void EnemyManager::Draw() {
-	
+
 	//　描画を行う
 	for (Enemy* enemy : enemies_) {
 		enemy->Draw();
@@ -81,7 +84,7 @@ void EnemyManager::Draw() {
 void EnemyManager::AddEnemy() {
 	// 生成した敵を初期化
 	Enemy* newEnemy = new Enemy();
-	newEnemy->Initialize(mapChip_->data_[0], mapChip_->mapChip);
+	newEnemy->Initialize(mapChip_->map_[0], mapChip_->mapChip[0]);
 	// リストに追加
 	enemies_.push_back(newEnemy);
 }

@@ -14,46 +14,25 @@ public:
 	void Initialize();
 	void Update();
 	void Draw();
+	void FallNextStage();
 
 	void LoadMapData(int fileNum);
-
 	void SetNextMapData();
 
 public:
 
 	// モデル //
 	Model* model_ = nullptr;
-	std::vector < std::vector < Model*>> mapChip;
+	std::vector < std::vector < std::vector < Model*>>> mapChip;
 
-	// 仮マップ
-	std::vector < std::vector<int32_t>>map = {
-	{0,0,0,0,0,0,0,1,1,1},
-	{0,1,1,1,0,0,0,0,0,0},
-	{0,1,1,1,0,0,0,0,0,0},
-	{0,0,0,0,1,1,1,0,0,0},
-	{0,0,0,0,0,0,1,0,0,0},
-	{0,0,1,1,0,0,0,0,0,0},
-	{0,0,1,0,0,1,1,1,0,0},
-	{0,0,1,0,0,1,0,0,0,0},
-	{0,0,1,0,0,1,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	};
+	// マップ
+	std::vector < std::vector < std::vector<int32_t>>>map_;
 
-	// ステージ
-	std::vector < std::vector<int32_t>>stageData_ = {
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	{0,0,0,0,0,0,0,0,0,0},
-	};
 	// マップのcsvを取得する
 	std::vector <std::stringstream> mapData;
 	std::vector <std::vector < std::vector <int32_t>>> data_;
+
+	// 取得するデータのz進行度
+	int32_t dataZ_ = 0;
 
 };

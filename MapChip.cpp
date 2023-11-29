@@ -7,9 +7,11 @@ MapChip::MapChip()
 
 MapChip::~MapChip()
 {
-	for (int32_t y = 0; y < map.size(); ++y) {
-		for (int32_t x = 0; x < map[0].size(); ++x) {
-			delete mapChip[y][x];
+	for (int32_t z = 0; z < mapChip.size(); ++z) {
+		for (int32_t y = 0; y < mapChip[z].size(); ++y) {
+			for (int32_t x = 0; x < mapChip[z][y].size(); ++x) {
+				delete mapChip[z][y][x];
+			}
 		}
 	}
 }
@@ -17,58 +19,65 @@ MapChip::~MapChip()
 void MapChip::Initialize() {
 
 	// マップチップを初期化
-	for (int32_t y = 0; y < data_[0].size(); ++y) {
-		std::vector<Model*>newMapChipLine;
-		for (int32_t x = 0; x < data_[0][y].size(); ++x) {
-			Model* newMapChip;
-			newMapChip = new Model;
-			newMapChip->Initialize();
-			newMapChip->transform.scale = { 0.5f,0.5f,0.5f };
-			newMapChip->transform.translate.x = ((float)x * 1) - (data_[0][y].size() * 0.5f);
-			newMapChip->transform.translate.y = ((float)y * -1) + (data_[0].size() * 0.5f);
-			newMapChip->textureNum = TextureName::STAGETEXTURE;
+	for (int32_t z = 0; z < map_.size(); ++z) {
+		for (int32_t y = 0; y < map_[z].size(); ++y) {
+			std::vector<Model*>newMapChipLine;
+			for (int32_t x = 0; x < map_[z][y].size(); ++x) {
+				Model* newMapChip;
+				newMapChip = new Model;
+				newMapChip->Initialize();
+				newMapChip->transform.scale = { 0.5f,0.5f,0.5f };
+				newMapChip->transform.translate.x = ((float)x * 1) - (map_[y].size() * 0.5f);
+				newMapChip->transform.translate.y = ((float)y * -1) + (map_.size() * 0.5f);
+				newMapChip->textureNum = TextureName::STAGETEXTURE;
 
-			// Map[y][x]が1である場合
-			// マップにブロックを配置
-			if (data_[0][y][x] == 1) {
-				newMapChip->textureNum = TextureName::UPSIDETANK;
-				newMapChip->transform.translate.z -= 1;
+				// Map[y][x]が1である場合
+				// マップにブロックを配置
+				if (map_[z][y][x] == 1) {
+					newMapChip->textureNum = TextureName::UPSIDETANK;
+					newMapChip->transform.translate.z -= 1;
+				}
+
+				if (map_[z][y][x] == -1) {
+					newMapChip->textureNum = TextureName::UPSIDETANK;
+					newMapChip->transform.translate.z -= 1;
+				}
+				newMapChipLine.push_back(newMapChip);
 			}
-			newMapChipLine.push_back(newMapChip);
+			mapChip[0].push_back(newMapChipLine);
 		}
-		mapChip.push_back(newMapChipLine);
 	}
 
 }
 
 void MapChip::Update() {
 
-	ImGui::Begin("MapChip");
-	for (int y = 0; y < data_[0].size(); ++y) {
-		for (int x = 0; x < data_[0][y].size(); ++x) {
-			// 	ImGui::SameLine()　を用いて同じ行で表示する
-			ImGui::SameLine();
-			ImGui::Text("%d ", data_[0][y][x]);
-			ImGui::SameLine();
-			// 改行する
-			ImGui::NewLine();
+	// マップチップを配置
+	for (int32_t z = 1; z < map_.size(); ++z) {
+		for (int32_t y = 0; y < map_[z].size(); ++y) {
+			for (int32_t x = 0; x < map_[z][y].size(); ++x) {
+				// 自分のマスにブロックが存在し、1つ下の階層の同じマスが空白の場合、
+				// 一個下にブロックを移動させる
+				if (map_[z][y][x] == 1 && map_[z - 1][y][x] == 0) {
+					map_[z][y][x] = 0;
+					map_[z - 1][y][x] = 1;
+					mapChip[z][y][x]->transform.translate.z += 1;
+				}
+			}
 		}
-		// 改行する
-		ImGui::NewLine();
 	}
-	ImGui::End();
-
 }
 
 void MapChip::Draw() {
 
 	// マップチップを配置
-	for (int32_t y = 0; y < data_[0].size(); ++y) {
-		for (int32_t x = 0; x < data_[0][y].size(); ++x) {
-			mapChip[y][x]->Draw();
+	for (int32_t z = 0; z < map_.size(); ++z) {
+		for (int32_t y = 0; y < map_[z].size(); ++y) {
+			for (int32_t x = 0; x < map_[z][y].size(); ++x) {
+				mapChip[z][y][x]->Draw();
+			}
 		}
 	}
-
 }
 
 void MapChip::LoadMapData(int fileNum) {
@@ -135,30 +144,66 @@ void MapChip::SetNextMapData() {
 		++index;
 	}
 
-	for (size_t z = 0; z < data_.size(); z++)
-	{
+}
+
+void MapChip::FallNextStage() {
+
+	if (dataZ_ < data_.size()) {
+
+		// マップにデータの値を加算
+		std::vector <std::vector <int32_t>>newValueMatrix;
+
+		for (int32_t y = 0; y < data_[dataZ_].size(); ++y) {
+			std::vector<int32_t> newValueLine;
+
+			for (int32_t x = 0; x < data_[dataZ_][y].size(); ++x) {
+				int32_t newValue = data_[dataZ_][y][x];
+				newValueLine.push_back(newValue);
+			}
+			newValueMatrix.push_back(newValueLine);
+		}
+		map_.push_back(newValueMatrix);
+
 		// マップチップを初期化
-		for (int32_t y = 0; y < data_[0].size(); ++y) {
+			// 行列の範囲
+		std::vector<std::vector<Model*>> newMapChipArea;
+
+		for (int32_t y = 0; y < map_[dataZ_].size(); ++y) {
+			// 一行の範囲
 			std::vector<Model*>newMapChipLine;
-			for (int32_t x = 0; x < data_[0][y].size(); ++x) {
+
+			for (int32_t x = 0; x < map_[dataZ_][y].size(); ++x) {
+				// 一マスの範囲
 				Model* newMapChip;
+
 				newMapChip = new Model;
 				newMapChip->Initialize();
 				newMapChip->transform.scale = { 0.5f,0.5f,0.5f };
-				newMapChip->transform.translate.x = ((float)x * 1) - (data_[0][y].size() * 0.5f);
-				newMapChip->transform.translate.y = ((float)y * -1) + (data_[0].size() * 0.5f);
+				newMapChip->transform.translate.x = ((float)x * 1) - (map_[dataZ_][y].size() * 0.5f);
+				newMapChip->transform.translate.y = ((float)y * -1) + (map_[dataZ_].size() * 0.5f);
 				newMapChip->textureNum = TextureName::STAGETEXTURE;
 
 				// Map[y][x]が1である場合
 				// マップにブロックを配置
-				if (data_[0][y][x] == 1) {
+				if (map_[dataZ_][y][x] == 1) {
+					newMapChip->textureNum = TextureName::UPSIDETANK;
+					newMapChip->transform.translate.z -= (dataZ_ + 1);
+				}
+
+				if (map_[dataZ_][y][x] == -1) {
 					newMapChip->textureNum = TextureName::UPSIDETANK;
 					newMapChip->transform.translate.z -= 1;
 				}
 				newMapChipLine.push_back(newMapChip);
 			}
-			mapChip.push_back(newMapChipLine);
+
+			newMapChipArea.push_back(newMapChipLine);
 		}
+
+		mapChip.push_back(newMapChipArea);
+
+		++dataZ_;
 	}
+
 
 }
