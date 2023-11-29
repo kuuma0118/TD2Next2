@@ -1,7 +1,7 @@
 #pragma once
 #include "Enemy.h"
 #include <list>
-#include "../MapChip.h"
+#include "../MapChipManager.h"
 
 // 前方宣言 (プレイヤー)
 class DownsideTank;
@@ -13,7 +13,7 @@ public:	// メンバ関数
 	EnemyManager();
 	~EnemyManager();
 
-	void Initialize(DownsideTank* player, MapChip* mapChip);
+	void Initialize(DownsideTank* player, MapChipManager* mapChip);
 	void Update();
 	void Draw();
 	void AddEnemy();
@@ -29,6 +29,6 @@ private: // メンバ変数
 	// プレイヤーの最近地点のノード
 	Node nearestNode_ = { 0,0,0,0,0,nullptr };
 	// マップチップ
-	MapChip* mapChip_;
+	MapChipManager* mapChipManager_;
 };
 

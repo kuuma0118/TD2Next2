@@ -6,7 +6,7 @@
 #include <queue>
 #include <cmath>
 #include "MoveEasing.h"
-
+#include "MapChip.h"
 
 Enemy::Enemy() { }
 
@@ -19,12 +19,12 @@ Enemy::~Enemy() {
 	}
 }
 
-void Enemy::Initialize(std::vector < std::vector<int32_t>> map, std::vector<std::vector<Model*>> mapchip) {
+void Enemy::Initialize(std::vector < std::vector<int32_t>> map, std::vector<std::vector<MapChip*>> mapchip) {
 
 	pMap_ = map;
 	for (int y = 0; y < map.size(); ++y) {
 		for (int x = 0; x < map[y].size(); ++x) {
-			pMapchip_[y][x] = mapchip[y][x];
+			pMapchip_[y][x] = mapchip[y][x]->model_;
 		}
 	}
 

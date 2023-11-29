@@ -213,6 +213,18 @@
     <ClCompile Include="Blossom Engine\utility\Collision\CollisionManager.cpp">
       <Filter>Blossom Engine\utility\Collision</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyManager.cpp">
+      <Filter>Blossom Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="MapChipManager.cpp">
+      <Filter>Blossom Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Necessary\Models\Bullet.cpp">
+      <Filter>Blossom Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="MapChip.cpp">
+      <Filter>Blossom Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imgui_impl_dx12.h">
@@ -365,6 +377,11 @@
     <ClInclude Include="Necessary\Models\DownsideTank.h">
       <Filter>Necessary\Models</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyManager.h" />
+    <ClInclude Include="MapChipManager.h" />
+    <ClInclude Include="Necessary\Models\Bullet.h" />
+    <ClInclude Include="Necessary\Models\UpsideTank.h" />
+    <ClInclude Include="MapChip.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />

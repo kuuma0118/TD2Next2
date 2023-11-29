@@ -11,7 +11,7 @@
 #include "../Necessary/Models/DownsideTank.h"
 #include "../Necessary/Models/Bullet.h"
 #include "../EnemyManager.h"
-#include "../MapChip.h"
+#include "../MapChipManager.h"
 
 class GameManager;
 
@@ -48,5 +48,5 @@ private:
 	int32_t pY = 2;
 
 	// マップチップ
-	MapChip* mapChip_;
+	MapChipManager* mapChipManager_;
 };

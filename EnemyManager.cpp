@@ -14,11 +14,11 @@ EnemyManager::~EnemyManager() {
 }
 
 // 初期化処理
-void EnemyManager::Initialize(DownsideTank* player, MapChip* mapChip) {
+void EnemyManager::Initialize(DownsideTank* player, MapChipManager* mapChip) {
 	// プレイヤーのポインタを取得
 	player_ = player;
 	// マップチップのポインタを取得
-	mapChip_ = mapChip;
+	mapChipManager_ = mapChip;
 }
 
 // 更新処理
@@ -32,30 +32,30 @@ void EnemyManager::Update() {
 		std::sqrt(std::pow(player_->transform.translate.x - nearestNode_.x, 2) +
 			std::pow(player_->transform.translate.y - nearestNode_.y, 2));
 
-	if (!mapChip_->map_.empty()) {
+	if (!mapChipManager_->map_.empty()) {
 
-		for (int y = 0; y < mapChip_->map_[0].size(); ++y) {
-			for (int x = 0; x < mapChip_->map_[0][y].size(); ++x) {
+		for (int y = 0; y < mapChipManager_->map_[0].size(); ++y) {
+			for (int x = 0; x < mapChipManager_->map_[0][y].size(); ++x) {
 
-				if (mapChip_->map_[0][y][x] == 0) {
+				if (mapChipManager_->map_[0][y][x] == 0) {
 					double distance = std::sqrt(
-						std::pow(player_->transform.translate.x - mapChip_->mapChip[0][y][x]->transform.translate.x, 2) +
-						std::pow(player_->transform.translate.y - mapChip_->mapChip[0][y][x]->transform.translate.y, 2));
-					mapChip_->mapChip[0][y][x]->textureNum = TextureName::STAGETEXTURE;
+						std::pow(player_->transform.translate.x - mapChipManager_->mapChip[0][y][x]->model_->transform.translate.x, 2) +
+						std::pow(player_->transform.translate.y - mapChipManager_->mapChip[0][y][x]->model_->transform.translate.y, 2));
+					mapChipManager_->mapChip[0][y][x]->model_->textureNum = TextureName::STAGETEXTURE;
 
 					if (distance < minDistance) {
 						minDistance = distance;
 						nearestNode_ = Node(x, y, 0, 0, 0, nullptr);
 					}
 				}
-				else if (mapChip_->map_[0][y][x] == 1) {
-					mapChip_->mapChip[0][y][x]->textureNum = TextureName::UPSIDETANK;
+				else if (mapChipManager_->map_[0][y][x] == 1) {
+					mapChipManager_->mapChip[0][y][x]->model_->textureNum = TextureName::UPSIDETANK;
 				}
 			}
 		}
 
 		// プレイヤーが居る地点のマップチップのテクスチャを切り替えてわかりやすくする
-		mapChip_->mapChip[0][nearestNode_.y][nearestNode_.x]->textureNum = TextureName::BLOCK;
+		mapChipManager_->mapChip[0][nearestNode_.y][nearestNode_.x]->model_->textureNum = TextureName::BLOCK;
 	}
 
 
@@ -84,7 +84,7 @@ void EnemyManager::Draw() {
 void EnemyManager::AddEnemy() {
 	// 生成した敵を初期化
 	Enemy* newEnemy = new Enemy();
-	newEnemy->Initialize(mapChip_->map_[0], mapChip_->mapChip[0]);
+	newEnemy->Initialize(mapChipManager_->map_[0], mapChipManager_->mapChip[0]);
 	// リストに追加
 	enemies_.push_back(newEnemy);
 }

@@ -29,15 +29,15 @@ void GameScene::Initialize() {
 	pos_ = { 0,0,30 };
 	bool isWKeyPressed = false;
 
-	mapChip_ = new MapChip;
-	mapChip_->LoadMapData(3);
-	mapChip_->SetNextMapData();
-	mapChip_->FallNextStage();
+	mapChipManager_ = new MapChipManager;
+	mapChipManager_->LoadMapData(3);
+	mapChipManager_->SetNextMapData();
+	mapChipManager_->FallNextStage();
 	
 
 	// enemyManager
 	enemyManager_ = new EnemyManager;
-	enemyManager_->Initialize(downsidetank_,mapChip_);
+	enemyManager_->Initialize(downsidetank_,mapChipManager_);
 
 }
 
@@ -143,9 +143,9 @@ void GameScene::Update() {
 	}
 
 	if (input_->TriggerKey(DIK_1)) {
-		mapChip_->FallNextStage();
+		mapChipManager_->FallNextStage();
 	}
-	mapChip_->Update();
+	mapChipManager_->Update();
 	
 
 	////////////////////////////////////////////
@@ -167,7 +167,7 @@ void GameScene::Update() {
 void GameScene::Draw() {
 	//map_->Draw();
 	//stage_->Draw();
-	mapChip_->Draw();
+	mapChipManager_->Draw();
 	upsidetank_->Draw();
 	downsidetank_->Draw();
 	// プレイヤーの弾(複数)の描画処理
@@ -192,5 +192,5 @@ void GameScene::Finalize() {
 	}
 	delete downsidetank_;
 	delete enemyManager_;
-	delete mapChip_;
+	delete mapChipManager_;
 }
