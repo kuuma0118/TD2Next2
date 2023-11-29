@@ -91,7 +91,9 @@ void Bullet::Initialize() {
 }
 
 void Bullet::Update() {
-
+	ImGui::Begin("Bullet");
+	ImGui::DragFloat3("bullet pos", &transform.translate.x, 0.1f);
+	ImGui::End();
 
 		transform.translate.x += velotity_.x/10;
 		transform.translate.y += velotity_.y/10;

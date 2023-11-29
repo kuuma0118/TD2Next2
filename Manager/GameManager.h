@@ -4,7 +4,8 @@
 #include "../Blossom Engine/GameScenes/IScene.h"
 #include "../Blossom Engine/GameScenes/TitleScene.h"
 #include "../Blossom Engine/GameScenes/GameScene.h"
-
+#include "../Blossom Engine/GameScenes/GameClear.h"
+#include "../Blossom Engine/GameScenes/GameOver.h"
 
 // Manager
 #include "ObjManager.h"

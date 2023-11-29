@@ -64,6 +64,23 @@ void GameScene::Initialize() {
 }
 
 void GameScene::Update() {
+	if (downsidetank_->transform.translate.x > 9.4f) {
+		downsidetank_->transform.translate.x = 9.4f;
+		upsidetank_->transform.translate.x = 9.4f;
+	}
+	if (downsidetank_->transform.translate.x < -9.4f) {
+		downsidetank_->transform.translate.x = -9.4f;
+		upsidetank_->transform.translate.x = -9.4f;
+	}
+	if (downsidetank_->transform.translate.y > 7.2f) {
+		downsidetank_->transform.translate.y = 7.2f;
+		upsidetank_->transform.translate.y = 7.2f;
+	}
+	if (downsidetank_->transform.translate.y < -5.6f) {
+		downsidetank_->transform.translate.y = -5.6f;
+		upsidetank_->transform.translate.y = -5.6f;
+	}
+	
 	/*ImGui::Begin("GameScene Debug");
 	ImGui::SliderInt("loadStageLevel", &loadStageNum_, 0, 7);
 	ImGui::End();
@@ -164,6 +181,13 @@ void GameScene::Update() {
 		}
 	}
 
+	playerBullets_.remove_if([](Bullet* bullet) {
+		if (bullet->isBulletDeth) {
+			delete bullet;
+			return true;
+		}
+		return false;
+		});
 	if (input_->TriggerKey(DIK_1)) {
 		mapChipManager_->FallNextStage();
 	}
@@ -206,6 +230,7 @@ void GameScene::Draw() {
 
 	enemyManager_->Draw();
 	//sprite_->Draw(pos_, UVCHEKER);
+	
 }
 
 void GameScene::Finalize() {

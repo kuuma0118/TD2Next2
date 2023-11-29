@@ -7,8 +7,8 @@ GameManager::GameManager() {
 	// 各シーンの配列
 	sceneArr_[TITLE_SCENE] = new TitleScene();
 	sceneArr_[GAME_SCENE] = new GameScene();
-	//sceneArr_[GAMECLEAR_SCENE] = new GameClear();
-	//sceneArr_[GAMEOVER_SCENE] = new GameOver();
+	sceneArr_[GAMECLEAR_SCENE] = new GameClear();
+	sceneArr_[GAMEOVER_SCENE] = new GameOver();
 }
 
 void GameManager::Initialize() {

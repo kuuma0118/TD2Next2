@@ -20,7 +20,6 @@ private: // メンバ定数
 	const float kCameraTurnSpeed = 0.07f;
 	const float kCameraZoomSpeed = 0.5f;
 
-
 private: // メンバ変数
 	// 回転中心座標
 	Vector3 rotationCenterPosition_;

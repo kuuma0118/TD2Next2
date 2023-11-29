@@ -100,6 +100,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Blossom Engine\components\camera\DebugCamera.cpp" />
     <ClCompile Include="Blossom Engine\components\Input\Input.cpp" />
     <ClCompile Include="Blossom Engine\components\light\Light.cpp" />
+    <ClCompile Include="Blossom Engine\GameScenes\GameClear.cpp" />
+    <ClCompile Include="Blossom Engine\GameScenes\GameOver.cpp" />
     <ClCompile Include="Blossom Engine\GameScenes\GameScene.cpp" />
     <ClCompile Include="Blossom Engine\GameScenes\IScene.cpp" />
     <ClCompile Include="Blossom Engine\GameScenes\TitleScene.cpp" />
@@ -147,6 +149,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Blossom Engine\components\camera\DebugCamera.h" />
     <ClInclude Include="Blossom Engine\components\Input\Input.h" />
     <ClInclude Include="Blossom Engine\components\light\Light.h" />
+    <ClInclude Include="Blossom Engine\GameScenes\GameClear.h" />
+    <ClInclude Include="Blossom Engine\GameScenes\GameOver.h" />
     <ClInclude Include="Blossom Engine\GameScenes\GameScene.h" />
     <ClInclude Include="Blossom Engine\GameScenes\IScene.h" />
     <ClInclude Include="Blossom Engine\GameScenes\TitleScene.h" />

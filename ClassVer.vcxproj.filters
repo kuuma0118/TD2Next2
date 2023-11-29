@@ -225,6 +225,15 @@
     <ClCompile Include="MapChip.cpp">
       <Filter>Blossom Engine</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyManager.cpp">
+      <Filter>Blossom Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Blossom Engine\GameScenes\GameClear.cpp">
+      <Filter>Blossom Engine\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Blossom Engine\GameScenes\GameOver.cpp">
+      <Filter>Blossom Engine\GameScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imgui_impl_dx12.h">
@@ -376,6 +385,19 @@
     </ClInclude>
     <ClInclude Include="Necessary\Models\DownsideTank.h">
       <Filter>Necessary\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Necessary\Models\Bullet.h">
+      <Filter>Necessary\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Necessary\Models\UpsideTank.h">
+      <Filter>Necessary\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyManager.h" />
+    <ClInclude Include="Blossom Engine\GameScenes\GameClear.h">
+      <Filter>Blossom Engine\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Blossom Engine\GameScenes\GameOver.h">
+      <Filter>Blossom Engine\GameScene</Filter>
     </ClInclude>
     <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="MapChipManager.h" />
