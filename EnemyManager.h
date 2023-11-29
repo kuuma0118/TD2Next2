@@ -2,6 +2,7 @@
 #include "Enemy.h"
 #include <list>
 #include "../MapChipManager.h"
+#include "../Blossom Engine/utility/Collision/CollisionManager.h"
 
 // 前方宣言 (プレイヤー)
 class DownsideTank;
@@ -18,7 +19,7 @@ public:	// メンバ関数
 	void Draw();
 	void AddEnemy();
 	void DeleteEnemy();
-
+	std::list<Enemy*> GetEnemies();
 
 private: // メンバ変数
 

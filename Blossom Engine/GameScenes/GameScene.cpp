@@ -51,8 +51,6 @@ void GameScene::Initialize() {
 
 void GameScene::Update() {
 
-	// リストをクリア
-	collisionManager_->ClearColliderList();
 
 	if (downsidetank_->transform.translate.x > 9.4f) {
 		downsidetank_->transform.translate.x = 9.4f;
@@ -192,12 +190,32 @@ void GameScene::Update() {
 
 	// エネミーの更新処理	
 	enemyManager_->Update();
+	
 
 	if (input_->TriggerKey(DIK_9)) {
 		enemyManager_->AddEnemy();
 	}
+	
 	if (input_->TriggerKey(DIK_0)) {
 		enemyManager_->DeleteEnemy();
+	}
+
+	////////////////////////////////////////////
+	///	衝突判定
+	////////////////////////////////////////////
+
+
+	// リストをクリア
+	collisionManager_->ClearColliderList();
+
+	// プレイヤーの弾(複数)の更新処理
+	for (Bullet* bullet : playerBullets_)
+	{
+		collisionManager_->SetColliderList(bullet);
+	}
+
+	for (Enemy* enemy : enemyManager_->GetEnemies()) {
+		collisionManager_->SetColliderList(enemy);
 	}
 
 	// マップチップをコライダーリストに追加する

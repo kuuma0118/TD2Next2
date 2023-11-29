@@ -63,12 +63,16 @@ void EnemyManager::Update() {
 		// 更新処理を行う
 		enemy->Update(nearestNode_);
 		enemy->SetAngle(player_->transform);
+	}
 
-		// イテレータを使用して要素を削除する
+	enemies_.remove_if([](Enemy* enemy) {
 		if (!enemy->GetIsActive()) {
 			delete enemy;
+			return true;
 		}
-	}
+		return false;
+		});
+
 }
 
 // 描画処理
@@ -96,4 +100,8 @@ void EnemyManager::DeleteEnemy() {
 		// リストの先頭にいる敵を削除
 		enemies_.erase(enemies_.begin());
 	}
+}
+
+std::list<Enemy*> EnemyManager::GetEnemies() {
+	return enemies_;
 }

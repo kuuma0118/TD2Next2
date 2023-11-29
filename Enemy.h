@@ -2,7 +2,7 @@
 #include "./Blossom Engine/Math/MatrixCalculate.h"
 #include "./Blossom Engine/Model/Model.h"
 #include "Necessary/Models/Block.h"
-
+#include "../Blossom Engine/utility/Collision/Collider.h"
 #include "../Necessary/Models/UpsideTank.h"
 #include "../Necessary/Models/DownsideTank.h"
 
@@ -49,7 +49,8 @@ struct Node {
 
 class MapChip;
 
-class Enemy
+class Enemy:
+	public Collider
 {
 public:	// ** メンバ関数 ** //
 
@@ -65,7 +66,7 @@ public:	// ** メンバ関数 ** //
 	void DeleteRoute();
 	bool GetIsValid(int32_t x, int32_t y);
 	int32_t GetManhattanDistance(const Node& a, const Node& b);
-
+	void OnCollision(uint32_t collisionAttribute, float damage)override;
 	void SetAngle(const Transform& player);
 
 	// ゲッタ
@@ -78,7 +79,8 @@ public:	// ** メンバ関数 ** //
 		
 		return false;
 	}
-	bool GetIsActive() { return isActive_; }
+	bool GetIsActive()const { return isActive_; }
+	Vector3 GetWorldPosition()override;
 
 	// セッタ
 
@@ -95,8 +97,6 @@ private:// ** メンバ変数 ** //
 
 	// 座標 //
 
-	// 敵本体 トランスフォーム
-	Transform transform_;
 	// 敵視界　トランスフォーム
 	Transform visionTransform_;
 	Vector3 visionVertex[3];

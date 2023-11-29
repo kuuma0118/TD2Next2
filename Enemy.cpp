@@ -32,7 +32,7 @@ void Enemy::Initialize(std::vector < std::vector<int32_t>> map, std::vector<std:
 	}
 
 	// 敵本体 トランスフォーム
-	transform_ = { {1.0f,1.0f,1.0f}, {0.0f,0.0f,0.0f}, { 0.0f, 0.0f, 0.0f } };
+	
 	// 敵視界　トランスフォーム
 	visionTransform_ = { {1.0f,1.0f,1.0f}, {0.0f,0.0f,0.0f}, { 0.0f, 0.0f, 0.0f } };
 	visionVertex[0] = { visionTransform_.translate.x,visionTransform_.translate.y,visionTransform_.translate.z };
@@ -67,8 +67,21 @@ void Enemy::Initialize(std::vector < std::vector<int32_t>> map, std::vector<std:
 	// クールタイム(最速で一秒ごとに一発)
 	shotCoolTime_ = 0;
 
+	/// コライダー
 
-	// AIタイプごとにパラメータを設定
+	//衝突半径
+	SetRadius(1.0f);
+	//AABB
+	AABB newAABB = { { -1.0f,-1.0f,-1.0f }, { 1.0f,1.0f,1.0f } };
+	SetAABB(newAABB);
+	//衝突属性(自分)
+	SetCollisionAttribute(kCollisionAttributeEnemy);
+	//衝突マスク(相手)
+	SetCollisionMask(kCollisionMaskEnemy);
+	//形状(デフォルトは球に設定)
+	SetCollisionPrimitive(kCollisionPrimitiveAABB);
+	//ダメージ
+	SetDamage(0.0f);
 
 
 }
@@ -326,4 +339,12 @@ void Enemy::SetAngle(const Transform& player) {
 	// 回転
 	upsidetank_->transform.rotate.z = -atan2(vel.x, vel.y);
 	
+}
+
+Vector3 Enemy::GetWorldPosition() {
+	return downsidetank_->transform.translate;
+}
+
+void Enemy::OnCollision(uint32_t collisionAttribute, float damage) {
+	this->isActive_ = false;
 }
