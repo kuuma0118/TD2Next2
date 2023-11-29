@@ -51,6 +51,7 @@ void GameScene::Update() {
 		downsidetank_->transform.translate.y = -5.6f;
 		upsidetank_->transform.translate.y = -5.6f;
 	}
+	
 	/*ImGui::Begin("GameScene Debug");
 	ImGui::SliderInt("loadStageLevel", &loadStageNum_, 0, 7);
 	ImGui::End();
@@ -151,8 +152,6 @@ void GameScene::Update() {
 		}
 	}
 
-
-
 	////////////////////////////////////////////
 	/// プレイヤーの座標をマップチップ座標に変換(仮)
 	////////////////////////////////////////////
@@ -183,6 +182,7 @@ void GameScene::Draw() {
 
 	enemyManager_->Draw();
 	//sprite_->Draw(pos_, UVCHEKER);
+	
 }
 
 void GameScene::Finalize() {
