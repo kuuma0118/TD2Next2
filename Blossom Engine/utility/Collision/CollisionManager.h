@@ -32,5 +32,4 @@ private:
 private:
 	//コライダーリスト
 	std::list<Collider*> colliders_{};
-
 };
