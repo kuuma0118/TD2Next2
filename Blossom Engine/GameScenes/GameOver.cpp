@@ -10,7 +10,7 @@ void GameOver::Initialize() {
 	sprite_ = new Sprite();
 	sprite_->Initialize();
 	textureNum_ = GAMEOVER;
-	pos_ = { 0,0,30 };
+	pos_ = { 0,0,2000 };
 	bool isWKeyPressed = false;
 }
 
