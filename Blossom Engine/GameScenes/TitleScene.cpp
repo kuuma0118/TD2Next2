@@ -19,25 +19,8 @@ void TitleScene::Initialize() {
 
 void TitleScene::Update() {
 	sprite_->ImGuiAdjustParameter();
-	if (isTransitionEnd_ == false) {
-		transitionTimer_ += 1.0f / kTransitionTime;
-		transitionColor_.w = Lerp(transitionColor_.w, 0.0f, transitionTimer_);
-		transitionSprite_->SetColor(transitionColor_);
-
-		if (transitionColor_.w <= 0.0f) {
-			isTransitionEnd_ = true;
-			transitionTimer_ = 0.0f;
-		}
-	}
-
-	if (isTransition_) {
-		transitionTimer_ += 1.0f / kTransitionTime;
-		transitionColor_.w = Lerp(transitionColor_.w, 1.0f, transitionTimer_);
-		transitionSprite_->SetColor(transitionColor_);
-
-		if (transitionColor_.w >= 1.0f) {
-			sceneNum = GAME_SCENE;
-		}
+	if (input_->TriggerKey(DIK_SPACE)) {
+		sceneNum = GAME_SCENE;
 	}
 }
 

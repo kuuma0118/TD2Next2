@@ -45,4 +45,7 @@ private:
 
 	int32_t pX = 6;
 	int32_t pY = 2;
+
+	// カメラのポインタ
+	DebugCamera* camera_ = nullptr;
 };

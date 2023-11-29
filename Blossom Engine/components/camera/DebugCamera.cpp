@@ -17,8 +17,8 @@ void DebugCamera::Initialize() {
 
 	// 回転中心座標
 	// オフセット
-	offset_ = { 0.0f, 0.8f, -32.0f };
-	offsetRotation_ = { 0.0f,0.0f,0.0f };
+	offset_ = { 0.0f, 1.0f, -32.0f };
+	offsetRotation_ = { -0.5f,0.0f,0.0f };
 }
 
 void DebugCamera::Update() {

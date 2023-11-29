@@ -32,9 +32,13 @@ void GameScene::Initialize() {
 	// enemy　一体仮置き
 	enemyManager_ = new EnemyManager;
 	enemyManager_->Initialize(downsidetank_);
+
 }
 
 void GameScene::Update() {
+
+	
+
 	if (downsidetank_->transform.translate.x > 9.4f) {
 		downsidetank_->transform.translate.x = 9.4f;
 		upsidetank_->transform.translate.x = 9.4f;
@@ -172,6 +176,7 @@ void GameScene::Update() {
 	if (input_->TriggerKey(DIK_0)) {
 		enemyManager_->DeleteEnemy();
 	}
+
 }
 
 

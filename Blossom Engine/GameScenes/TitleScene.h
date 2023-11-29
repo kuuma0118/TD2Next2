@@ -6,6 +6,7 @@
 #include "../Necessary/Models/UpsideTank.h"
 #include "../Necessary/Models/DownsideTank.h"
 #include "../Necessary/Models/Block.h"
+#include "../components/camera/DebugCamera.h"
 class GameManager;
 
 class TitleScene : public IScene
@@ -40,4 +41,6 @@ private:
 	bool isTransitionEnd_ = false;
 	//トランジションのタイマー
 	float transitionTimer_ = 0;
+	// カメラのポインタ
+	DebugCamera* camera_ = nullptr;
 };
