@@ -3,7 +3,7 @@
 void TitleScene::Initialize() {
 	sprite_ = new Sprite();
 	sprite_->Initialize();
-	textureNum_ = UVCHEKER;
+	textureNum_ = TITLE;
 	input_ = Input::GetInstance();
 	block_ = new Block();
 	block_->Initialize();
