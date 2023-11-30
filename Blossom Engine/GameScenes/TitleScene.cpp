@@ -14,7 +14,7 @@ void TitleScene::Initialize() {
 	downsidetank_ = new DownsideTank();
 	downsidetank_->Initialize();
 	downsidetank_->textureNum = DOWNSIDETANK;
-	pos_ = { 0,0,30 };
+	pos_ = { 0,0,2000 };
 }
 
 void TitleScene::Update() {
